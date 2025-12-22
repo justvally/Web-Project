@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MEMOIRE</title>
+
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+        <!-- External CSS -->
+        <link rel="stylesheet" href="style.css">
+        <!-- Font Awesome (icons) -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </head>
+     
+<body>
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">MEMOIRE</div>
+    <div class="menu">
+        <a href="index.html">HOME</a> 
+        <a href="catalog.html">CATALOG</a> 
+        <a href="discover.html">DISCOVER</a> 
+        <a href="collection.html">COLLECTION</a>
+    </div>
+    <div class="nav-icons">
+        <i class="fas fa-shopping-cart"></i>
+        <i class="fas fa-user"></i>
+    </div>
+</div>
+
+<div class="catalog-header">
+
+    <!-- LEFT SIDE -->
+    <div class="catalog-left">
+        <div class="catalog-title">NOW BROWSING</div>
+
+        <div class="catalog-tabs">
+            <button class="tab active">PERFUME</button>
+            <button class="tab">COLOGNE</button>
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="catalog-actions">
+        <button class="action-btn">FILTER</button>
+        <button class="action-btn outline">PERSONALIZE</button>
+    </div>
+</div>
+
+<!-- Filter Modal -->
+<div id="filterModal" class="modal">
+    <div class="modal-content">
+        <h2>FILTER OPTIONS</h2>
+
+        <!-- Show All Products Button -->
+        <button class="show-all-btn">Show All Products</button>
+
+        <!-- Brand Filter -->
+        <div class="filter-category">
+            <h3>BRAND</h3>
+            <div class="filter-options">
+                <label><input type="checkbox" name="brand" value="Dior"> Dior</label>
+                <label><input type="checkbox" name="brand" value="Chanel"> Chanel</label>
+                <label><input type="checkbox" name="brand" value="Prada"> Prada</label>
+                <label><input type="checkbox" name="brand" value="Versace"> Versace</label>
+            </div>
+        </div>
+
+        <!-- Price Filter -->
+        <div class="filter-category">
+            <h3>PRICE</h3>
+            <div class="filter-options">
+                <label><input type="checkbox" name="price" value="Under $50"> Under $50</label>
+                <label><input type="checkbox" name="price" value="$50-$100"> $50-$100</label>
+                <label><input type="checkbox" name="price" value="$100-$200"> $100-$200</label>
+                <label><input type="checkbox" name="price" value="Above $200"> Above $200</label>
+            </div>
+        </div>
+
+        <!-- Scent Family Filter -->
+        <div class="filter-category">
+            <h3>SCENT FAMILY</h3>
+            <div class="filter-options">
+                <label><input type="checkbox" name="scent" value="Floral"> Floral</label>
+                <label><input type="checkbox" name="scent" value="Citrus"> Citrus</label>
+                <label><input type="checkbox" name="scent" value="Woody"> Woody</label>
+                <label><input type="checkbox" name="scent" value="Oriental"> Oriental</label>
+            </div>
+        </div>
+
+        <!-- Size Filter -->
+        <div class="filter-category">
+            <h3>SIZE</h3>
+            <div class="filter-options">
+                <label><input type="checkbox" name="size" value="30ml"> 30ml</label>
+                <label><input type="checkbox" name="size" value="50ml"> 50ml</label>
+                <label><input type="checkbox" name="size" value="100ml"> 100ml</label>
+            </div>
+        </div>
+
+        <button class="close-btn">Close</button>
+    </div>
+</div>
+
+<!-- Personalize Modal -->
+<div id="personalizeModal" class="modal">
+    <div class="modal-content">
+        <h2>Personalize Options</h2>
+
+        <!-- Show All Products Button -->
+        <button class="show-all-btn">Show All Products</button>
+
+        <!-- Mood Filter -->
+        <div class="filter-category">
+            <h3>Mood</h3>
+            <div class="filter-options">
+                <label><input type="checkbox" name="mood" value="Romantic"> Romantic</label>
+                <label><input type="checkbox" name="mood" value="Energetic"> Energetic</label>
+                <label><input type="checkbox" name="mood" value="Relaxing"> Relaxing</label>
+                <label><input type="checkbox" name="mood" value="Confident"> Confident</label>
+            </div>
+        </div>
+
+        <!-- Season Filter -->
+        <div class="filter-category">
+            <h3>Season</h3>
+            <div class="filter-options">
+                <label><input type="checkbox" name="season" value="Spring"> Spring</label>
+                <label><input type="checkbox" name="season" value="Summer"> Summer</label>
+                <label><input type="checkbox" name="season" value="Autumn"> Autumn</label>
+                <label><input type="checkbox" name="season" value="Winter"> Winter</label>
+            </div>
+        </div>
+
+        <!-- Longevity Filter -->
+        <div class="filter-category">
+            <h3>Longevity</h3>
+            <div class="filter-options">
+                <label><input type="checkbox" name="longevity" value="Short"> Short</label>
+                <label><input type="checkbox" name="longevity" value="Moderate"> Moderate</label>
+                <label><input type="checkbox" name="longevity" value="Long"> Long</label>
+            </div>
+        </div>
+
+        <!-- Scent Notes Filter -->
+        <div class="filter-category">
+            <h3>Scent Notes</h3>
+            <div class="filter-options">
+                <label><input type="checkbox" name="notes" value="Floral"> Floral</label>
+                <label><input type="checkbox" name="notes" value="Citrus"> Citrus</label>
+                <label><input type="checkbox" name="notes" value="Woody"> Woody</label>
+                <label><input type="checkbox" name="notes" value="Oriental"> Oriental</label>
+            </div>
+        </div>
+
+        <button class="close-btn">Close</button>
+    </div>
+</div>
+
+<div class="catalog-products">
+
+    <!-- Row 1 -->
+    <div class="product-row">
+        <div class="card">
+            <img src="perfumes/Miss dior.png" alt="Miss Dior">
+            <div class="price-tag">$120</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/chanelle gabrielle.png" alt="Chanelle Gabrielle">
+            <div class="price-tag">$135</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/prada paradoxe.png" alt="Prada Paradoxe">
+            <div class="price-tag">$150</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="product-row">
+        <div class="card">
+            <img src="perfumes/versace eros.png" alt="Versace Eros">
+            <div class="price-tag">$140</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/Miss dior.png" alt="Miss Dior">
+            <div class="price-tag">$120</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/chanelle gabrielle.png" alt="Chanelle Gabrielle">
+            <div class="price-tag">$135</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="product-row">
+        <div class="card">
+            <img src="perfumes/prada paradoxe.png" alt="Prada Paradoxe">
+            <div class="price-tag">$150</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/versace eros.png" alt="Versace Eros">
+            <div class="price-tag">$140</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/Miss dior.png" alt="Miss Dior">
+            <div class="price-tag">$120</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+    </div>
+
+</div>
+
+<!-- COLOGNE TAB CONTENT -->
+<div class="catalog-products cologne-tab" style="display: none;">
+
+    <!-- Row 1 -->
+    <div class="product-row">
+        <div class="card">
+            <img src="perfumes/chanelle gabrielle.png" alt="Cologne 1">
+            <div class="price-tag">$95</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/versace eros.png" alt="Cologne 2">
+            <div class="price-tag">$110</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/Miss dior.png" alt="Cologne 3">
+            <div class="price-tag">$105</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="product-row">
+        <div class="card">
+            <img src="perfumes/prada paradoxe.png" alt="Cologne 4">
+            <div class="price-tag">$120</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/chanelle gabrielle.png" alt="Cologne 5">
+            <div class="price-tag">$115</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/versace eros.png" alt="Cologne 6">
+            <div class="price-tag">$100</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="product-row">
+        <div class="card">
+            <img src="perfumes/prada paradoxe.png" alt="Cologne 7">
+            <div class="price-tag">$130</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/Miss dior.png" alt="Cologne 8">
+            <div class="price-tag">$125</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+        <div class="card">
+            <img src="perfumes/chanelle gabrielle.png" alt="Cologne 9">
+            <div class="price-tag">$110</div>
+            <div class="add-to-cart">ADD TO CART</div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>

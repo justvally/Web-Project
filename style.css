@@ -6,7 +6,7 @@ body {
 
 /* NAVBAR */
 .navbar {
-    background-color: #e1bb53;
+    background-color: #D8B96D;
     padding: 45px 40px;
     display: flex;
     justify-content: space-between;
@@ -110,6 +110,12 @@ body {
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.explore-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
 /* SECTION TITLE */
@@ -214,6 +220,12 @@ body {
     font-size: 20px;
     font-weight: bold;
     height: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.find-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
 .featured-tab {
@@ -258,3 +270,463 @@ body {
     width: 240px;
     height: auto;
 }
+
+.card {
+    flex: 0 0 22%;           
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.card img {
+    display: block;
+    width: 100%;
+    transition: transform 0.4s ease;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.2);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.card:hover img {
+    transform: scale(1.05);
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+.footer-poster img {
+    width: 100%;
+    height: auto;
+}
+
+.footer-poster {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.view-btn {
+    position: absolute;
+    left: 11%;
+    bottom: 28%;
+    display: inline-block;
+    padding: 20px 85px;
+    background: #0a0a0a;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    height: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.view-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.footer { 
+    width: 100%;
+    height: 300px;
+    background-color: #D8B96D;
+}
+
+
+/*catalog*/
+.head-text{
+    font-family: "Josefin Sans", sans-serif;
+    margin-top: 4%;
+    margin-left: 8%;
+    font-size: 45px;
+    font-weight: 500;
+    color: #0a0a0a;
+}
+
+.catalog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 60px 80px;
+}
+
+/* LEFT SIDE */
+.catalog-left {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.catalog-title {
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* PERFUME / COLOGNE TABS */
+.catalog-tabs {
+    display: flex;
+    gap: 30px;
+}
+
+
+.tab {
+    background: none;
+    border: none;
+    font-size: 18px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    padding-bottom: 5px;
+    position: relative;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab:hover {
+    opacity: 1;
+    transform: translateY(-2px); /* subtle lift */
+}
+
+.tab.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background: black;
+    transition: width 0.3s ease;
+}
+
+.tab:hover::after {
+    width: 100%; /* subtle underline effect even on non-active tabs */
+}
+
+/* RIGHT SIDE */
+.catalog-actions {
+    display: flex;
+    gap: 20px;
+}
+
+.action-btn {
+    padding: 12px 26px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    cursor: pointer;
+    background: black;
+    color: white;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.action-btn.outline {
+    background: transparent;
+    color: black;
+    border: 1px solid black;
+}
+
+.action-btn.outline:hover {
+    background: black;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.card {
+    position: relative;
+    width: 220px;       /* adjust as needed */
+    overflow: hidden;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Price Tag */
+.card .price-tag {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    background: black;
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 8px 25px;   /* wider horizontally */
+    height: auto;
+    clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
+    white-space: nowrap;  /* keep text in one line */
+    z-index: 2;
+}
+
+/* Add to Cart Button - full width overlay */
+.card .add-cart-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;            /* span entire card width */
+    padding: 15px 0;        /* vertical padding, horizontal handled by width */
+    font-family: "Josefin Sans", sans-serif; 
+    font-weight: 600;
+    font-size: 16px;
+    background: rgba(0, 0, 0, 0.9); /* slightly transparent luxury black */
+    color: white;
+    border: none;
+    border-radius: 0 0 12px 12px; /* rounded bottom corners only */
+    opacity: 0;
+    transform: translateY(100%);  /* hidden below card initially */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 2;
+    white-space: nowrap;     /* ensure text stays in one line */
+    text-align: center;
+    cursor: pointer;
+}
+
+/* Hover effect to reveal Add to Cart */
+.card:hover .add-cart-btn {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Optional: subtle image zoom on hover for luxury feel */
+.card:hover img {
+    transform: scale(1.05);
+}
+
+/* Common styles for action buttons */
+.action-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s ease; /* smooth transition on hover */
+}
+
+/* Filter button */
+.action-btn {
+    background-color: black;
+    color: white;
+}
+
+/* Personalize button (outline) */
+.action-btn.outline {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+/* Hover effects */
+.action-btn:hover {
+    background-color: #333; /* slightly lighter black */
+    transform: translateY(-2px); /* subtle lift */
+}
+
+.action-btn.outline:hover {
+    background-color: black;
+    color: white;
+    transform: translateY(-2px); /* subtle lift */
+}
+
+/* Modal overlay */
+.modal {
+    display: none; /* hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    background: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* Modal overlay */
+.modal {
+    display: none; /* hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px); /* blurry background */
+    background: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+/* Modal Overlay */
+.modal {
+    display: none; /* hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4); /* blurry background */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Modal Content */
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    width: 450px;
+    max-width: 90%;
+    max-height: 80vh; /* scrollable if content is too tall */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Show All Products Button */
+.show-all-btn {
+    width: 100%;
+    padding: 12px 0;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Filter Categories */
+.filter-category {
+    display: flex;
+    flex-direction: column; /* title on top */
+}
+
+/* Custom checkbox color */
+.filter-options input[type="checkbox"] {
+    accent-color: #e1bb53; /* modern way to change checkbox tick color */
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.filter-category h3 {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Filter options row */
+.filter-options {
+    display: flex;
+    flex-wrap: wrap; /* allows options to go to next line if too long */
+    gap: 10px;
+}
+
+.filter-options label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Close Button */
+.close-btn {
+    padding: 10px 20px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.catalog-products {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* space between rows */
+    padding: 20px 40px;
+}
+
+.product-row {
+    display: flex;
+    justify-content: center; /* center all cards in the row */
+    gap: 45px; /* space between cards */
+}
+
+.card {
+    width: 32%; /* 3 cards per row */
+    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Image fills card */
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Price tag */
+.price-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: black;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Add to cart bar (hidden by default) */
+.add-to-cart {
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    width: 100%;
+    background: #0a0a0a;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-weight: 600;
+    font-size: 16px;
+    transition: bottom 0.3s ease;
+}
+
+/* Hover effect: show add to cart */
+.card:hover .add-to-cart {
+    bottom: 0;
+}
+
+/* Optional: subtle image scale on hover */
+.card:hover img {
+    transform: scale(1.03);
+}
+
