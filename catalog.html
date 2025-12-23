@@ -40,6 +40,8 @@
             <button class="tab active">PERFUME</button>
             <button class="tab">COLOGNE</button>
         </div>
+
+        <div class="product-count" id="productCount">0 products</div>
     </div>
 
     <!-- RIGHT SIDE -->
@@ -53,9 +55,9 @@
 <div id="filterModal" class="modal">
     <div class="modal-content">
         <h2>FILTER OPTIONS</h2>
-
+        <button class="close-btn">x</button>
         <!-- Show All Products Button -->
-        <button class="show-all-btn">Show All Products</button>
+        <button class="show-all-btn">SHOW ALL PRODUCTS</button>
 
         <!-- Brand Filter -->
         <div class="filter-category">
@@ -65,6 +67,12 @@
                 <label><input type="checkbox" name="brand" value="Chanel"> Chanel</label>
                 <label><input type="checkbox" name="brand" value="Prada"> Prada</label>
                 <label><input type="checkbox" name="brand" value="Versace"> Versace</label>
+                <label><input type="checkbox" name="brand" value="Dior"> Jo Malone</label>
+                <label><input type="checkbox" name="brand" value="Chanel"> Byredo</label>
+                <label><input type="checkbox" name="brand" value="Prada"> YSL</label>
+                <label><input type="checkbox" name="brand" value="Versace"> Victoria's Secret</label>
+                <label><input type="checkbox" name="brand" value="Dior"> Burberry</label>
+                <label><input type="checkbox" name="brand" value="Chanel"> Maison Margiela</label>
             </div>
         </div>
 
@@ -100,21 +108,23 @@
             </div>
         </div>
 
-        <button class="close-btn">Close</button>
+        <button class="apply-btn">APPLY</button>
+    </div>
     </div>
 </div>
 
 <!-- Personalize Modal -->
 <div id="personalizeModal" class="modal">
     <div class="modal-content">
-        <h2>Personalize Options</h2>
+        <h2>PERSONALIZE OPTIONS</h2>
+        <button class="close-btn">x</button>
 
         <!-- Show All Products Button -->
-        <button class="show-all-btn">Show All Products</button>
+        <button class="show-all-btn">SHOW ALL PRODUCTS</button>
 
         <!-- Mood Filter -->
         <div class="filter-category">
-            <h3>Mood</h3>
+            <h3>MOOD</h3>
             <div class="filter-options">
                 <label><input type="checkbox" name="mood" value="Romantic"> Romantic</label>
                 <label><input type="checkbox" name="mood" value="Energetic"> Energetic</label>
@@ -125,7 +135,7 @@
 
         <!-- Season Filter -->
         <div class="filter-category">
-            <h3>Season</h3>
+            <h3>SEASON</h3>
             <div class="filter-options">
                 <label><input type="checkbox" name="season" value="Spring"> Spring</label>
                 <label><input type="checkbox" name="season" value="Summer"> Summer</label>
@@ -136,7 +146,7 @@
 
         <!-- Longevity Filter -->
         <div class="filter-category">
-            <h3>Longevity</h3>
+            <h3>LONGEVITY</h3>
             <div class="filter-options">
                 <label><input type="checkbox" name="longevity" value="Short"> Short</label>
                 <label><input type="checkbox" name="longevity" value="Moderate"> Moderate</label>
@@ -146,7 +156,7 @@
 
         <!-- Scent Notes Filter -->
         <div class="filter-category">
-            <h3>Scent Notes</h3>
+            <h3>SCENT NOTES</h3>
             <div class="filter-options">
                 <label><input type="checkbox" name="notes" value="Floral"> Floral</label>
                 <label><input type="checkbox" name="notes" value="Citrus"> Citrus</label>
@@ -155,12 +165,13 @@
             </div>
         </div>
 
-        <button class="close-btn">Close</button>
+        <button class="apply-btn">APPLY</button>
+
     </div>
 </div>
 
 <div class="catalog-products">
-
+    <span class="product-count" id="perfumeCount">0 products</span>
     <!-- Row 1 -->
     <div class="product-row">
         <div class="card">
@@ -264,22 +275,59 @@
     <!-- Row 3 -->
     <div class="product-row">
         <div class="card">
+            data-brand="prada"
+            data-price="120"
+            data-scent="Citrus"
+            data-size="50ml">
             <img src="perfumes/prada paradoxe.png" alt="Cologne 7">
             <div class="price-tag">$130</div>
             <div class="add-to-cart">ADD TO CART</div>
         </div>
         <div class="card">
+            data-brand="Dior"
+            data-price="120"
+            data-scent="Floral"
+            data-size="50ml">
             <img src="perfumes/Miss dior.png" alt="Cologne 8">
             <div class="price-tag">$125</div>
             <div class="add-to-cart">ADD TO CART</div>
         </div>
         <div class="card">
+            data-brand="Chanel"
+            data-price="120"
+            data-scent="woody"
+            data-size="50ml">
             <img src="perfumes/chanelle gabrielle.png" alt="Cologne 9">
             <div class="price-tag">$110</div>
             <div class="add-to-cart">ADD TO CART</div>
         </div>
     </div>
 
+</div>
+
+<!-- CART MODAL OVERLAY -->
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<!-- Cart Overlay -->
+<div id="cartOverlay"></div>
+
+<!-- Cart Modal -->
+<div id="cartModal">
+    <div class="cart-header">
+        <h2>YOUR CART</h2>
+        <span id="closeCart">&times;</span>
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-footer">
+        <p>ITEMS: <span id="itemCount">0</span></p>
+        <p>TOTAL: <span id="totalPrice">$0</span></p>
+    </div>
+</div>
+
+<div id="cartToast" class="cart-toast">
+    <span id="toastText">ADDED TO CART!</span>
 </div>
 
 
