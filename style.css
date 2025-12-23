@@ -28,29 +28,31 @@ body {
     font-weight: 500;
     letter-spacing: 0.5px;
     font-size: 18px;
-
- }
+}
 
 .navbar .nav-icons i {
     margin-left: 20px;
     color: black;
     font-size: 20px;
     cursor: pointer;
+    position: relative;
 }
-.menu a{
-        color: #ecf0f1;
-        text-decoration: none;
-        font-weight: 600; /* Slightly bolder font */
-        padding: 10px 20px;
-        border-radius: 25px; /* Rounded pill shape */
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        
-    }
-    .menu a:hover,
-    .menu a.active {
-        background-color: rgb(178, 134, 15);
-        transform: translateY(-2px); 
-    }
+
+.menu a {
+    color: #ecf0f1;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.menu a:hover,
+.menu a.active {
+    background-color: rgb(178, 134, 15);
+    transform: translateY(-2px);
+}
+
 .lang-btn {
     padding: 6px 12px;
     background: #eee;
@@ -135,7 +137,6 @@ body {
 }
 
 .ad-panel {
-   
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -146,7 +147,7 @@ body {
 
 .ad-track {
     display: flex;
-    width: 600vw; /* 5 slides */
+    width: 600vw;
     transition: transform 0.8s ease-in-out;
 }
 
@@ -171,12 +172,15 @@ body {
     align-items: center;
 }
 
+/* QUIZ TAB - COLORFUL UPDATE */
+/* QUIZ TAB - ORIGINAL STYLE (NO COLORS) */
 .quiz-title {
     font-family: "Josefin Sans", sans-serif;
     margin: 50px 0 10px;
     font-size: 35px;
     font-weight: 700;
     margin-left: 8%;
+    color: #0a0a0a; /* Changed back to black */
 }
 
 .quiz-sub {
@@ -185,47 +189,64 @@ body {
     font-weight: 500;
     margin-left: 8%;
     margin-bottom: 2%;
+    color: #666; /* Changed back to gray */
 }
 
 .quiz-tab {
     position: relative;
     display: flex;
     flex-direction: row;
+    background: none; /* Removed gradient background */
+    margin: 30px 8%;
+    border-radius: 0; /* Removed border radius */
+    overflow: hidden;
+    box-shadow: none; /* Removed box shadow */
 }
 
-.quiz-tab img{
+.quiz-tab img {
     flex-shrink: 0;
-    
+    width: 60%;
+    object-fit: cover;
 }
 
 .quiz-text {
     position: absolute;
     font-size: 30px;
     font-weight: 500;
-    top: 25%;
-    right: 20%;
+    top: 20%;
+    right: 15%;
     max-width: 250px;
     text-align: right;
+    color: #000; /* Changed back to black */
+    text-shadow: none; /* Removed text shadow */
+    background: none; /* Removed background */
+    padding: 0; /* Removed padding */
+    border-radius: 0; /* Removed border radius */
+    backdrop-filter: none; /* Removed backdrop filter */
 }
 
 .find-btn {
     position: absolute;
-    right: 20%;
-    bottom: 25%;
+    right: 15%;
+    bottom: 22%;
     display: inline-block;
     padding: 20px 25px;
-    background: #0a0a0a;
+    background: #0a0a0a; /* Changed back to solid black */
     color: white;
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
     height: 12px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0; /* Removed border radius */
+    border: none;
+    cursor: pointer;
 }
 
 .find-btn:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    background: #0a0a0a; /* Kept solid black on hover */
 }
 
 .featured-tab {
@@ -255,13 +276,13 @@ body {
 .featured-track {
     display: flex;
     gap: 45px;
-    overflow-x: auto;           /* horizontal scroll */
-    overflow-y: hidden;         /* prevent vertical scroll */
-    width: 1100px;              /* 4 cards × 260px each */
-    margin: 0 auto;             /* center the track */
+    overflow-x: auto;
+    overflow-y: hidden;
+    width: 1100px;
+    margin: 0 auto;
     margin-top: 4%;
     margin-bottom: 3%;
-    scroll-behavior: smooth;    
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
 
@@ -272,7 +293,7 @@ body {
 }
 
 .card {
-    flex: 0 0 22%;           
+    flex: 0 0 22%;
     position: relative;
     overflow: hidden;
     border-radius: 12px;
@@ -332,21 +353,99 @@ body {
     box-shadow: 0 12px 30px rgba(0,0,0,0.35);
 }
 
-.footer { 
+.footer {
     width: 100%;
     height: 300px;
     background-color: #D8B96D;
 }
 
-
 /*catalog*/
-.head-text{
+.head-text {
     font-family: "Josefin Sans", sans-serif;
     margin-top: 4%;
     margin-left: 8%;
     font-size: 45px;
     font-weight: 500;
     color: #0a0a0a;
+}
+
+/* Replace the entire .catalog-hero styles with this: */
+/* Replace the entire .catalog-hero styles with this: */
+.catalog-hero {
+    background: #0A0A0A; /* Solid black background */
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.catalog-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(216, 185, 109, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(216, 185, 109, 0.1) 0%, transparent 20%);
+    pointer-events: none;
+}
+
+.catalog-hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+.catalog-hero p {
+    font-size: 18px;
+    max-width: 600px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .catalog-hero {
+        height: 250px;
+    }
+    
+    .catalog-hero h1 {
+        font-size: 32px;
+    }
+    
+    .catalog-hero p {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .catalog-hero {
+        height: 200px;
+    }
+    
+    .catalog-hero h1 {
+        font-size: 28px;
+    }
+    
+    .catalog-hero p {
+        font-size: 14px;
+    }
 }
 
 .catalog-header {
@@ -375,7 +474,6 @@ body {
     gap: 30px;
 }
 
-
 .tab {
     background: none;
     border: none;
@@ -390,7 +488,7 @@ body {
 
 .tab:hover {
     opacity: 1;
-    transform: translateY(-2px); /* subtle lift */
+    transform: translateY(-2px);
 }
 
 .tab.active::after {
@@ -405,7 +503,7 @@ body {
 }
 
 .tab:hover::after {
-    width: 100%; /* subtle underline effect even on non-active tabs */
+    width: 100%;
 }
 
 /* RIGHT SIDE */
@@ -419,13 +517,15 @@ body {
     font-size: 14px;
     letter-spacing: 2px;
     cursor: pointer;
-    background: black;
-    color: white;
-    border: none;
+    background: transparent; /* Changed from black to transparent */
+    color: black;
+    border: 1px solid black; /* Added border */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 
 .action-btn:hover {
+    background: black;
+    color: white;
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
@@ -445,7 +545,7 @@ body {
 
 .card {
     position: relative;
-    width: 220px;       /* adjust as needed */
+    width: 220px;
     overflow: hidden;
     border-radius: 12px;
     cursor: pointer;
@@ -458,7 +558,7 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Price Tag */
+/* PRICE TAG - UPDATED BOW TIE STYLE */
 .card .price-tag {
     position: absolute;
     top: 10px;
@@ -468,48 +568,46 @@ body {
     font-family: "Josefin Sans", sans-serif;
     font-weight: 600;
     font-size: 14px;
-    padding: 8px 25px;   /* wider horizontally */
+    padding: 8px 25px;
     height: auto;
-    clip-path: polygon(0 0, 100% 0, 90% 50%, 100% 100%, 0 100%);
-    white-space: nowrap;  /* keep text in one line */
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+    white-space: nowrap;
     z-index: 2;
+    border-radius: 0 12px 12px 0; /* Added border radius */
 }
 
-/* Add to Cart Button - full width overlay */
+/* Add to Cart Button */
 .card .add-cart-btn {
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;            /* span entire card width */
-    padding: 15px 0;        /* vertical padding, horizontal handled by width */
-    font-family: "Josefin Sans", sans-serif; 
+    width: 100%;
+    padding: 15px 0;
+    font-family: "Josefin Sans", sans-serif;
     font-weight: 600;
     font-size: 16px;
-    background: rgba(0, 0, 0, 0.9); /* slightly transparent luxury black */
+    background: rgba(0, 0, 0, 0.9);
     color: white;
     border: none;
-    border-radius: 0 0 12px 12px; /* rounded bottom corners only */
+    border-radius: 0 0 12px 12px;
     opacity: 0;
-    transform: translateY(100%);  /* hidden below card initially */
+    transform: translateY(100%);
     transition: transform 0.3s ease, opacity 0.3s ease;
     z-index: 2;
-    white-space: nowrap;     /* ensure text stays in one line */
+    white-space: nowrap;
     text-align: center;
     cursor: pointer;
 }
 
-/* Hover effect to reveal Add to Cart */
 .card:hover .add-cart-btn {
     transform: translateY(0);
     opacity: 1;
 }
 
-/* Optional: subtle image zoom on hover for luxury feel */
 .card:hover img {
     transform: scale(1.05);
 }
 
-/* Common styles for action buttons */
 .action-btn {
     padding: 10px 20px;
     border: none;
@@ -517,37 +615,34 @@ body {
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.4s ease; /* smooth transition on hover */
+    transition: all 0.4s ease;
 }
 
-/* Filter button */
 .action-btn {
     background-color: black;
     color: white;
 }
 
-/* Personalize button (outline) */
 .action-btn.outline {
     background-color: white;
     color: black;
     border: 2px solid black;
 }
 
-/* Hover effects */
 .action-btn:hover {
-    background-color: #333; /* slightly lighter black */
-    transform: translateY(-2px); /* subtle lift */
+    background-color: #333;
+    transform: translateY(-2px);
 }
 
 .action-btn.outline:hover {
     background-color: black;
     color: white;
-    transform: translateY(-2px); /* subtle lift */
+    transform: translateY(-2px);
 }
 
 /* Modal overlay */
 .modal {
-    display: none; /* hidden by default */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -566,37 +661,54 @@ body {
     padding: 40px;
     width: 450px;
     max-width: 90%;
-    max-height: 90vh; /* scrollable if content is too tall */
+    max-height: 90vh;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
     position: relative;
+    border-radius: 15px;
 }
 
 .close-btn {
     position: absolute;
-    right: 7.5%;
-    top: 9%;
+    right: 20px;
+    top: 20px;
     cursor: pointer;
     font-family: 'Josefin Sans', sans-serif;
     background: #ccc;
     color: #000;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    border: none;
 }
 
-/* Apply button at the bottom */
+.close-btn:hover {
+    background: #aaa;
+}
+
 .apply-btn {
-    position: absolute;      /* position relative to the modal */
-    bottom: 6%;            /* distance from bottom */
-    right: 7.5%;             /* distance from right */
     padding: 12px 15px;
     border: none;
     cursor: pointer;
     font-family: 'Josefin Sans', sans-serif;
-    background: #000000;     /* black */
+    background: #000000;
     color: white;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
+.apply-btn:hover {
+    background: #333;
+    transform: translateY(-2px);
+}
 
 /* Show All Products Button */
 .show-all-btn {
@@ -607,33 +719,37 @@ body {
     border: none;
     cursor: pointer;
     font-weight: 600;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.show-all-btn:hover {
+    background: #333;
 }
 
 /* Filter Categories */
 .filter-category {
     display: flex;
-    flex-direction: column; /* title on top */
+    flex-direction: column;
 }
 
-/* Custom checkbox color */
 .filter-options input[type="checkbox"] {
-    accent-color: #e1bb53; /* modern way to change checkbox tick color */
+    accent-color: #e1bb53;
     width: 18px;
     height: 18px;
     cursor: pointer;
 }
 
 .filter-category h3 {
-    margin-bottom: 10px; /* space between title and options */
+    margin-bottom: 10px;
     font-family: 'Josefin Sans', sans-serif;
     font-weight: 400;
 }
 
-/* Filter options row */
 .filter-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px 10px; /* vertical 5px, horizontal 10px spacing between checkboxes */
+    gap: 5px 10px;
 }
 
 .filter-options label {
@@ -651,28 +767,16 @@ body {
     justify-content: center;
 }
 
-
-/* Close Button */
-.close-btn {
-    padding: 10px 20px;
-    background: black;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    align-self: flex-end;
-}
-
 .catalog-products {
     display: flex;
     flex-direction: column;
-    gap: 15px; /* space between rows */
+    gap: 15px;
     padding: 20px 40px;
 }
 
 .catalog-header {
     display: flex;
-    justify-content: space-between; /* left = title/tabs, right = buttons */
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
 }
@@ -689,16 +793,17 @@ body {
 
 .product-row {
     display: flex;
-    justify-content: center; /* center all cards in the row */
-    gap: 45px; /* space between cards */
+    justify-content: center;
+    gap: 45px;
+    margin-bottom: 30px;
 }
 
 .card {
-    width: 32%; /* 3 cards per row */
-    position: relative; /* Needed so .add-to-cart is positioned relative to the card */
+    width: 32%;
+    position: relative;
     background: #fff;
     border-radius: 12px;
-    overflow: hidden; /* Ensures button slides in neatly */
+    overflow: hidden;
     cursor: pointer;
     font-family: 'Josefin Sans', sans-serif;
 }
@@ -711,20 +816,22 @@ body {
     transition: transform 0.3s ease;
 }
 
-/* Price tag */
+/* Price tag - UPDATED BORDER RADIUS */
 .price-tag {
     position: absolute;
     top: 10px;
-    left: 10px;
+    left: 0;
     background: black;
     color: white;
-    padding: 5px 10px;
-    border-radius: 8px;
+    padding: 8px 15px;
     font-weight: 600;
     font-size: 14px;
+    z-index: 2;
+    clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+    border-radius: 0 12px 12px 0; /* Added border radius */
 }
 
-/* Add to cart bar (hidden by default) */
+/* Add to cart bar */
 .add-to-cart {
     position: absolute;
     bottom: 0;
@@ -737,17 +844,15 @@ body {
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
-    transform: translateY(100%); /* Hidden below initially */
+    transform: translateY(100%);
     transition: transform 0.3s ease;
-    z-index: 5; /* Sit above the image */
+    z-index: 5;
 }
 
-/* Hover effect: show add to cart */
 .card:hover .add-to-cart {
     transform: translateY(0);
 }
 
-/* Optional: subtle image scale on hover */
 .card:hover img {
     transform: scale(1.03);
 }
@@ -792,46 +897,112 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 #closeCart {
     cursor: pointer;
     font-size: 24px;
+    background: none;
+    border: none;
 }
 
 /* Cart items */
 .cart-item {
     display: flex;
-    gap: 10px;
+    gap: 15px;
     margin: 15px 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
 }
 
 .cart-item img {
-    width: 50px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.cart-item-info p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.cart-item-info span {
+    font-weight: 600;
+    color: #000;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn:hover {
+    background: #f5f5f5;
+}
+
+.quantity {
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+.remove-item {
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: auto;
+}
+
+.remove-item:hover {
+    color: #000;
 }
 
 .cart-toast {
     position: fixed;
     bottom: 28px;
     right: 28px;
-
     background: #0a0a0a;
     color: #f5f5f5;
-
     padding: 14px 26px;
     border-radius: 14px;
-
     font-family: 'Josefin Sans', sans-serif;
     font-size: 14px;
-    font-weight: 300;   /* thin */
+    font-weight: 300;
     letter-spacing: 1px;
-
     box-shadow: 0 12px 35px rgba(0,0,0,0.4);
-
     opacity: 0;
     transform: translateY(18px);
     transition: opacity 0.4s ease, transform 0.4s ease;
-
     z-index: 9999;
 }
 
@@ -844,10 +1015,8 @@ body {
     font-size: 14px;
     color: #555;
     font-family: 'Josefin Sans', sans-serif;
-    margin-top: 5px; /* optional spacing below tabs */
+    margin-top: 5px;
 }
-
-/* Add to your existing CSS */
 
 /* Active Filters Display */
 .active-filters {
@@ -856,6 +1025,7 @@ body {
     flex-wrap: wrap;
     gap: 10px;
     min-height: 50px;
+    align-items: center;
 }
 
 .filter-tag {
@@ -884,6 +1054,7 @@ body {
     color: #999;
     cursor: pointer;
     font-size: 14px;
+    margin-left: 10px;
 }
 
 .clear-all:hover {
@@ -1011,6 +1182,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .clear-filters:hover {
@@ -1050,6 +1222,7 @@ body {
     padding: 40px;
     background: white;
     position: relative;
+    border-radius: 15px;
 }
 
 .product-detail {
@@ -1179,6 +1352,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-weight: bold;
 }
 
 /* Improved Cart Modal */
@@ -1263,9 +1437,14 @@ body {
     color: #000;
 }
 
-.cart-summary {
+.cart-footer {
     padding: 20px;
     border-top: 1px solid #eee;
+    background: #f9f9f9;
+}
+
+.cart-summary {
+    margin-bottom: 20px;
 }
 
 .cart-summary p {
@@ -1311,61 +1490,21 @@ body {
     background: #f5f5f5;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .product-detail {
-        flex-direction: column;
-    }
-    
-    .product-detail-image {
-        max-width: 100%;
-    }
-    
-    .cart-modal {
-        width: 100%;
-    }
-    
-    .filter-modal-content,
-    .personalize-modal-content {
-        width: 95vw;
-    }
-    
-    .catalog-header {
-        padding: 30px 20px;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-    
-    .active-filters {
-        padding: 15px 20px;
-    }
-}
-
-/* ... existing code ... */
-
-.catalog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 40px 80px 20px; /* Reduced bottom padding */
-}
-
 /* Move products closer to tabs */
 .catalog-products {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* space between rows */
-    padding: 0 40px 40px; /* Reduced top padding */
+    gap: 20px;
+    padding: 0 40px 40px;
 }
 
 /* Remove border radius from cards */
 .card {
-    width: 32%; /* 3 cards per row */
+    width: 32%;
     position: relative;
     background: #fff;
-    border-radius: 0; /* Changed from 12px to 0 */
-    overflow: hidden; /* Ensures button slides in neatly */
+    border-radius: 0;
+    overflow: hidden;
     cursor: pointer;
     font-family: 'Josefin Sans', sans-serif;
     transition: all 0.3s ease;
@@ -1373,21 +1512,22 @@ body {
 
 /* Remove the card overlay text */
 .card-overlay {
-    display: none; /* Hide the "CLICK TO VIEW DETAILS" text */
+    display: none;
 }
 
 /* Price tag - make it sharp too */
 .price-tag {
     position: absolute;
     top: 10px;
-    left: 0; /* Changed from 10px to 0 for sharp edge */
+    left: 0;
     background: black;
     color: white;
-    padding: 8px 15px; /* Adjusted padding */
+    padding: 8px 15px;
     font-weight: 600;
     font-size: 14px;
     clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
     z-index: 2;
+    border-radius: 0 12px 12px 0; /* Added border radius */
 }
 
 /* Add to cart bar */
@@ -1406,14 +1546,13 @@ body {
     transform: translateY(100%);
     transition: transform 0.3s ease;
     z-index: 5;
-    border-radius: 0; /* Remove radius */
+    border-radius: 0;
 }
 
 .card:hover .add-to-cart {
     transform: translateY(0);
 }
 
-/* Card image hover effect */
 .card:hover img {
     transform: scale(1.05);
 }
@@ -1491,7 +1630,7 @@ body {
     width: 80px;
     height: 80px;
     object-fit: cover;
-    border-radius: 0; /* Changed from 8px to 0 */
+    border-radius: 0;
 }
 
 /* Responsive adjustments */
@@ -1516,6 +1655,36 @@ body {
         width: 100%;
     }
     
+    .quiz-tab {
+        flex-direction: column;
+        margin: 20px;
+    }
+    
+    .quiz-tab img {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .quiz-text {
+        position: relative;
+        top: auto;
+        right: auto;
+        max-width: 100%;
+        text-align: center;
+        padding: 20px;
+        background: rgba(0,0,0,0.7);
+        margin: 0;
+    }
+    
+    .find-btn {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin: 20px auto;
+        display: block;
+        width: 200px;
+    }
+    
     .footer-quiz-content h2 {
         font-size: 28px;
     }
@@ -1527,6 +1696,27 @@ body {
     .quiz-btn {
         padding: 15px 25px;
         font-size: 18px;
+    }
+    
+    .product-detail {
+        flex-direction: column;
+    }
+    
+    .product-detail-image {
+        max-width: 100%;
+    }
+    
+    .cart-modal {
+        width: 100%;
+    }
+    
+    .filter-modal-content,
+    .personalize-modal-content {
+        width: 95vw;
+    }
+    
+    .active-filters {
+        padding: 15px 20px;
     }
 }
 
@@ -1734,6 +1924,19 @@ body {
     .footer-newsletter {
         max-width: 100%;
     }
+    
+    .navbar {
+        padding: 20px;
+        flex-wrap: wrap;
+    }
+    
+    .navbar .menu {
+        order: 3;
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1744,5 +1947,18 @@ body {
     .footer-links-container {
         flex-direction: column;
         gap: 30px;
+    }
+    
+    .catalog-header {
+        padding: 20px;
+    }
+    
+    .catalog-title {
+        font-size: 32px;
+    }
+    
+    .catalog-tabs {
+        flex-direction: column;
+        gap: 10px;
     }
 }

@@ -25,32 +25,38 @@ if (track && slides.length > 0) {
 
 document.addEventListener("DOMContentLoaded", () => {
     // === MODALS ===
-    const filterBtn = document.querySelector(".action-btn:not(.outline)");
-    const personalizeBtn = document.querySelector(".action-btn.outline");
+    const filterBtn = document.getElementById("filterBtn");
+    const personalizeBtn = document.getElementById("personalizeBtn");
     const filterModal = document.getElementById("filterModal");
     const personalizeModal = document.getElementById("personalizeModal");
     const closeBtns = document.querySelectorAll(".close-btn");
+    const productModal = document.getElementById('productModal');
 
     if (filterBtn) {
-        filterBtn.addEventListener("click", () => { filterModal.style.display = "flex"; });
+        filterBtn.addEventListener("click", () => { 
+            filterModal.style.display = "flex"; 
+        });
     }
     if (personalizeBtn) {
-        personalizeBtn.addEventListener("click", () => { personalizeModal.style.display = "flex"; });
+        personalizeBtn.addEventListener("click", () => { 
+            personalizeModal.style.display = "flex"; 
+        });
     }
 
     closeBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            filterModal.style.display = "none";
-            personalizeModal.style.display = "none";
-            document.getElementById('productModal').style.display = 'none';
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (filterModal) filterModal.style.display = "none";
+            if (personalizeModal) personalizeModal.style.display = "none";
+            if (productModal) productModal.style.display = 'none';
         });
     });
 
     window.addEventListener("click", (e) => {
         if (e.target === filterModal) filterModal.style.display = "none";
         if (e.target === personalizeModal) personalizeModal.style.display = "none";
-        if (e.target === document.getElementById('productModal')) {
-            document.getElementById('productModal').style.display = 'none';
+        if (e.target === productModal) {
+            productModal.style.display = 'none';
         }
     });
 
@@ -64,10 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            if(tab.textContent === "PERFUME" || tab.dataset.type === "perfume") {
+            if(tab.textContent.trim() === "PERFUME" || tab.dataset.type === "perfume") {
                 if (perfumeTab) perfumeTab.style.display = 'flex';
                 if (cologneTab) cologneTab.style.display = 'none';
-            } else if(tab.textContent === "COLOGNE" || tab.dataset.type === "cologne") {
+            } else if(tab.textContent.trim() === "COLOGNE" || tab.dataset.type === "cologne") {
                 if (perfumeTab) perfumeTab.style.display = 'none';
                 if (cologneTab) cologneTab.style.display = 'flex';
             }
@@ -77,29 +83,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // === CART ===
-    const cartIcon = document.querySelector('.fa-shopping-cart');
+    const cartIcon = document.getElementById("cartIcon") || document.querySelector('.fa-shopping-cart');
     const cartModal = document.getElementById('cartModal');
     const cartOverlay = document.getElementById('cartOverlay');
     const closeCart = document.getElementById('closeCart');
+    const continueShopping = document.querySelector('.continue-shopping');
+    const checkoutBtn = document.querySelector('.checkout-btn');
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     // Product descriptions database
     const productDescriptions = {
         1: "Miss Dior is a timeless floral fragrance that captures the essence of romance. With top notes of bergamot and mandarin, a heart of Grasse rose and peony, and a base of patchouli and musk, this scent evokes elegance and femininity.",
-        2: "Chanel Gabrielle Essence is a luminous floral scent that radiates confidence. A blend of jasmine, orange blossom, and tuberose creates a sophisticated fragrance that lasts throughout the day.",
-        3: "Prada Paradoxe is a modern fragrance that challenges conventions. With notes of neroli, jasmine, and amber, it creates a unique olfactory experience that's both fresh and warm.",
-        4: "Versace Eros is an aromatic fougère fragrance for men that embodies passion and strength. Mint, green apple, and tonka bean create a vibrant and seductive scent.",
-        5: "Miss Dior Blooming Bouquet is a fresh floral scent perfect for spring. With notes of peony, rose, and white musk, it's light, romantic, and effortlessly chic.",
-        6: "Chanel Coco Noir is an oriental fragrance that exudes mystery. Amber, vanilla, and sandalwood create a deep, sensual scent for evening wear.",
-        7: "Prada Luna Rossa is a woody aromatic fragrance inspired by sailing. Lavender, orange, and ambroxan create a fresh, sporty scent with elegance.",
-        8: "Versace Pour Homme is a fresh citrus fragrance perfect for daily wear. Bergamot, lemon, and neroli create an energetic and clean scent.",
-        9: "Dior Sauvage is a fresh spicy fragrance that captures the spirit of open spaces. Ambroxan, bergamot, and pepper create a bold, modern scent.",
-        10: "Chanel Bleu de Chanel is a timeless woody aromatic fragrance. Citrus, vetiver, and cedar create a sophisticated and versatile scent for any occasion.",
-        11: "Versace Dylan Blue is a fresh aquatic fragrance for the modern man. Calabrian bergamot, aquatic notes, and patchouli create a dynamic scent.",
-        12: "Dior Fahrenheit is a woody leather fragrance that's bold and distinctive. Leather, violet, and sandalwood create a unique, memorable scent.",
-        13: "Prada L'Homme is a fresh fragrance that balances elegance and masculinity. Iris, amber, and neroli create a clean, sophisticated scent.",
-        14: "Chanel Allure Homme is an oriental fragrance with warm, sensual notes. Vanilla, tonka bean, and sandalwood create a luxurious scent.",
-        15: "Versace Man Eau Fraiche is a fresh citrus aquatic fragrance. Lemon, rosewood, and cedar create a light, refreshing scent perfect for summer."
+        2: "Byredo Gypsy Water is a unisex fragrance that captures the spirit of freedom. With notes of bergamot, lemon, pepper, juniper berries, incense, pine needles, orris, amber, and vanilla, it's a sophisticated and mysterious scent.",
+        3: "Prada Paradoxe is a modern floral fragrance that challenges conventions. With notes of neroli, jasmine, and amber, it creates a unique olfactory experience that's both fresh and warm.",
+        4: "Chanel No. 5 is the iconic fragrance that revolutionized perfumery. With aldehydic top notes, a floral heart of jasmine and rose, and a warm base of sandalwood and vanilla, it remains a timeless classic.",
+        5: "Burberry Her is a fruity floral fragrance with a modern twist. Notes of red berries, jasmine, and violet create a youthful, vibrant scent that's perfect for daily wear.",
+        6: "Victoria's Secret Bombshell is a playful, feminine fragrance. Passionfruit, peony, and vanilla orchid create a flirty, energetic scent that's perfect for summer.",
+        7: "Maison Margiela By the Fireplace is a cozy, warm fragrance that evokes winter evenings by the fireplace. Notes of cloves, orange flower, chestnut, and vanilla create a comforting, gourmand scent.",
+        8: "Jo Malone Lime Basil & Mandarin is a fresh, citrus fragrance. Zesty lime, aromatic basil, and white thyme create an energizing, sophisticated scent perfect for daytime.",
+        9: "YSL Black Opium is an addictive gourmand fragrance. Coffee, white flowers, and vanilla create a mysterious, sensual scent perfect for evening wear.",
+        10: "Dior Sauvage is a fresh, masculine fragrance that captures the spirit of open spaces. Ambroxan, bergamot, and pepper create a bold, modern scent.",
+        11: "Byredo Mojave Ghost is a woody floral fragrance inspired by the Mojave desert. Notes of Jamaican nesberry, magnolia, sandalwood, and ambergris create a mysterious, ethereal scent.",
+        12: "Prada L'Homme is a sophisticated masculine fragrance. Iris, amber, and neroli create a clean, elegant scent perfect for the modern man.",
+        13: "Chanel Bleu de Chanel is a timeless woody aromatic fragrance. Citrus, vetiver, and cedar create a versatile scent for any occasion.",
+        14: "Burberry Brit for Him is a fresh, spicy fragrance. Bergamot, ginger, and vetiver create a refined, masculine scent.",
+        15: "Maison Margiela Sailing Day is a fresh aquatic fragrance. Sea salt, sage, and ambrette create a clean, marine scent perfect for summer.",
+        16: "Versace Eros is an aromatic fougère fragrance for men. Mint, green apple, and tonka bean create a vibrant and seductive scent.",
+        17: "Dior Fahrenheit is a woody leather fragrance. Leather, violet, and sandalwood create a unique, memorable masculine scent.",
+        18: "Chanel Allure Homme is an oriental fragrance. Vanilla, tonka bean, and sandalwood create a warm, sensual scent."
     };
 
     // === INITIALIZATION ===
@@ -114,8 +125,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function bindEvents() {
         // Filter functionality
-        const applyFilterBtn = document.querySelector('#filterModal .apply-btn');
-        const applyPersonalizeBtn = document.querySelector('#personalizeModal .apply-btn');
+        const applyFilterBtn = document.getElementById('applyFilters');
+        const clearFiltersBtn = document.getElementById('clearFilters');
+        const showAllProductsBtn = document.getElementById('showAllProducts');
         
         if (applyFilterBtn) {
             applyFilterBtn.addEventListener('click', () => {
@@ -131,41 +143,84 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
 
+        if (clearFiltersBtn) {
+            clearFiltersBtn.addEventListener('click', () => {
+                clearFilters();
+                applyFilters();
+                filterModal.style.display = 'none';
+            });
+        }
+
+        if (showAllProductsBtn) {
+            showAllProductsBtn.addEventListener('click', () => {
+                clearFilters();
+                applyFilters();
+                filterModal.style.display = 'none';
+            });
+        }
+
         // Personalize functionality
+        const applyPersonalizeBtn = document.getElementById('applyPersonalize');
+        const clearPersonalizeBtn = document.getElementById('clearPersonalize');
+        const showAllPersonalizeBtn = document.getElementById('showAllProductsPersonalize');
+        
         if (applyPersonalizeBtn) {
             applyPersonalizeBtn.addEventListener('click', () => {
-                const filters = {
-                    moods: [...document.querySelectorAll('#personalizeModal input[name="mood"]:checked')].map(i => i.value),
-                    seasons: [...document.querySelectorAll('#personalizeModal input[name="season"]:checked')].map(i => i.value),
-                    longevity: [...document.querySelectorAll('#personalizeModal input[name="longevity"]:checked')].map(i => i.value),
-                    occasions: [...document.querySelectorAll('#personalizeModal input[name="occasion"]:checked')].map(i => i.value),
+                const moods = [...document.querySelectorAll('#personalizeModal .personalize-btn[data-mood].active')].map(btn => btn.dataset.mood);
+                const seasons = [...document.querySelectorAll('#personalizeModal .personalize-btn[data-season].active')].map(btn => btn.dataset.season);
+                const longevity = [...document.querySelectorAll('#personalizeModal .personalize-btn[data-longevity].active')].map(btn => btn.dataset.longevity);
+                const occasions = [...document.querySelectorAll('#personalizeModal .personalize-btn[data-occasion].active')].map(btn => btn.dataset.occasion);
+                const notes = [...document.querySelectorAll('#personalizeModal .note-btn.active')].map(btn => btn.dataset.note);
+                
+                currentPersonalize = {
+                    moods: moods,
+                    seasons: seasons,
+                    longevity: longevity,
+                    occasions: occasions,
+                    notes: notes
                 };
-                currentPersonalize = filters;
+                
                 applyFilters();
                 personalizeModal.style.display = 'none';
             });
         }
 
-        // Show all buttons
-        document.querySelectorAll('.show-all-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                clearFilters();
+        if (clearPersonalizeBtn) {
+            clearPersonalizeBtn.addEventListener('click', () => {
                 clearPersonalize();
                 applyFilters();
+                personalizeModal.style.display = 'none';
             });
-        });
+        }
+
+        if (showAllPersonalizeBtn) {
+            showAllPersonalizeBtn.addEventListener('click', () => {
+                clearPersonalize();
+                applyFilters();
+                personalizeModal.style.display = 'none';
+            });
+        }
 
         // Personalize buttons toggle
         document.querySelectorAll('.personalize-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.classList.toggle('active');
+            });
+        });
+
+        // Note buttons toggle
+        document.querySelectorAll('.note-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
                 this.classList.toggle('active');
             });
         });
 
         // Product card clicks
-        document.querySelectorAll('.card').forEach(card => {
+        document.querySelectorAll('.product-card').forEach(card => {
             card.addEventListener('click', function(e) {
-                if (!e.target.classList.contains('add-to-cart')) {
+                if (!e.target.classList.contains('add-to-cart') && !e.target.closest('.add-to-cart')) {
                     showProductDetail(this);
                 }
             });
@@ -190,6 +245,15 @@ document.addEventListener("DOMContentLoaded", () => {
         if (cartOverlay) {
             cartOverlay.addEventListener('click', closeCartModal);
         }
+        if (continueShopping) {
+            continueShopping.addEventListener('click', closeCartModal);
+        }
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                alert('Proceeding to checkout. In a real application, this would redirect to a checkout page.');
+                closeCartModal();
+            });
+        }
 
         // Product detail modal add to cart
         const addToCartDetail = document.getElementById('addToCartDetail');
@@ -197,12 +261,11 @@ document.addEventListener("DOMContentLoaded", () => {
             addToCartDetail.addEventListener('click', addFromDetail);
         }
 
-        // Clear all filters
-        const clearAllBtn = document.querySelector('.clear-all');
-        if (clearAllBtn) {
-            clearAllBtn.addEventListener('click', () => {
-                clearFilters();
-                clearPersonalize();
+        // Wishlist button
+        const wishlistBtn = document.querySelector('.wishlist-btn');
+        if (wishlistBtn) {
+            wishlistBtn.addEventListener('click', () => {
+                alert('Added to wishlist!');
             });
         }
     }
@@ -212,21 +275,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const activeTab = document.querySelector('.tab.active');
         if (!activeTab) return;
         
-        const tabType = activeTab.textContent === "PERFUME" || activeTab.dataset.type === "perfume" ? "perfume" : "cologne";
+        const tabType = activeTab.dataset.type === "perfume" ? "perfume" : "cologne";
         const container = tabType === "perfume" 
             ? document.getElementById('perfumeProducts') 
             : document.getElementById('cologneProducts');
         
         if (!container) return;
         
-        const cards = container.querySelectorAll('.card');
+        const cards = container.querySelectorAll('.product-card');
         let visibleCount = 0;
 
         cards.forEach(card => {
             const brand = card.dataset.brand;
             const price = parseInt(card.dataset.price);
             const scent = card.dataset.scent;
-            const size = card.dataset.size + 'ml';
+            const size = card.dataset.size;
             
             let show = true;
 
@@ -237,10 +300,10 @@ document.addEventListener("DOMContentLoaded", () => {
             
             if (currentFilters.prices && currentFilters.prices.length) {
                 const priceMatch = currentFilters.prices.some(range => {
-                    if (range === "Under $50" || range === "under50") return price < 50;
-                    if (range === "$50-$100" || range === "50-100") return price >= 50 && price <= 100;
-                    if (range === "$100-$200" || range === "100-200") return price > 100 && price <= 200;
-                    if (range === "Above $200" || range === "above200") return price > 200;
+                    if (range === "under50") return price < 50;
+                    if (range === "50-100") return price >= 50 && price <= 100;
+                    if (range === "100-200") return price > 100 && price <= 200;
+                    if (range === "above200") return price > 200;
                     return false;
                 });
                 if (!priceMatch) show = false;
@@ -251,12 +314,19 @@ document.addEventListener("DOMContentLoaded", () => {
             if (currentPersonalize.seasons && currentPersonalize.seasons.length && !currentPersonalize.seasons.includes(card.dataset.season)) show = false;
             if (currentPersonalize.longevity && currentPersonalize.longevity.length && !currentPersonalize.longevity.includes(card.dataset.longevity)) show = false;
             if (currentPersonalize.occasions && currentPersonalize.occasions.length && !currentPersonalize.occasions.includes(card.dataset.occasion)) show = false;
+            
+            // Apply note filters
+            if (currentPersonalize.notes && currentPersonalize.notes.length) {
+                const notes = card.dataset.notes || '';
+                const hasMatchingNote = currentPersonalize.notes.some(note => notes.includes(note));
+                if (!hasMatchingNote) show = false;
+            }
 
-            card.style.display = show ? 'flex' : 'none';
+            card.style.display = show ? 'block' : 'none';
             if (show) visibleCount++;
         });
 
-        updateProductCount();
+        updateProductCount(visibleCount);
         updateActiveFilters();
     }
 
@@ -266,24 +336,37 @@ document.addEventListener("DOMContentLoaded", () => {
         
         activeFiltersContainer.innerHTML = '';
         
-        const allFilters = {...currentFilters, ...currentPersonalize};
+        const allFilters = {};
+        
+        // Add regular filters
+        Object.keys(currentFilters).forEach(key => {
+            if (currentFilters[key] && currentFilters[key].length > 0) {
+                allFilters[key] = currentFilters[key];
+            }
+        });
+        
+        // Add personalize filters
+        Object.keys(currentPersonalize).forEach(key => {
+            if (currentPersonalize[key] && currentPersonalize[key].length > 0) {
+                allFilters[key] = currentPersonalize[key];
+            }
+        });
+        
         let hasFilters = false;
         
         Object.keys(allFilters).forEach(key => {
-            if (allFilters[key] && allFilters[key].length > 0) {
+            allFilters[key].forEach(value => {
                 hasFilters = true;
-                allFilters[key].forEach(value => {
-                    const filterTag = document.createElement('span');
-                    filterTag.className = 'filter-tag';
-                    filterTag.innerHTML = `${value} <i class="fas fa-times"></i>`;
-                    
-                    filterTag.querySelector('i').addEventListener('click', () => {
-                        removeFilter(key, value);
-                    });
-                    
-                    activeFiltersContainer.appendChild(filterTag);
+                const filterTag = document.createElement('span');
+                filterTag.className = 'filter-tag';
+                filterTag.innerHTML = `${value} <i class="fas fa-times"></i>`;
+                
+                filterTag.querySelector('i').addEventListener('click', () => {
+                    removeFilter(key, value);
                 });
-            }
+                
+                activeFiltersContainer.appendChild(filterTag);
+            });
         });
         
         if (hasFilters) {
@@ -293,6 +376,7 @@ document.addEventListener("DOMContentLoaded", () => {
             clearAll.addEventListener('click', () => {
                 clearFilters();
                 clearPersonalize();
+                applyFilters();
             });
             activeFiltersContainer.appendChild(clearAll);
         }
@@ -301,18 +385,16 @@ document.addEventListener("DOMContentLoaded", () => {
     function removeFilter(category, value) {
         if (currentFilters[category]) {
             currentFilters[category] = currentFilters[category].filter(v => v !== value);
+            // Update checkbox
+            const checkbox = document.querySelector(`#filterModal input[name="${category}"][value="${value}"]`);
+            if (checkbox) checkbox.checked = false;
         }
         if (currentPersonalize[category]) {
             currentPersonalize[category] = currentPersonalize[category].filter(v => v !== value);
+            // Update button
+            const button = document.querySelector(`#personalizeModal [data-${category.toLowerCase()}="${value}"]`);
+            if (button) button.classList.remove('active');
         }
-        
-        // Update checkboxes
-        const checkbox = document.querySelector(`input[value="${value}"]`);
-        if (checkbox) checkbox.checked = false;
-        
-        // Update personalize buttons
-        const personalizeBtn = document.querySelector(`[data-${category.toLowerCase()}="${value}"]`);
-        if (personalizeBtn) personalizeBtn.classList.remove('active');
         
         applyFilters();
     }
@@ -325,10 +407,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function clearPersonalize() {
-        document.querySelectorAll('#personalizeModal input[type="checkbox"]').forEach(cb => {
-            cb.checked = false;
+        document.querySelectorAll('#personalizeModal .personalize-btn.active').forEach(btn => {
+            btn.classList.remove('active');
         });
-        document.querySelectorAll('.personalize-btn.active').forEach(btn => {
+        document.querySelectorAll('#personalizeModal .note-btn.active').forEach(btn => {
             btn.classList.remove('active');
         });
         currentPersonalize = {};
@@ -342,15 +424,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const productId = card.dataset.id;
         
         document.getElementById('productDetailImg').src = card.querySelector('img').src;
+        document.getElementById('productDetailImg').alt = card.querySelector('img').alt;
         document.getElementById('productDetailName').textContent = card.querySelector('img').alt;
         document.getElementById('productDetailBrand').textContent = card.dataset.brand;
         document.getElementById('productDetailPrice').textContent = '$' + card.dataset.price;
-        document.getElementById('productDetailSize').textContent = card.dataset.size + 'ml';
+        document.getElementById('productDetailSize').textContent = card.dataset.size;
         document.getElementById('productDetailScent').textContent = card.dataset.scent;
         document.getElementById('productDetailLongevity').textContent = card.dataset.longevity;
         document.getElementById('productDetailSeason').textContent = card.dataset.season;
-        document.getElementById('productDetailDesc').textContent = productDescriptions[productId] || 
-            "A luxurious fragrance that captures the essence of elegance and sophistication.";
+        
+        // Set product description
+        const desc = productDescriptions[productId] || 
+            `A luxurious ${card.dataset.scent.toLowerCase()} fragrance from ${card.dataset.brand}. Perfect for ${card.dataset.occasion.toLowerCase()} occasions. Features notes of ${card.dataset.notes}.`;
+        document.getElementById('productDetailDesc').textContent = desc;
         
         modal.dataset.productId = productId;
         modal.style.display = 'flex';
@@ -387,6 +473,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (card) {
             addToCart(card);
+            modal.style.display = 'none';
         }
     }
 
@@ -411,6 +498,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!cartItems) return;
         
         const totalPrice = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
         
         if (cart.length === 0) {
             cartItems.innerHTML = `
@@ -425,12 +513,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="${item.image}" alt="${item.name}">
                     <div class="cart-item-info">
                         <h4>${item.name}</h4>
+                        <p>${item.brand} • ${item.size}</p>
                         <span>$${item.price}</span>
                         <div class="cart-item-controls">
                             <button class="quantity-btn minus">-</button>
                             <span class="quantity">${item.quantity}</span>
                             <button class="quantity-btn plus">+</button>
-                            <button class="remove-item">&times;</button>
+                            <button class="remove-item"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
                 </div>
@@ -463,7 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const itemCountEl = document.getElementById('itemCount');
         
         if (totalPriceEl) totalPriceEl.textContent = '$' + totalPrice.toFixed(2);
-        if (itemCountEl) itemCountEl.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        if (itemCountEl) itemCountEl.textContent = totalItems;
     }
 
     function updateCartItem(itemId, change) {
@@ -489,14 +578,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function openCart() {
-        document.getElementById('cartModal').classList.add('active');
-        document.getElementById('cartOverlay').classList.add('active');
+        cartModal.classList.add('active');
+        cartOverlay.classList.add('active');
         renderCart();
     }
 
     function closeCartModal() {
-        document.getElementById('cartModal').classList.remove('active');
-        document.getElementById('cartOverlay').classList.remove('active');
+        cartModal.classList.remove('active');
+        cartOverlay.classList.remove('active');
     }
 
     function showCartToast(message) {
@@ -504,7 +593,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const text = document.getElementById('toastText');
         if (!toast || !text) return;
         
-        text.textContent = message;
+        text.textContent = '✓ ' + message;
         toast.classList.add('show');
         
         setTimeout(() => {
@@ -512,26 +601,127 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000);
     }
 
-    function updateProductCount() {
+    function updateProductCount(count = null) {
         const activeTab = document.querySelector('.tab.active');
         if (!activeTab) return;
         
-        const tabType = activeTab.textContent === "PERFUME" || activeTab.dataset.type === "perfume" ? "perfume" : "cologne";
+        const tabType = activeTab.dataset.type === "perfume" ? "perfume" : "cologne";
         const container = tabType === "perfume" 
             ? document.getElementById('perfumeProducts') 
             : document.getElementById('cologneProducts');
         
         if (!container) return;
         
-        const visibleCards = Array.from(container.querySelectorAll('.card'))
-            .filter(card => card.style.display !== 'none');
+        if (count === null) {
+            const visibleCards = Array.from(container.querySelectorAll('.product-card'))
+                .filter(card => card.style.display !== 'none');
+            count = visibleCards.length;
+        }
         
         const productCountEl = document.getElementById('productCount');
         if (productCountEl) {
-            productCountEl.textContent = `${visibleCards.length} products`;
+            productCountEl.textContent = `${count} products`;
         }
     }
 
-    // Initialize
-    init();
+        // Initialize if on catalog page, otherwise just bind product card events
+    if (document.getElementById('filterBtn') || document.querySelector('.catalog-products')) {
+        init();
+    } else {
+        // For homepage, initialize cart and bind product cards
+        updateCartCount();
+        bindProductCardEvents();
+        bindCartEvents();
+    }
+
+    function bindProductCardEvents() {
+        // Product card clicks
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('add-to-cart') && !e.target.closest('.add-to-cart')) {
+                    showProductDetail(this);
+                }
+            });
+        });
+
+        // Add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.card');
+                addToCart(card);
+            });
+        });
+    }
+
+    function bindCartEvents() {
+        const cartIcon = document.getElementById("cartIcon") || document.querySelector('.fa-shopping-cart');
+        if (cartIcon && cartModal) {
+            cartIcon.addEventListener('click', openCart);
+        }
+        if (closeCart) {
+            closeCart.addEventListener('click', closeCartModal);
+        }
+        if (cartOverlay) {
+            cartOverlay.addEventListener('click', closeCartModal);
+        }
+        if (continueShopping) {
+            continueShopping.addEventListener('click', closeCartModal);
+        }
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                alert('Proceeding to checkout. In a real application, this would redirect to a checkout page.');
+                closeCartModal();
+            });
+        }
+    }
 });
+
+    // Initialize based on page type
+    const isHomepage = !document.getElementById('filterBtn') && 
+                      !document.querySelector('.catalog-products');
+    
+    if (!isHomepage) {
+        init(); // Catalog page
+    } else {
+        // Homepage - just bind product cards and cart
+        updateCartCount();
+        
+        // Product card clicks
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.classList.contains('add-to-cart') && !e.target.closest('.add-to-cart')) {
+                    showProductDetail(this);
+                }
+            });
+        });
+
+        // Add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.card');
+                addToCart(card);
+            });
+        });
+
+        // Cart functionality
+        if (cartIcon && cartModal) {
+            cartIcon.addEventListener('click', openCart);
+        }
+        if (closeCart) {
+            closeCart.addEventListener('click', closeCartModal);
+        }
+        if (cartOverlay) {
+            cartOverlay.addEventListener('click', closeCartModal);
+        }
+        if (continueShopping) {
+            continueShopping.addEventListener('click', closeCartModal);
+        }
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                alert('Proceeding to checkout. In a real application, this would redirect to a checkout page.');
+                closeCartModal();
+            });
+        }
+    }

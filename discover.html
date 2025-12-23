@@ -15,530 +15,709 @@
     
     <!-- Quiz Specific CSS -->
     <style>
-        /* Color Variables - MEMOIRE Theme */
         :root {
-            --memoire-gold: #D8B96D;
-            --memoire-dark: #0A0A0A;
-            --memoire-light: #F8F5EC;
-            --memoire-bronze: #B8860B;
-            --memoire-cream: #FFF9E6;
-            --memoire-rose: #E8C4C4;
-            --memoire-lavender: #D4C2FC;
-            --memoire-mint: #C2E8D4;
-            --memoire-sand: #E8D4B4;
-            --memoire-slate: #2C3E50;
+            /* MEMOIRE Color Palette - Matched to catalog page */
+            --primary-gold: #D8B96D;
+            --dark-gold: #B89A54;
+            --light-gold: #E8D4A2;
+            --pale-gold: #F5EED9;
+            --deep-charcoal: #1A1A1A;
+            --rich-brown: #3D2B1F;
+            --warm-taupe: #8B7355;
+            --cream: #F8F5F0;
+            --soft-beige: #E6DFD4;
+            --dark-text: #2C2416;
+            --medium-text: #5A5248;
+            --light-text: #7A7367;
+            --shadow: rgba(26, 26, 26, 0.1);
+            --shadow-gold: rgba(216, 185, 109, 0.15);
         }
         
-        body {
-            background-color: var(--memoire-light);
-        }
-        
-        /* Quiz Specific Styles */
-        .quiz-container {
-            padding: 40px 80px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .quiz-header {
-            text-align: center;
-            margin-bottom: 60px;
-            padding: 40px;
-            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
-            border-radius: 20px;
-            color: white;
-            box-shadow: 0 15px 35px rgba(216, 185, 109, 0.3);
+        /* Hero Section - Black with Gold Radial Blur */
+        .quiz-hero {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
             position: relative;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+            border-radius: 20px;
             overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
         
-        .quiz-header::before {
-            content: "";
+        .quiz-hero::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(216, 185, 109, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(216, 185, 109, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(216, 185, 109, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 90% 10%, rgba(216, 185, 109, 0.12) 0%, transparent 35%);
+            filter: blur(40px);
+            z-index: 1;
+        }
+        
+        .quiz-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--light-gold), var(--primary-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(216, 185, 109, 0.2);
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--light-gold);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary-gold);
+            font-family: "Josefin Sans", sans-serif;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--light-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-family: "Josefin Sans", sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            .quiz-hero {
+                padding: 40px 15px;
+                margin-bottom: 30px;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+                margin-bottom: 30px;
+            }
+            
+            .hero-stats {
+                gap: 30px;
+                margin-top: 40px;
+            }
+            
+            .stat-number {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .quiz-hero {
+                padding: 30px 15px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .hero-stats {
+                gap: 20px;
+            }
+            
+            .stat-number {
+                font-size: 24px;
+            }
+        }
+        
+        /* Quiz Specific Styles */
+        .quiz-container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 768px) {
+            .quiz-container {
+                padding: 40px 60px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .quiz-container {
+                padding: 40px 80px;
+            }
+        }
+        
+        .quiz-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold), var(--primary-gold));
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: var(--pale-gold);
+            border-radius: 15px;
+            border: 1px solid var(--light-gold);
+            box-shadow: 0 5px 15px var(--shadow-gold);
+            position: relative;
+        }
+        
+        .quiz-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 2px;
+            background: var(--primary-gold);
         }
         
         .quiz-title {
-            font-size: 52px;
+            font-size: 36px;
             font-weight: 700;
             margin-bottom: 15px;
+            letter-spacing: 1px;
+            color: var(--rich-brown);
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 1;
+        }
+        
+        @media (min-width: 768px) {
+            .quiz-title {
+                font-size: 42px;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .quiz-title {
+                font-size: 48px;
+            }
         }
         
         .quiz-subtitle {
-            font-size: 20px;
-            margin: 0 auto 30px;
+            font-size: 16px;
+            color: var(--medium-text);
             max-width: 700px;
+            margin: 0 auto 30px;
             line-height: 1.6;
-            opacity: 0.9;
-            position: relative;
-            z-index: 1;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 300;
         }
         
-        .quiz-progress-container {
-            background: rgba(255,255,255,0.2);
-            border-radius: 50px;
-            padding: 5px;
-            margin: 30px auto;
-            max-width: 600px;
-            position: relative;
-            z-index: 1;
+        @media (min-width: 768px) {
+            .quiz-subtitle {
+                font-size: 18px;
+            }
         }
         
         .quiz-progress {
             width: 100%;
-            height: 12px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 6px;
+            height: 6px;
+            background: var(--soft-beige);
+            border-radius: 3px;
+            margin: 30px 0;
             overflow: hidden;
         }
         
         .quiz-progress-bar {
             height: 100%;
-            background: white;
+            background: linear-gradient(90deg, var(--light-gold), var(--primary-gold), var(--dark-gold));
             width: 0%;
             transition: width 0.5s ease;
-            border-radius: 6px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            border-radius: 3px;
         }
         
         .quiz-progress-text {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 14px;
+            color: var(--warm-taupe);
             text-align: center;
             margin-top: 15px;
+            font-weight: 600;
             letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
+            font-family: "Josefin Sans", sans-serif;
         }
         
         .quiz-step {
             display: none;
-            animation: fadeIn 0.5s ease;
+            padding: 30px;
             background: white;
-            border-radius: 20px;
-            padding: 50px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            border: 2px solid var(--memoire-cream);
+            border-radius: 15px;
+            border: 1px solid var(--soft-beige);
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        @media (min-width: 768px) {
+            .quiz-step {
+                padding: 40px;
+            }
+        }
+        
+        .quiz-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gold);
+            border-radius: 15px 15px 0 0;
         }
         
         .quiz-step.active {
             display: block;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
         .step-question {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
             text-align: center;
             line-height: 1.3;
-            color: var(--memoire-slate);
+            color: var(--rich-brown);
+            font-family: "Josefin Sans", sans-serif;
             position: relative;
             padding-bottom: 20px;
         }
         
+        @media (min-width: 768px) {
+            .step-question {
+                font-size: 32px;
+            }
+        }
+        
         .step-question::after {
-            content: "";
+            content: '';
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--memoire-gold);
-            border-radius: 2px;
+            width: 80px;
+            height: 2px;
+            background: var(--light-gold);
         }
         
         .step-description {
-            font-size: 18px;
-            color: #666;
+            font-size: 16px;
+            color: var(--medium-text);
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            line-height: 1.6;
-            padding: 0 20px;
+            line-height: 1.5;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 300;
+            background: var(--pale-gold);
+            padding: 15px 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-gold);
         }
         
         .options-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
         }
         
-        @media (min-width: 768px) {
+        @media (min-width: 640px) {
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
             .options-grid {
                 grid-template-columns: repeat(4, 1fr);
             }
         }
         
         .quiz-option {
-            border: 3px solid #f0f0f0;
-            border-radius: 15px;
-            padding: 35px 25px;
+            border: 2px solid var(--soft-beige);
+            border-radius: 12px;
+            padding: 25px 15px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 200px;
+            min-height: 160px;
             background: white;
             position: relative;
             overflow: hidden;
         }
         
-        .quiz-option::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--memoire-gold);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
         .quiz-option:hover {
-            border-color: var(--memoire-gold);
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 35px rgba(216, 185, 109, 0.2);
-        }
-        
-        .quiz-option:hover::before {
-            transform: scaleX(1);
+            border-color: var(--primary-gold);
+            box-shadow: 0 8px 20px var(--shadow-gold);
         }
         
         .quiz-option.selected {
-            border-color: var(--memoire-gold);
-            background: linear-gradient(135deg, rgba(216, 185, 109, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
-            box-shadow: 0 15px 35px rgba(216, 185, 109, 0.25);
-            transform: translateY(-5px);
+            border-color: var(--primary-gold);
+            background: var(--pale-gold);
+            box-shadow: 0 5px 15px var(--shadow-gold);
         }
         
-        .quiz-option.selected::before {
-            transform: scaleX(1);
-            background: var(--memoire-bronze);
-        }
-        
-        .option-icon {
-            font-size: 40px;
-            color: var(--memoire-gold);
-            margin-bottom: 20px;
-            height: 60px;
+        .quiz-option.selected::after {
+            content: '✓';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 25px;
+            height: 25px;
+            background: var(--primary-gold);
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .option-icon {
+            font-size: 32px;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            height: 50px;
+            width: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--pale-gold);
+            border-radius: 50%;
+            transition: all 0.2s ease;
         }
         
         .quiz-option:hover .option-icon {
-            transform: scale(1.2);
+            background: var(--primary-gold);
+            color: white;
         }
         
         .quiz-option.selected .option-icon {
-            color: var(--memoire-bronze);
+            background: var(--primary-gold);
+            color: white;
         }
         
         .option-text {
-            font-size: 20px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 600;
             margin-bottom: 10px;
-            color: var(--memoire-slate);
+            color: var(--rich-brown);
+            font-family: "Josefin Sans", sans-serif;
         }
         
         .option-desc {
             font-size: 14px;
-            color: #777;
+            color: var(--medium-text);
             line-height: 1.4;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 300;
         }
         
         .quiz-navigation {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 40px;
-            border-top: 2px solid var(--memoire-cream);
+            padding-top: 30px;
+            border-top: 2px solid var(--soft-beige);
+            margin-top: 20px;
         }
         
         .quiz-btn {
-            padding: 18px 45px;
-            font-size: 16px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            padding: 12px 25px;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
             cursor: pointer;
             border: none;
-            border-radius: 50px;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 8px;
+            transition: all 0.2s ease;
             font-family: "Josefin Sans", sans-serif;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 768px) {
+            .quiz-btn {
+                padding: 15px 35px;
+                font-size: 16px;
+            }
         }
         
         .btn-prev {
             background: transparent;
-            color: var(--memoire-slate);
-            border: 3px solid #eee;
+            color: var(--warm-taupe);
+            border: 2px solid var(--soft-beige);
         }
         
         .btn-prev:hover {
-            background: var(--memoire-light);
-            border-color: var(--memoire-gold);
-            color: var(--memoire-dark);
-            transform: translateX(-5px);
+            background: var(--soft-beige);
+            color: var(--rich-brown);
+            border-color: var(--light-gold);
         }
         
-        .btn-next, .btn-submit {
-            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+        .btn-next {
+            background: linear-gradient(45deg, var(--rich-brown), var(--warm-taupe));
             color: white;
-            box-shadow: 0 8px 20px rgba(216, 185, 109, 0.3);
         }
         
-        .btn-next:hover, .btn-submit:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(216, 185, 109, 0.4);
+        .btn-next:hover {
+            background: linear-gradient(45deg, var(--warm-taupe), var(--rich-brown));
+            box-shadow: 0 5px 15px var(--shadow);
         }
         
         .btn-submit {
-            background: linear-gradient(135deg, var(--memoire-dark) 0%, var(--memoire-slate) 100%);
-            box-shadow: 0 8px 20px rgba(10, 10, 10, 0.3);
+            background: linear-gradient(45deg, var(--primary-gold), var(--dark-gold));
+            color: var(--rich-brown);
+            font-weight: 700;
         }
         
         .btn-submit:hover {
-            box-shadow: 0 15px 30px rgba(10, 10, 10, 0.4);
+            background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
+            box-shadow: 0 5px 15px var(--shadow-gold);
         }
         
         .btn-hidden {
             visibility: hidden;
         }
         
-        /* Advertisement Banner */
-        .quiz-ad-banner {
-            background: linear-gradient(135deg, var(--memoire-rose) 0%, var(--memoire-lavender) 100%);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 60px 0;
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            box-shadow: 0 15px 35px rgba(212, 194, 252, 0.3);
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .quiz-ad-banner::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="none"><path d="M0,0 C100,50 100,150 200,200 L200,0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
-        }
-        
-        .ad-content {
-            flex: 1;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .ad-title {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--memoire-slate);
-            margin-bottom: 15px;
-        }
-        
-        .ad-text {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-        
-        .ad-cta {
-            display: inline-block;
-            padding: 15px 35px;
-            background: var(--memoire-slate);
-            color: white;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border: 2px solid var(--memoire-slate);
-        }
-        
-        .ad-cta:hover {
-            background: transparent;
-            color: var(--memoire-slate);
-            transform: translateY(-3px);
-        }
-        
-        .ad-image {
-            flex: 0 0 300px;
-            height: 250px;
-            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            color: var(--memoire-gold);
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .ad-image::before {
-            content: "NEW";
-            position: absolute;
-            top: 15px;
-            right: -30px;
-            background: var(--memoire-gold);
-            color: white;
-            padding: 5px 40px;
-            transform: rotate(45deg);
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-        
         /* Results Page */
         .results-container {
             text-align: center;
-            padding: 40px 0;
-            animation: fadeIn 0.8s ease;
+            padding: 30px 0;
         }
         
-        .results-header {
-            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
-            border-radius: 20px;
-            padding: 60px 40px;
-            color: white;
-            margin-bottom: 60px;
-            box-shadow: 0 15px 35px rgba(216, 185, 109, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .results-header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+        @media (min-width: 768px) {
+            .results-container {
+                padding: 40px 0;
+            }
         }
         
         .results-icon {
-            font-size: 80px;
-            color: white;
+            font-size: 60px;
+            color: var(--primary-gold);
             margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            background: var(--pale-gold);
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px var(--shadow-gold);
+        }
+        
+        @media (min-width: 768px) {
+            .results-icon {
+                font-size: 70px;
+                width: 120px;
+                height: 120px;
+                line-height: 120px;
+            }
         }
         
         .results-title {
-            font-size: 48px;
-            font-weight: 700;
+            font-size: 36px;
+            font-weight: 600;
             margin-bottom: 20px;
+            color: var(--rich-brown);
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             position: relative;
-            z-index: 1;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            padding-bottom: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .results-title {
+                font-size: 42px;
+            }
+        }
+        
+        .results-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--light-gold), var(--primary-gold), var(--light-gold));
         }
         
         .results-subtitle {
-            font-size: 22px;
-            opacity: 0.9;
+            font-size: 18px;
+            color: var(--medium-text);
             margin-bottom: 40px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             line-height: 1.6;
-            position: relative;
-            z-index: 1;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 300;
+            background: var(--pale-gold);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-gold);
+        }
+        
+        @media (min-width: 768px) {
+            .results-subtitle {
+                font-size: 20px;
+            }
         }
         
         .results-profile {
-            background: white;
-            border-radius: 20px;
-            padding: 50px;
-            margin: 40px auto;
-            max-width: 900px;
+            background: linear-gradient(135deg, var(--cream), white);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
             text-align: left;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            border: 2px solid var(--memoire-cream);
+            border: 1px solid var(--soft-beige);
+            box-shadow: 0 10px 25px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 768px) {
+            .results-profile {
+                padding: 40px;
+                margin: 40px auto;
+            }
+        }
+        
+        .results-profile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--light-gold), var(--primary-gold), var(--dark-gold));
         }
         
         .profile-title {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: var(--memoire-slate);
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: var(--rich-brown);
             text-align: center;
-            position: relative;
-            padding-bottom: 20px;
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--soft-beige);
         }
         
-        .profile-title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 150px;
-            height: 3px;
-            background: var(--memoire-gold);
-            border-radius: 2px;
+        @media (min-width: 768px) {
+            .profile-title {
+                font-size: 24px;
+            }
         }
         
         .profile-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        @media (min-width: 640px) {
+            .profile-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
         }
         
         .profile-item {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 4px solid var(--light-gold);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
         
         .profile-label {
             font-size: 14px;
-            color: var(--memoire-gold);
-            margin-bottom: 8px;
-            font-weight: 600;
-            letter-spacing: 1px;
+            color: var(--warm-taupe);
+            margin-bottom: 5px;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            font-family: "Josefin Sans", sans-serif;
         }
         
         .profile-value {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--memoire-dark);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-text);
+            font-family: "Josefin Sans", sans-serif;
         }
         
         .profile-tags {
@@ -549,169 +728,182 @@
         }
         
         .profile-tag {
-            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
+            background: linear-gradient(45deg, var(--pale-gold), var(--light-gold));
+            color: var(--rich-brown);
+            padding: 8px 15px;
+            border-radius: 20px;
             font-size: 14px;
-            font-weight: 600;
-            box-shadow: 0 5px 15px rgba(216, 185, 109, 0.2);
+            font-weight: 500;
+            border: 1px solid var(--light-gold);
+            font-family: "Josefin Sans", sans-serif;
         }
         
         .recommendations {
-            margin: 80px 0;
+            margin: 40px 0;
         }
         
-        .recommendations-header {
-            text-align: center;
-            margin-bottom: 60px;
+        @media (min-width: 768px) {
+            .recommendations {
+                margin: 60px 0;
+            }
         }
         
         .recommendations-title {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--memoire-slate);
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--rich-brown);
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             position: relative;
-            display: inline-block;
+            padding-bottom: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .recommendations-title {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
         }
         
         .recommendations-title::after {
-            content: "";
+            content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 200px;
+            width: 150px;
             height: 3px;
-            background: var(--memoire-gold);
-            border-radius: 2px;
-        }
-        
-        .recommendations-subtitle {
-            font-size: 20px;
-            color: #666;
-            max-width: 700px;
-            margin: 20px auto 0;
-            line-height: 1.6;
+            background: linear-gradient(90deg, var(--light-gold), var(--primary-gold), var(--light-gold));
         }
         
         .recommendation-cards {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
         }
         
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
             .recommendation-cards {
-                grid-template-columns: repeat(1, 1fr);
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                margin-bottom: 50px;
             }
         }
         
         .recommendation-card {
             background: white;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px var(--shadow);
+            transition: all 0.2s ease;
+            border: 1px solid var(--soft-beige);
             position: relative;
-            border: 2px solid var(--memoire-cream);
         }
         
         .recommendation-card:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(216, 185, 109, 0.2);
-            border-color: var(--memoire-gold);
+            box-shadow: 0 15px 35px var(--shadow-gold);
         }
         
-        .rec-badge {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--memoire-gold);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            z-index: 2;
-        }
-        
-        .rec-image {
-            height: 280px;
-            background: linear-gradient(135deg, var(--memoire-cream) 0%, var(--memoire-sand) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            color: var(--memoire-gold);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .rec-image::before {
-            content: "";
+        .recommendation-card::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
+            height: 4px;
+            background: linear-gradient(90deg, var(--light-gold), var(--primary-gold));
+        }
+        
+        .rec-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--pale-gold), var(--cream));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: var(--primary-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @media (min-width: 768px) {
+            .rec-image {
+                height: 250px;
+                font-size: 60px;
+            }
         }
         
         .rec-info {
-            padding: 30px;
+            padding: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .rec-info {
+                padding: 25px;
+            }
         }
         
         .rec-name {
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 20px;
+            font-weight: 600;
             margin-bottom: 10px;
-            color: var(--memoire-slate);
+            color: var(--rich-brown);
+            font-family: "Josefin Sans", sans-serif;
+        }
+        
+        @media (min-width: 768px) {
+            .rec-name {
+                font-size: 22px;
+            }
         }
         
         .rec-brand {
-            font-size: 16px;
-            color: var(--memoire-gold);
-            letter-spacing: 2px;
+            font-size: 14px;
+            color: var(--warm-taupe);
+            letter-spacing: 1px;
             margin-bottom: 15px;
-            font-weight: 600;
+            text-transform: uppercase;
+            font-family: "Josefin Sans", sans-serif;
         }
         
         .rec-desc {
-            font-size: 15px;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            font-size: 14px;
+            color: var(--medium-text);
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 300;
         }
         
         .rec-match {
             display: flex;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .match-text {
             font-size: 14px;
-            color: #666;
+            color: var(--warm-taupe);
             margin-right: 10px;
             font-weight: 600;
+            font-family: "Josefin Sans", sans-serif;
         }
         
         .match-bar {
             flex: 1;
             height: 8px;
-            background: #eee;
+            background: var(--soft-beige);
             border-radius: 4px;
             overflow: hidden;
         }
         
         .match-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+            background: linear-gradient(90deg, var(--light-gold), var(--primary-gold));
             border-radius: 4px;
         }
         
@@ -722,280 +914,196 @@
         }
         
         .rec-price {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--memoire-dark);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--rich-brown);
+            font-family: "Josefin Sans", sans-serif;
+        }
+        
+        @media (min-width: 768px) {
+            .rec-price {
+                font-size: 22px;
+            }
         }
         
         .rec-btn {
-            padding: 12px 25px;
-            background: linear-gradient(135deg, var(--memoire-dark) 0%, var(--memoire-slate) 100%);
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--rich-brown), var(--warm-taupe));
             color: white;
             border: none;
-            border-radius: 50px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: 700;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(10,10,10,0.2);
         }
         
         .rec-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(10,10,10,0.3);
+            background: linear-gradient(45deg, var(--warm-taupe), var(--rich-brown));
+            box-shadow: 0 5px 15px var(--shadow);
         }
         
         .results-actions {
             display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 60px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 40px;
+            align-items: center;
+        }
+        
+        @media (min-width: 768px) {
+            .results-actions {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+            }
         }
         
         .action-retake {
-            padding: 18px 45px;
+            padding: 12px 25px;
             background: transparent;
-            border: 3px solid var(--memoire-gold);
-            color: var(--memoire-gold);
-            border-radius: 50px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            border: 2px solid var(--rich-brown);
+            color: var(--rich-brown);
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            font-family: "Josefin Sans", sans-serif;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
         
         .action-retake:hover {
-            background: var(--memoire-gold);
+            background: var(--rich-brown);
             color: white;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(216, 185, 109, 0.3);
+            box-shadow: 0 5px 15px var(--shadow);
         }
         
         .action-browse {
-            padding: 18px 45px;
-            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+            padding: 12px 25px;
+            background: linear-gradient(45deg, var(--primary-gold), var(--dark-gold));
             border: none;
-            color: white;
-            border-radius: 50px;
-            font-weight: 700;
-            letter-spacing: 2px;
+            color: var(--rich-brown);
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            font-family: "Josefin Sans", sans-serif;
             text-transform: uppercase;
+            letter-spacing: 2px;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 8px 20px rgba(216, 185, 109, 0.3);
+            text-align: center;
         }
         
         .action-browse:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(216, 185, 109, 0.4);
-        }
-        
-        /* Featured Collections Banner */
-        .featured-collections {
-            background: linear-gradient(135deg, var(--memoire-mint) 0%, #a8e6cf 100%);
-            border-radius: 20px;
-            padding: 50px;
-            margin: 80px 0;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(194, 232, 212, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .featured-collections::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="none"><path d="M0,100 C50,0 150,200 200,100 L200,0 L0,0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
-        }
-        
-        .collections-title {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--memoire-slate);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .collections-subtitle {
-            font-size: 18px;
-            color: #555;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .collections-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .collection-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-        
-        .collection-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        
-        .collection-icon {
-            font-size: 40px;
-            color: var(--memoire-gold);
-            margin-bottom: 20px;
-        }
-        
-        .collection-name {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--memoire-slate);
-        }
-        
-        .collection-desc {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-        
-        .collections-cta {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--memoire-slate);
-            color: white;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .collections-cta:hover {
-            background: var(--memoire-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(10,10,10,0.2);
+            background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
+            box-shadow: 0 5px 15px var(--shadow-gold);
         }
         
         /* Skip Section */
         .skip-section {
             text-align: center;
-            margin-top: 60px;
+            margin-top: 40px;
             padding-top: 40px;
-            border-top: 2px solid var(--memoire-cream);
+            border-top: 2px solid var(--soft-beige);
+            background: var(--pale-gold);
+            padding: 25px;
+            border-radius: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .skip-section {
+                padding: 30px;
+            }
         }
         
         .skip-text {
-            font-size: 18px;
-            color: #666;
+            font-size: 16px;
+            color: var(--medium-text);
             margin-bottom: 20px;
+            font-family: "Josefin Sans", sans-serif;
+            font-weight: 300;
         }
         
         .skip-btn {
-            padding: 15px 40px;
+            padding: 12px 25px;
             background: transparent;
-            border: 3px solid #ddd;
-            color: #666;
-            border-radius: 50px;
-            font-weight: 700;
+            border: 2px solid var(--light-gold);
+            color: var(--warm-taupe);
+            border-radius: 6px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             text-decoration: none;
             display: inline-block;
-            letter-spacing: 1px;
         }
         
         .skip-btn:hover {
-            border-color: var(--memoire-gold);
-            color: var(--memoire-gold);
-            transform: translateY(-3px);
+            border-color: var(--primary-gold);
+            color: var(--rich-brown);
+            background: var(--light-gold);
         }
         
-        /* Responsive */
-        @media (max-width: 992px) {
+        /* Background pattern - simplified */
+        body {
+            background: var(--cream);
+            position: relative;
+            min-height: 100vh;
+            font-family: "Josefin Sans", sans-serif;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(216, 185, 109, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 115, 85, 0.05) 0%, transparent 20%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
             .quiz-container {
-                padding: 20px;
+                padding: 20px 15px;
+                border-radius: 15px;
             }
             
             .quiz-header {
-                padding: 30px 20px;
+                padding: 20px;
+                margin-bottom: 30px;
             }
             
             .quiz-title {
-                font-size: 36px;
-            }
-            
-            .quiz-step {
-                padding: 30px 20px;
-            }
-            
-            .step-question {
                 font-size: 28px;
             }
             
-            .options-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .quiz-step {
+                padding: 20px;
             }
             
-            .quiz-ad-banner {
-                flex-direction: column;
-                text-align: center;
-                padding: 30px 20px;
+            .step-question {
+                font-size: 24px;
             }
             
-            .ad-image {
-                flex: 0 0 250px;
-                width: 100%;
+            .option-icon {
+                font-size: 28px;
+                height: 45px;
+                width: 45px;
             }
             
-            .collections-grid {
-                grid-template-columns: repeat(1, 1fr);
-            }
-            
-            .profile-grid {
-                grid-template-columns: repeat(1, 1fr);
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .options-grid {
-                grid-template-columns: repeat(1, 1fr);
-            }
-            
-            .recommendation-cards {
-                grid-template-columns: repeat(1, 1fr);
-            }
-            
-            .quiz-btn {
-                padding: 15px 25px;
-                font-size: 14px;
-            }
-            
-            .action-retake, .action-browse {
-                padding: 15px 25px;
-                font-size: 14px;
+            .option-text {
+                font-size: 16px;
             }
         }
     </style>
@@ -1019,30 +1127,43 @@
     </div>
 </div>
 
+<!-- Hero Section -->
+<div class="quiz-hero">
+    <div class="quiz-hero-content">
+        <h1 class="hero-title">DISCOVER YOUR SIGNATURE SCENT</h1>
+        <p class="hero-subtitle">Take our personalized quiz to find fragrances that match your unique style, mood, and personality. Your scent journey begins here.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Quick Questions</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Match Accuracy</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Personalized Picks</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2min</div>
+                <div class="stat-label">Average Time</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Quiz Container -->
 <div class="quiz-container">
     <div class="quiz-header">
-        <h1 class="quiz-title">FIND YOUR SIGNATURE SCENT</h1>
-        <p class="quiz-subtitle">Our personalized scent discovery quiz helps you find fragrances that match your unique personality, style, and preferences. Begin your olfactory journey today.</p>
+        <h2 class="quiz-title">Scent Discovery Quiz</h2>
+        <p class="quiz-subtitle">Answer 8 simple questions to get personalized fragrance recommendations tailored just for you.</p>
         
-        <div class="quiz-progress-container">
-            <div class="quiz-progress">
-                <div class="quiz-progress-bar" id="progressBar"></div>
-            </div>
+        <div class="quiz-progress">
+            <div class="quiz-progress-bar" id="progressBar"></div>
         </div>
-        <div class="quiz-progress-text" id="progressText">QUESTION <span id="currentStep">1</span> OF 8</div>
-    </div>
-    
-    <!-- Advertisement Banner -->
-    <div class="quiz-ad-banner">
-        <div class="ad-content">
-            <h3 class="ad-title">NEW LIMITED EDITION: GOLDEN MEMORIES</h3>
-            <p class="ad-text">Experience our exclusive collection inspired by timeless moments. Rich amber, rare oud, and golden saffron create a scent that lingers in memory. Limited stock available.</p>
-            <a href="catalog.html" class="ad-cta">SHOP NOW</a>
-        </div>
-        <div class="ad-image">
-            <i class="fas fa-crown"></i>
-        </div>
+        <div class="quiz-progress-text" id="progressText">Question <span id="currentStep">1</span> of 8</div>
     </div>
     
     <!-- Quiz Steps -->
@@ -1050,7 +1171,7 @@
         <!-- Step 1: Gender -->
         <div class="quiz-step active" id="step1">
             <h2 class="step-question">How do you identify?</h2>
-            <p class="step-description">Select how you identify to receive personalized fragrance recommendations tailored to your preferences.</p>
+            <p class="step-description">This helps us tailor fragrance recommendations to your preferences.</p>
             
             <div class="options-grid">
                 <div class="quiz-option" data-value="female">
@@ -1058,7 +1179,7 @@
                         <i class="fas fa-female"></i>
                     </div>
                     <div class="option-text">Woman</div>
-                    <div class="option-desc">Feminine & elegant fragrances</div>
+                    <div class="option-desc">Feminine fragrances</div>
                 </div>
                 
                 <div class="quiz-option" data-value="male">
@@ -1066,7 +1187,7 @@
                         <i class="fas fa-male"></i>
                     </div>
                     <div class="option-text">Man</div>
-                    <div class="option-desc">Masculine & bold scents</div>
+                    <div class="option-desc">Masculine scents</div>
                 </div>
                 
                 <div class="quiz-option" data-value="nonbinary">
@@ -1082,15 +1203,22 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <div class="option-text">Show me all</div>
-                    <div class="option-desc">Explore complete collection</div>
+                    <div class="option-desc">Explore all fragrances</div>
                 </div>
+            </div>
+
+            <!-- Navigation Buttons inside the quiz tab -->
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-btn btn-prev btn-hidden" id="prevBtn">Previous</button>
+                <button type="button" class="quiz-btn btn-next" id="nextBtn">Next Question</button>
+                <button type="submit" class="quiz-btn btn-submit" id="submitBtn" style="display: none;">Get My Results</button>
             </div>
         </div>
         
         <!-- Step 2: Scent Family Preference -->
         <div class="quiz-step" id="step2">
-            <h2 class="step-question">Which scent family speaks to you?</h2>
-            <p class="step-description">Choose the fragrance category that resonates with your personality and style.</p>
+            <h2 class="step-question">Which scent family do you prefer?</h2>
+            <p class="step-description">Select the fragrance category that most appeals to you.</p>
             
             <div class="options-grid">
                 <div class="quiz-option" data-value="floral">
@@ -1098,7 +1226,7 @@
                         <i class="fas fa-spa"></i>
                     </div>
                     <div class="option-text">Floral</div>
-                    <div class="option-desc">Romantic, delicate, feminine</div>
+                    <div class="option-desc">Rose, jasmine, lily</div>
                 </div>
                 
                 <div class="quiz-option" data-value="woody">
@@ -1106,7 +1234,7 @@
                         <i class="fas fa-tree"></i>
                     </div>
                     <div class="option-text">Woody</div>
-                    <div class="option-desc">Earthy, warm, sophisticated</div>
+                    <div class="option-desc">Sandalwood, cedar, vetiver</div>
                 </div>
                 
                 <div class="quiz-option" data-value="fresh">
@@ -1114,7 +1242,7 @@
                         <i class="fas fa-wind"></i>
                     </div>
                     <div class="option-text">Fresh</div>
-                    <div class="option-desc">Clean, vibrant, energizing</div>
+                    <div class="option-desc">Citrus, aquatic, green notes</div>
                 </div>
                 
                 <div class="quiz-option" data-value="oriental">
@@ -1122,49 +1250,21 @@
                         <i class="fas fa-gem"></i>
                     </div>
                     <div class="option-text">Oriental</div>
-                    <div class="option-desc">Spicy, exotic, mysterious</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Featured Collections Banner -->
-        <div class="featured-collections">
-            <h3 class="collections-title">EXPLORE OUR CURATED COLLECTIONS</h3>
-            <p class="collections-subtitle">Discover scents organized by mood, occasion, and season for a seamless shopping experience.</p>
-            
-            <div class="collections-grid">
-                <div class="collection-card">
-                    <div class="collection-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h4 class="collection-name">Romantic Evenings</h4>
-                    <p class="collection-desc">Sensual fragrances for intimate moments and special dates.</p>
-                </div>
-                
-                <div class="collection-card">
-                    <div class="collection-icon">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h4 class="collection-name">Office Elegance</h4>
-                    <p class="collection-desc">Sophisticated scents perfect for professional settings.</p>
-                </div>
-                
-                <div class="collection-card">
-                    <div class="collection-icon">
-                        <i class="fas fa-umbrella-beach"></i>
-                    </div>
-                    <h4 class="collection-name">Summer Vibes</h4>
-                    <p class="collection-desc">Light, fresh fragrances for warm days and sunny adventures.</p>
+                    <div class="option-desc">Vanilla, amber, spices</div>
                 </div>
             </div>
             
-            <a href="collection.html" class="collections-cta">VIEW ALL COLLECTIONS</a>
+            <!-- Navigation Buttons inside the quiz tab -->
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-btn btn-prev" id="prevBtn2">Previous</button>
+                <button type="button" class="quiz-btn btn-next" id="nextBtn2">Next Question</button>
+            </div>
         </div>
         
         <!-- Step 3: Mood -->
         <div class="quiz-step" id="step3">
-            <h2 class="step-question">What mood do you want to express?</h2>
-            <p class="step-description">Fragrances can amplify emotions and create lasting impressions.</p>
+            <h2 class="step-question">What mood do you want your scent to evoke?</h2>
+            <p class="step-description">Fragrances can influence how you feel and how others perceive you.</p>
             
             <div class="options-grid">
                 <div class="quiz-option" data-value="romantic">
@@ -1172,7 +1272,7 @@
                         <i class="fas fa-heart"></i>
                     </div>
                     <div class="option-text">Romantic</div>
-                    <div class="option-desc">Alluring, soft, intimate</div>
+                    <div class="option-desc">Soft, intimate, alluring</div>
                 </div>
                 
                 <div class="quiz-option" data-value="confident">
@@ -1199,12 +1299,18 @@
                     <div class="option-desc">Calm, soothing, comforting</div>
                 </div>
             </div>
+            
+            <!-- Navigation Buttons inside the quiz tab -->
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-btn btn-prev" id="prevBtn3">Previous</button>
+                <button type="button" class="quiz-btn btn-next" id="nextBtn3">Next Question</button>
+            </div>
         </div>
         
         <!-- Step 4: Season -->
         <div class="quiz-step" id="step4">
-            <h2 class="step-question">When will you wear this fragrance most?</h2>
-            <p class="step-description">Seasonal scents enhance your experience throughout the year.</p>
+            <h2 class="step-question">When do you plan to wear this fragrance most?</h2>
+            <p class="step-description">Some scents work better in specific seasons or occasions.</p>
             
             <div class="options-grid">
                 <div class="quiz-option" data-value="spring">
@@ -1212,7 +1318,7 @@
                         <i class="fas fa-seedling"></i>
                     </div>
                     <div class="option-text">Spring</div>
-                    <div class="option-desc">Blooming florals, fresh greens</div>
+                    <div class="option-desc">Light florals, fresh greens</div>
                 </div>
                 
                 <div class="quiz-option" data-value="summer">
@@ -1220,7 +1326,7 @@
                         <i class="fas fa-sun"></i>
                     </div>
                     <div class="option-text">Summer</div>
-                    <div class="option-desc">Citrus, aquatic, beachy vibes</div>
+                    <div class="option-desc">Citrus, aquatic, light scents</div>
                 </div>
                 
                 <div class="quiz-option" data-value="autumn">
@@ -1228,7 +1334,7 @@
                         <i class="fas fa-leaf"></i>
                     </div>
                     <div class="option-text">Autumn</div>
-                    <div class="option-desc">Warm spices, cozy woods</div>
+                    <div class="option-desc">Warm spices, woody notes</div>
                 </div>
                 
                 <div class="quiz-option" data-value="winter">
@@ -1236,27 +1342,21 @@
                         <i class="fas fa-snowflake"></i>
                     </div>
                     <div class="option-text">Winter</div>
-                    <div class="option-desc">Rich, deep, luxurious notes</div>
+                    <div class="option-desc">Rich, deep, cozy fragrances</div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Advertisement Banner 2 -->
-        <div class="quiz-ad-banner" style="background: linear-gradient(135deg, var(--memoire-sand) 0%, #f0d8a8 100%);">
-            <div class="ad-image" style="background: linear-gradient(135deg, #fff 0%, #f8f0e3 100%);">
-                <i class="fas fa-gift"></i>
-            </div>
-            <div class="ad-content">
-                <h3 class="ad-title">PERFECT GIFT SETS FOR EVERY OCCASION</h3>
-                <p class="ad-text">Our curated gift sets include travel sizes, luxury cases, and complementary scents. Free engraving and gift wrapping available.</p>
-                <a href="catalog.html?tab=gifts" class="ad-cta">SHOP GIFTS</a>
+            
+            <!-- Navigation Buttons inside the quiz tab -->
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-btn btn-prev" id="prevBtn4">Previous</button>
+                <button type="button" class="quiz-btn btn-next" id="nextBtn4">Next Question</button>
             </div>
         </div>
         
         <!-- Step 5: Occasion -->
         <div class="quiz-step" id="step5">
-            <h2 class="step-question">Where will this fragrance make memories?</h2>
-            <p class="step-description">Choose the setting where you'll create unforgettable scent memories.</p>
+            <h2 class="step-question">Where will you wear this fragrance most often?</h2>
+            <p class="step-description">Different occasions call for different scent intensities.</p>
             
             <div class="options-grid">
                 <div class="quiz-option" data-value="daily">
@@ -1264,7 +1364,7 @@
                         <i class="fas fa-briefcase"></i>
                     </div>
                     <div class="option-text">Daily Wear</div>
-                    <div class="option-desc">Office, everyday elegance</div>
+                    <div class="option-desc">Office, everyday activities</div>
                 </div>
                 
                 <div class="quiz-option" data-value="evening">
@@ -1272,7 +1372,7 @@
                         <i class="fas fa-moon"></i>
                     </div>
                     <div class="option-text">Evening/Date</div>
-                    <div class="option-desc">Night outs, romantic moments</div>
+                    <div class="option-desc">Night outs, romantic evenings</div>
                 </div>
                 
                 <div class="quiz-option" data-value="special">
@@ -1280,7 +1380,7 @@
                         <i class="fas fa-star"></i>
                     </div>
                     <div class="option-text">Special Occasions</div>
-                    <div class="option-desc">Celebrations, milestones</div>
+                    <div class="option-desc">Events, celebrations, parties</div>
                 </div>
                 
                 <div class="quiz-option" data-value="casual">
@@ -1288,15 +1388,21 @@
                         <i class="fas fa-tshirt"></i>
                     </div>
                     <div class="option-text">Casual/Weekend</div>
-                    <div class="option-desc">Relaxed, comfortable settings</div>
+                    <div class="option-desc">Relaxed settings, weekends</div>
                 </div>
+            </div>
+            
+            <!-- Navigation Buttons inside the quiz tab -->
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-btn btn-prev" id="prevBtn5">Previous</button>
+                <button type="button" class="quiz-btn btn-next" id="nextBtn5">Next Question</button>
             </div>
         </div>
         
         <!-- Step 6: Longevity -->
         <div class="quiz-step" id="step6">
-            <h2 class="step-question">How long should your scent linger?</h2>
-            <p class="step-description">Select your preferred staying power for the perfect fragrance experience.</p>
+            <h2 class="step-question">How long do you want your fragrance to last?</h2>
+            <p class="step-description">This affects the concentration and formulation we recommend.</p>
             
             <div class="options-grid">
                 <div class="quiz-option" data-value="short">
@@ -1304,7 +1410,7 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="option-text">4-6 Hours</div>
-                    <div class="option-desc">Light, refreshing presence</div>
+                    <div class="option-desc">Light, refreshing, Eau de Toilette</div>
                 </div>
                 
                 <div class="quiz-option" data-value="moderate">
@@ -1312,7 +1418,7 @@
                         <i class="far fa-clock"></i>
                     </div>
                     <div class="option-text">6-8 Hours</div>
-                    <div class="option-desc">Balanced, all-day wear</div>
+                    <div class="option-desc">Balanced, Eau de Parfum</div>
                 </div>
                 
                 <div class="quiz-option" data-value="long">
@@ -1320,23 +1426,29 @@
                         <i class="fas fa-hourglass-end"></i>
                     </div>
                     <div class="option-text">8+ Hours</div>
-                    <div class="option-desc">Long-lasting, memorable</div>
+                    <div class="option-desc">Long-lasting, Parfum concentration</div>
                 </div>
                 
                 <div class="quiz-option" data-value="allDay">
                     <div class="option-icon">
                         <i class="fas fa-infinity"></i>
                     </div>
-                    <div class="option-text">All Day & Night</div>
+                    <div class="option-text">All Day</div>
                     <div class="option-desc">Maximum staying power</div>
                 </div>
+            </div>
+            
+            <!-- Navigation Buttons inside the quiz tab -->
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-btn btn-prev" id="prevBtn6">Previous</button>
+                <button type="button" class="quiz-btn btn-next" id="nextBtn6">Next Question</button>
             </div>
         </div>
         
         <!-- Step 7: Notes -->
         <div class="quiz-step" id="step7">
-            <h2 class="step-question">Which notes captivate your senses?</h2>
-            <p class="step-description">Select up to three fragrance notes that you're naturally drawn to.</p>
+            <h2 class="step-question">Which specific notes do you love?</h2>
+            <p class="step-description">Select up to three notes that appeal to you most.</p>
             
             <div class="options-grid">
                 <div class="quiz-option" data-value="rose">
@@ -1371,12 +1483,18 @@
                     <div class="option-desc">Creamy, woody, luxurious</div>
                 </div>
             </div>
+            
+            <!-- Navigation Buttons inside the quiz tab -->
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-btn btn-prev" id="prevBtn7">Previous</button>
+                <button type="button" class="quiz-btn btn-next" id="nextBtn7">Next Question</button>
+            </div>
         </div>
         
         <!-- Step 8: Experience -->
         <div class="quiz-step" id="step8">
-            <h2 class="step-question">What's your fragrance journey?</h2>
-            <p class="step-description">Tell us about your experience to receive perfectly tailored recommendations.</p>
+            <h2 class="step-question">What's your fragrance experience level?</h2>
+            <p class="step-description">This helps us tailor recommendations to your knowledge and preferences.</p>
             
             <div class="options-grid">
                 <div class="quiz-option" data-value="beginner">
@@ -1384,7 +1502,7 @@
                         <i class="fas fa-seedling"></i>
                     </div>
                     <div class="option-text">Beginner</div>
-                    <div class="option-desc">New to fragrances, exploring</div>
+                    <div class="option-desc">New to fragrances, need guidance</div>
                 </div>
                 
                 <div class="quiz-option" data-value="intermediate">
@@ -1392,7 +1510,7 @@
                         <i class="fas fa-leaf"></i>
                     </div>
                     <div class="option-text">Intermediate</div>
-                    <div class="option-desc">Know my preferences, discovering</div>
+                    <div class="option-desc">Know what I like, open to discovery</div>
                 </div>
                 
                 <div class="quiz-option" data-value="expert">
@@ -1400,7 +1518,7 @@
                         <i class="fas fa-tree"></i>
                     </div>
                     <div class="option-text">Expert</div>
-                    <div class="option-desc">Knowledgeable, seeking depth</div>
+                    <div class="option-desc">Knowledgeable, seeking niche scents</div>
                 </div>
                 
                 <div class="quiz-option" data-value="collector">
@@ -1408,216 +1526,163 @@
                         <i class="fas fa-gem"></i>
                     </div>
                     <div class="option-text">Collector</div>
-                    <div class="option-desc">Seasoned, pursuing rare finds</div>
+                    <div class="option-desc">Seasoned collector, looking for rare finds</div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Navigation Buttons -->
-        <div class="quiz-navigation">
-            <button type="button" class="quiz-btn btn-prev btn-hidden" id="prevBtn">Previous</button>
-            <button type="button" class="quiz-btn btn-next" id="nextBtn">Next Question</button>
-            <button type="submit" class="quiz-btn btn-submit" id="submitBtn" style="display: none;">Get My Results</button>
+            
+            <!-- Navigation Buttons inside the quiz tab -->
+            <div class="quiz-navigation">
+                <button type="button" class="quiz-btn btn-prev" id="prevBtn8">Previous</button>
+                <button type="button" class="quiz-btn btn-submit" id="submitBtn8">Get My Results</button>
+            </div>
         </div>
     </form>
     
     <!-- Skip Section -->
     <div class="skip-section">
-        <p class="skip-text">Looking for something specific? Browse our complete collection instead</p>
-        <a href="catalog.html" class="skip-btn">BROWSE ALL FRAGRANCES</a>
+        <p class="skip-text">Short on time? Skip the quiz and browse our collections</p>
+        <a href="catalog.html" class="skip-btn">Browse All Fragrances</a>
     </div>
     
     <!-- Results Section (Initially Hidden) -->
     <div id="resultsSection" style="display: none;">
-        <div class="results-header">
+        <div class="results-container">
             <div class="results-icon">
                 <i class="fas fa-award"></i>
             </div>
             
-            <h2 class="results-title">YOUR SCENT PROFILE IS READY</h2>
-            <p class="results-subtitle">Based on your unique preferences, we've curated a personalized selection of fragrances that match your personality and style.</p>
-        </div>
-        
-        <!-- Profile Summary -->
-        <div class="results-profile">
-            <h3 class="profile-title">YOUR PERSONALIZED SCENT PROFILE</h3>
-            <div class="profile-grid">
-                <div class="profile-item">
-                    <div class="profile-label">Scent Family</div>
-                    <div class="profile-value" id="profileScent">Floral & Fresh</div>
-                </div>
-                
-                <div class="profile-item">
-                    <div class="profile-label">Desired Mood</div>
-                    <div class="profile-value" id="profileMood">Confident & Romantic</div>
-                </div>
-                
-                <div class="profile-item">
-                    <div class="profile-label">Perfect For</div>
-                    <div class="profile-value" id="profileOccasion">Evening & Special Events</div>
-                </div>
-                
-                <div class="profile-item">
-                    <div class="profile-label">Longevity</div>
-                    <div class="profile-value" id="profileLongevity">6-8 hours</div>
-                </div>
-                
-                <div class="profile-item">
-                    <div class="profile-label">Ideal Season</div>
-                    <div class="profile-value" id="profileSeason">All Year</div>
-                </div>
-                
-                <div class="profile-item">
-                    <div class="profile-label">Experience Level</div>
-                    <div class="profile-value" id="profileExperience">Intermediate Explorer</div>
-                </div>
-            </div>
+            <h2 class="results-title">Your Scent Profile Is Ready</h2>
+            <p class="results-subtitle">Based on your answers, we've curated a personalized selection of fragrances that match your unique style and preferences.</p>
             
-            <div class="profile-item">
-                <div class="profile-label">Favorite Notes</div>
-                <div class="profile-tags" id="profileNotes">
-                    <span class="profile-tag">Rose</span>
-                    <span class="profile-tag">Jasmine</span>
-                    <span class="profile-tag">Bergamot</span>
-                    <span class="profile-tag">Sandalwood</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Advertisement Banner 3 -->
-        <div class="quiz-ad-banner" style="background: linear-gradient(135deg, var(--memoire-lavender) 0%, #c4b3f7 100%); margin: 60px auto; max-width: 900px;">
-            <div class="ad-content">
-                <h3 class="ad-title">MEMOIRE SCENT CLUB: CURATED MONTHLY DISCOVERY</h3>
-                <p class="ad-text">Join our exclusive subscription and receive a new luxury fragrance every month. Cancel anytime, free shipping, and member-only discounts.</p>
-                <a href="#" class="ad-cta">JOIN NOW</a>
-            </div>
-            <div class="ad-image" style="background: linear-gradient(135deg, #fff 0%, #f0ecff 100%);">
-                <i class="fas fa-box-open"></i>
-            </div>
-        </div>
-        
-        <!-- Recommendations -->
-        <div class="recommendations">
-            <div class="recommendations-header">
-                <h3 class="recommendations-title">YOUR PERFECT MATCHES</h3>
-                <p class="recommendations-subtitle">Based on your scent profile, these fragrances are tailored to your unique preferences and personality.</p>
-            </div>
-            
-            <div class="recommendation-cards">
-                <!-- Recommendation 1 -->
-                <div class="recommendation-card">
-                    <div class="rec-badge">BEST MATCH</div>
-                    <div class="rec-image">
-                        <i class="fas fa-wine-bottle"></i>
+            <!-- Profile Summary -->
+            <div class="results-profile">
+                <h3 class="profile-title">Your Scent Profile</h3>
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <div class="profile-label">Scent Family</div>
+                        <div class="profile-value" id="profileScent">Floral & Fresh</div>
                     </div>
-                    <div class="rec-info">
-                        <h4 class="rec-name">Miss Dior Eau de Parfum</h4>
-                        <div class="rec-brand">DIOR</div>
-                        <p class="rec-desc">A timeless floral fragrance capturing romance with bergamot, Grasse rose, and patchouli. Elegant and unforgettable.</p>
-                        
-                        <div class="rec-match">
-                            <span class="match-text">Your Match:</span>
-                            <div class="match-bar">
-                                <div class="match-fill" style="width: 95%;"></div>
+                    
+                    <div class="profile-item">
+                        <div class="profile-label">Mood</div>
+                        <div class="profile-value" id="profileMood">Confident & Romantic</div>
+                    </div>
+                    
+                    <div class="profile-item">
+                        <div class="profile-label">Best For</div>
+                        <div class="profile-value" id="profileOccasion">Evening & Special Events</div>
+                    </div>
+                    
+                    <div class="profile-item">
+                        <div class="profile-label">Longevity</div>
+                        <div class="profile-value" id="profileLongevity">6-8 hours</div>
+                    </div>
+                    
+                    <div class="profile-item">
+                        <div class="profile-label">Season</div>
+                        <div class="profile-value" id="profileSeason">All Year</div>
+                    </div>
+                    
+                    <div class="profile-item">
+                        <div class="profile-label">Experience Level</div>
+                        <div class="profile-value" id="profileExperience">Intermediate</div>
+                    </div>
+                </div>
+                
+                <div class="profile-item">
+                    <div class="profile-label">Preferred Notes</div>
+                    <div class="profile-tags" id="profileNotes">
+                        <span class="profile-tag">Rose</span>
+                        <span class="profile-tag">Jasmine</span>
+                        <span class="profile-tag">Bergamot</span>
+                        <span class="profile-tag">Sandalwood</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recommendations -->
+            <div class="recommendations">
+                <h3 class="recommendations-title">Your Personalized Recommendations</h3>
+                
+                <div class="recommendation-cards">
+                    <!-- Recommendation 1 -->
+                    <div class="recommendation-card">
+                        <div class="rec-image">
+                            <i class="fas fa-wine-bottle"></i>
+                        </div>
+                        <div class="rec-info">
+                            <h4 class="rec-name">Miss Dior Eau de Parfum</h4>
+                            <div class="rec-brand">DIOR</div>
+                            <p class="rec-desc">A timeless floral fragrance with notes of bergamot, rose, and patchouli. Elegant and feminine.</p>
+                            
+                            <div class="rec-match">
+                                <span class="match-text">Match:</span>
+                                <div class="match-bar">
+                                    <div class="match-fill" style="width: 95%;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="rec-actions">
+                                <div class="rec-price">$128</div>
+                                <button class="rec-btn">ADD TO CART</button>
                             </div>
                         </div>
-                        
-                        <div class="rec-actions">
-                            <div class="rec-price">$128</div>
-                            <button class="rec-btn">ADD TO CART</button>
+                    </div>
+                    
+                    <!-- Recommendation 2 -->
+                    <div class="recommendation-card">
+                        <div class="rec-image">
+                            <i class="fas fa-wine-bottle"></i>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- Recommendation 2 -->
-                <div class="recommendation-card">
-                    <div class="rec-badge">POPULAR CHOICE</div>
-                    <div class="rec-image">
-                        <i class="fas fa-wine-bottle"></i>
-                    </div>
-                    <div class="rec-info">
-                        <h4 class="rec-name">Chanel Gabrielle Essence</h4>
-                        <div class="rec-brand">CHANEL</div>
-                        <p class="rec-desc">Luminous floral scent radiating confidence with jasmine, orange blossom, and tuberose. Sophisticated luxury.</p>
-                        
-                        <div class="rec-match">
-                            <span class="match-text">Your Match:</span>
-                            <div class="match-bar">
-                                <div class="match-fill" style="width: 88%;"></div>
+                        <div class="rec-info">
+                            <h4 class="rec-name">Chanel Gabrielle Essence</h4>
+                            <div class="rec-brand">CHANEL</div>
+                            <p class="rec-desc">A luminous floral scent with jasmine, orange blossom, and tuberose. Sophisticated and radiant.</p>
+                            
+                            <div class="rec-match">
+                                <span class="match-text">Match:</span>
+                                <div class="match-bar">
+                                    <div class="match-fill" style="width: 88%;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="rec-actions">
+                                <div class="rec-price">$165</div>
+                                <button class="rec-btn">ADD TO CART</button>
                             </div>
                         </div>
-                        
-                        <div class="rec-actions">
-                            <div class="rec-price">$165</div>
-                            <button class="rec-btn">ADD TO CART</button>
+                    </div>
+                    
+                    <!-- Recommendation 3 -->
+                    <div class="recommendation-card">
+                        <div class="rec-image">
+                            <i class="fas fa-wine-bottle"></i>
                         </div>
-                    </div>
-                </div>
-                
-                <!-- Recommendation 3 -->
-                <div class="recommendation-card">
-                    <div class="rec-badge">EDITOR'S PICK</div>
-                    <div class="rec-image">
-                        <i class="fas fa-wine-bottle"></i>
-                    </div>
-                    <div class="rec-info">
-                        <h4 class="rec-name">Byredo Gypsy Water</h4>
-                        <div class="rec-brand">BYREDO</div>
-                        <p class="rec-desc">Woody aromatic freedom with bergamot, juniper, sandalwood, and amber. Free-spirited sophistication.</p>
-                        
-                        <div class="rec-match">
-                            <span class="match-text">Your Match:</span>
-                            <div class="match-bar">
-                                <div class="match-fill" style="width: 82%;"></div>
+                        <div class="rec-info">
+                            <h4 class="rec-name">Byredo Gypsy Water</h4>
+                            <div class="rec-brand">BYREDO</div>
+                            <p class="rec-desc">A woody aromatic fragrance with bergamot, juniper, and sandalwood. Free-spirited and sophisticated.</p>
+                            
+                            <div class="rec-match">
+                                <span class="match-text">Match:</span>
+                                <div class="match-bar">
+                                    <div class="match-fill" style="width: 82%;"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="rec-actions">
+                                <div class="rec-price">$250</div>
+                                <button class="rec-btn">ADD TO CART</button>
                             </div>
                         </div>
-                        
-                        <div class="rec-actions">
-                            <div class="rec-price">$250</div>
-                            <button class="rec-btn">ADD TO CART</button>
-                        </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="results-actions">
-                <button class="action-retake" id="retakeBtn">RETAKE QUIZ</button>
-                <a href="catalog.html" class="action-browse">BROWSE ALL SCENTS</a>
-            </div>
-        </div>
-        
-        <!-- Featured Collections -->
-        <div class="featured-collections">
-            <h3 class="collections-title">CONTINUE YOUR SCENT JOURNEY</h3>
-            <p class="collections-subtitle">Explore these curated collections based on your profile to discover more fragrances you'll love.</p>
-            
-            <div class="collections-grid">
-                <div class="collection-card">
-                    <div class="collection-icon">
-                        <i class="fas fa-moon"></i>
-                    </div>
-                    <h4 class="collection-name">Evening Elegance</h4>
-                    <p class="collection-desc">Sophisticated scents perfect for night outs and special occasions.</p>
                 </div>
                 
-                <div class="collection-card">
-                    <div class="collection-icon">
-                        <i class="fas fa-heart"></i>
-                    </div>
-                    <h4 class="collection-name">Romantic Florals</h4>
-                    <p class="collection-desc">Delicate floral bouquets for intimate moments and connection.</p>
-                </div>
-                
-                <div class="collection-card">
-                    <div class="collection-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4 class="collection-name">Luxury Collection</h4>
-                    <p class="collection-desc">Premium fragrances for those who appreciate the finest scents.</p>
+                <div class="results-actions">
+                    <button class="action-retake" id="retakeBtn">RETAKE QUIZ</button>
+                    <a href="catalog.html" class="action-browse">BROWSE ALL SCENTS</a>
                 </div>
             </div>
-            
-            <a href="collection.html" class="collections-cta">EXPLORE MORE COLLECTIONS</a>
         </div>
     </div>
 </div>
@@ -1627,24 +1692,27 @@
     // Quiz Logic
     document.addEventListener('DOMContentLoaded', function() {
         const quizSteps = document.querySelectorAll('.quiz-step');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const submitBtn = document.getElementById('submitBtn');
+        const userSelections = {};
+        
+        // Initialize current step
+        let currentStep = 0;
+        const totalSteps = quizSteps.length;
+        
+        // Progress elements
         const progressBar = document.getElementById('progressBar');
         const currentStepEl = document.getElementById('currentStep');
         const progressText = document.getElementById('progressText');
-        const quizOptions = document.querySelectorAll('.quiz-option');
-        const retakeBtn = document.getElementById('retakeBtn');
         
-        let currentStep = 0;
-        const totalSteps = quizSteps.length;
-        const userSelections = {};
-        
-        // Initialize progress
-        updateProgress();
+        // Update progress
+        function updateProgress() {
+            const progress = ((currentStep + 1) / totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+            currentStepEl.textContent = currentStep + 1;
+            progressText.textContent = `Question ${currentStep + 1} of ${totalSteps}`;
+        }
         
         // Option selection
-        quizOptions.forEach(option => {
+        document.querySelectorAll('.quiz-option').forEach(option => {
             option.addEventListener('click', function() {
                 const stepId = this.closest('.quiz-step').id;
                 const value = this.getAttribute('data-value');
@@ -1684,67 +1752,96 @@
                     }
                 }
                 
-                // Enable next button
-                nextBtn.disabled = false;
+                // Enable navigation buttons for current step
+                enableNavigation(currentStep);
             });
         });
         
-        // Next button
-        nextBtn.addEventListener('click', function() {
+        // Navigation functions
+        function goToNextStep() {
             if (currentStep < totalSteps - 1) {
-                // Move to next step
                 quizSteps[currentStep].classList.remove('active');
                 currentStep++;
                 quizSteps[currentStep].classList.add('active');
-                
-                // Update buttons
-                updateButtons();
                 updateProgress();
-                
-                // Scroll to top of step
-                quizSteps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else if (currentStep === totalSteps - 1) {
-                // Show submit button on last step
-                nextBtn.style.display = 'none';
-                submitBtn.style.display = 'inline-block';
+                enableNavigation(currentStep);
+                window.scrollTo({ top: quizSteps[currentStep].offsetTop - 100, behavior: 'smooth' });
             }
-        });
+        }
         
-        // Previous button
-        prevBtn.addEventListener('click', function() {
+        function goToPrevStep() {
             if (currentStep > 0) {
-                // Move to previous step
                 quizSteps[currentStep].classList.remove('active');
                 currentStep--;
                 quizSteps[currentStep].classList.add('active');
-                
-                // Update buttons
-                updateButtons();
                 updateProgress();
-                
-                // Scroll to top of step
-                quizSteps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                enableNavigation(currentStep);
+                window.scrollTo({ top: quizSteps[currentStep].offsetTop - 100, behavior: 'smooth' });
             }
-        });
+        }
         
-        // Submit button
-        submitBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+        function enableNavigation(stepIndex) {
+            // Enable/disable previous button
+            const prevButtons = quizSteps[stepIndex].querySelectorAll('.btn-prev');
+            prevButtons.forEach(btn => {
+                btn.disabled = stepIndex === 0;
+                if (stepIndex === 0) {
+                    btn.classList.add('btn-hidden');
+                } else {
+                    btn.classList.remove('btn-hidden');
+                }
+            });
             
-            // Hide quiz, show results
-            document.getElementById('scentQuiz').style.display = 'none';
-            document.querySelector('.skip-section').style.display = 'none';
-            document.getElementById('resultsSection').style.display = 'block';
+            // Enable/disable next button based on selection
+            const nextButtons = quizSteps[stepIndex].querySelectorAll('.btn-next');
+            const submitButtons = quizSteps[stepIndex].querySelectorAll('.btn-submit');
+            const hasSelection = quizSteps[stepIndex].querySelector('.quiz-option.selected');
             
-            // Generate profile based on selections
-            generateProfile();
+            if (stepIndex === totalSteps - 1) {
+                // Last step - enable submit button
+                nextButtons.forEach(btn => btn.style.display = 'none');
+                submitButtons.forEach(btn => {
+                    btn.style.display = 'inline-block';
+                    btn.disabled = !hasSelection;
+                });
+            } else {
+                // Other steps - enable next button
+                nextButtons.forEach(btn => {
+                    btn.style.display = 'inline-block';
+                    btn.disabled = !hasSelection;
+                });
+                submitButtons.forEach(btn => btn.style.display = 'none');
+            }
+        }
+        
+        // Set up navigation event listeners for each step
+        for (let i = 1; i <= totalSteps; i++) {
+            const stepElement = document.getElementById(`step${i}`);
             
-            // Scroll to results
-            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+            // Next button
+            const nextBtn = stepElement.querySelector('.btn-next');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', goToNextStep);
+            }
+            
+            // Previous button
+            const prevBtn = stepElement.querySelector('.btn-prev');
+            if (prevBtn) {
+                prevBtn.addEventListener('click', goToPrevStep);
+            }
+            
+            // Submit button (for last step)
+            const submitBtn = stepElement.querySelector('.btn-submit');
+            if (submitBtn) {
+                submitBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showResults();
+                });
+            }
+        }
         
         // Retake quiz button
-        retakeBtn.addEventListener('click', function() {
+        document.getElementById('retakeBtn').addEventListener('click', function() {
             // Reset everything
             currentStep = 0;
             
@@ -1756,18 +1853,14 @@
             // Reset steps
             quizSteps.forEach((step, index) => {
                 step.classList.remove('active');
-                if (index === 0) step.classList.add('active');
+                if (index === 0) {
+                    step.classList.add('active');
+                }
                 
                 // Clear selections in UI
                 const options = step.querySelectorAll('.quiz-option');
                 options.forEach(option => option.classList.remove('selected'));
             });
-            
-            // Reset buttons
-            nextBtn.style.display = 'inline-block';
-            submitBtn.style.display = 'none';
-            prevBtn.classList.add('btn-hidden');
-            nextBtn.disabled = true;
             
             // Clear selections
             for (let key in userSelections) {
@@ -1776,51 +1869,35 @@
             
             // Reset progress
             updateProgress();
+            enableNavigation(0);
             
             // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
-        // Helper functions
-        function updateButtons() {
-            // Show/hide previous button
-            if (currentStep > 0) {
-                prevBtn.classList.remove('btn-hidden');
-            } else {
-                prevBtn.classList.add('btn-hidden');
-            }
+        function showResults() {
+            // Hide quiz, show results
+            document.getElementById('scentQuiz').style.display = 'none';
+            document.querySelector('.skip-section').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
             
-            // Update next button text on last step
-            if (currentStep === totalSteps - 1) {
-                nextBtn.textContent = 'View My Results';
-            } else {
-                nextBtn.textContent = 'Next Question';
-            }
+            // Generate profile based on selections
+            generateProfile();
             
-            // Enable/disable next based on selection
-            const currentStepEl = quizSteps[currentStep];
-            const hasSelection = currentStepEl.querySelector('.quiz-option.selected');
-            nextBtn.disabled = !hasSelection;
-        }
-        
-        function updateProgress() {
-            const progress = ((currentStep + 1) / totalSteps) * 100;
-            progressBar.style.width = `${progress}%`;
-            currentStepEl.textContent = currentStep + 1;
-            progressText.textContent = `QUESTION ${currentStep + 1} OF ${totalSteps}`;
+            // Scroll to results
+            window.scrollTo({ top: document.getElementById('resultsSection').offsetTop - 50, behavior: 'smooth' });
         }
         
         function generateProfile() {
             // Map selections to profile (simplified for demo)
-            // In a real app, this would involve more complex logic and backend processing
             
             // Scent Family
             if (userSelections.step2) {
                 const scentMap = {
-                    'floral': 'Floral & Romantic',
-                    'woody': 'Woody & Earthy',
-                    'fresh': 'Fresh & Vibrant',
-                    'oriental': 'Oriental & Spicy'
+                    'floral': 'Floral',
+                    'woody': 'Woody',
+                    'fresh': 'Fresh',
+                    'oriental': 'Oriental'
                 };
                 document.getElementById('profileScent').textContent = scentMap[userSelections.step2] || 'Floral & Fresh';
             }
@@ -1828,10 +1905,10 @@
             // Mood
             if (userSelections.step3) {
                 const moodMap = {
-                    'romantic': 'Romantic & Alluring',
-                    'confident': 'Confident & Powerful',
-                    'energetic': 'Energetic & Uplifting',
-                    'relaxed': 'Relaxed & Soothing'
+                    'romantic': 'Romantic',
+                    'confident': 'Confident',
+                    'energetic': 'Energetic',
+                    'relaxed': 'Relaxed'
                 };
                 document.getElementById('profileMood').textContent = moodMap[userSelections.step3] || 'Confident & Romantic';
             }
@@ -1839,7 +1916,7 @@
             // Occasion
             if (userSelections.step5) {
                 const occasionMap = {
-                    'daily': 'Daily Wear & Office',
+                    'daily': 'Daily Wear',
                     'evening': 'Evening & Date Nights',
                     'special': 'Special Occasions',
                     'casual': 'Casual & Weekend'
@@ -1850,10 +1927,10 @@
             // Longevity
             if (userSelections.step6) {
                 const longevityMap = {
-                    'short': '4-6 hours (Light)',
-                    'moderate': '6-8 hours (Balanced)',
-                    'long': '8+ hours (Long-lasting)',
-                    'allDay': 'All Day & Night'
+                    'short': '4-6 hours',
+                    'moderate': '6-8 hours',
+                    'long': '8+ hours',
+                    'allDay': 'All Day'
                 };
                 document.getElementById('profileLongevity').textContent = longevityMap[userSelections.step6] || '6-8 hours';
             }
@@ -1872,12 +1949,12 @@
             // Experience
             if (userSelections.step8) {
                 const experienceMap = {
-                    'beginner': 'Beginner Explorer',
-                    'intermediate': 'Intermediate Connoisseur',
-                    'expert': 'Expert Enthusiast',
-                    'collector': 'Seasoned Collector'
+                    'beginner': 'Beginner',
+                    'intermediate': 'Intermediate',
+                    'expert': 'Expert',
+                    'collector': 'Collector'
                 };
-                document.getElementById('profileExperience').textContent = experienceMap[userSelections.step8] || 'Intermediate Explorer';
+                document.getElementById('profileExperience').textContent = experienceMap[userSelections.step8] || 'Intermediate';
             }
             
             // Notes
@@ -1903,8 +1980,9 @@
             }
         }
         
-        // Initialize next button as disabled
-        nextBtn.disabled = true;
+        // Initialize navigation for first step
+        updateProgress();
+        enableNavigation(0);
     });
 </script>
 
