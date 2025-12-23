@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMOIRE - Collections</title>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Collection Page Styles -->
+    <style>
+        /* Collection Specific Styles */
+        :root {
+            --memoire-gold: #D8B96D;
+            --memoire-dark: #0A0A0A;
+            --memoire-light: #F8F5EC;
+            --memoire-cream: #FFF9E6;
+            --memoire-slate: #2C3E50;
+        }
+        
+        body {
+            background-color: var(--memoire-light);
+        }
+        
+        /* Hero Section */
+        .collection-hero {
+            background: linear-gradient(135deg, rgba(216, 185, 109, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .collection-hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .collection-hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+        
+        .collection-hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        /* Collections Grid */
+        .collections-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+        
+        .collection-card {
+            background: white;
+            border-radius: 0; /* Changed from 20px to 0 */
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 2px solid var(--memoire-cream);
+        }
+        
+        .collection-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(216, 185, 109, 0.15);
+            border-color: var(--memoire-gold);
+        }
+        
+        .collection-badge {
+            position: absolute;
+            top: 20px;
+            left: 0; /* Changed from 20px to 0 for sharp edge */
+            background: var(--memoire-gold);
+            color: white;
+            padding: 8px 25px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 2;
+            clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+        }
+        
+        .collection-image {
+            height: 250px;
+            background: linear-gradient(135deg, var(--memoire-cream) 0%, #f5f0e1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            color: var(--memoire-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .collection-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .collection-info {
+            padding: 30px;
+        }
+        
+        .collection-name {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--memoire-slate);
+        }
+        
+        .collection-description {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .collection-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+        }
+        
+        .collection-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .collection-features i {
+            color: var(--memoire-gold);
+        }
+        
+        .collection-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--memoire-dark);
+            margin-bottom: 20px;
+        }
+        
+        .collection-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .collection-btn {
+            flex: 1;
+            padding: 15px;
+            background: var(--memoire-dark);
+            color: white;
+            border: none;
+            border-radius: 0; /* Changed from 8px to 0 */
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .collection-btn:hover {
+            background: var(--memoire-gold);
+            color: var(--memoire-dark);
+            transform: translateY(-2px);
+        }
+        
+        .collection-btn.outline {
+            background: transparent;
+            border: 2px solid var(--memoire-dark);
+            color: var(--memoire-dark);
+            border-radius: 0; /* Changed from 8px to 0 */
+        }
+        
+        .collection-btn.outline:hover {
+            background: var(--memoire-dark);
+            color: white;
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--memoire-slate);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: var(--memoire-gold);
+            border-radius: 0; /* Changed from 2px to 0 */
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            color: #666;
+            max-width: 700px;
+            margin: 20px auto 0;
+            line-height: 1.6;
+        }
+        
+        /* Gift Sets Section */
+        .gift-sets {
+            margin: 80px 0;
+        }
+        
+        /* Limited Edition Section */
+        .limited-edition {
+            background: linear-gradient(135deg, var(--memoire-cream) 0%, #fff5e6 100%);
+            border-radius: 0; /* Changed from 20px to 0 */
+            padding: 60px;
+            margin: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .limited-edition::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.2)"/></svg>');
+            background-size: cover;
+        }
+        
+        .limited-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--memoire-slate);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .limited-description {
+            font-size: 18px;
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .limited-timer {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .timer-unit {
+            text-align: center;
+        }
+        
+        .timer-value {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--memoire-gold);
+            margin-bottom: 5px;
+        }
+        
+        .timer-label {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Featured Items */
+        .featured-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .featured-item {
+            background: white;
+            border-radius: 0; /* Changed from 15px to 0 */
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .featured-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--memoire-gold);
+            box-shadow: 0 15px 30px rgba(216, 185, 109, 0.1);
+        }
+        
+        .featured-icon {
+            font-size: 40px;
+            color: var(--memoire-gold);
+            margin-bottom: 20px;
+        }
+        
+        .featured-name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--memoire-slate);
+        }
+        
+        .featured-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .collections-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .featured-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .collections-container {
+                padding: 40px 20px;
+            }
+            
+            .collection-hero {
+                height: 300px;
+            }
+            
+            .collection-hero h1 {
+                font-size: 36px;
+            }
+            
+            .collection-hero p {
+                font-size: 18px;
+            }
+            
+            .collections-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .section-subtitle {
+                font-size: 18px;
+            }
+            
+            .limited-edition {
+                padding: 40px 20px;
+            }
+            
+            .limited-title {
+                font-size: 28px;
+            }
+            
+            .featured-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .timer-unit {
+                flex: 1;
+            }
+            
+            .timer-value {
+                font-size: 32px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .collection-hero h1 {
+                font-size: 28px;
+            }
+            
+            .collection-hero p {
+                font-size: 16px;
+            }
+            
+            .collection-actions {
+                flex-direction: column;
+            }
+            
+            .collection-btn {
+                width: 100%;
+            }
+            
+            .timer-value {
+                font-size: 24px;
+            }
+            
+            .timer-label {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">MEMOIRE</div>
+    <div class="menu">
+        <a href="index.html">HOME</a> 
+        <a href="catalog.html">CATALOG</a> 
+        <a href="discover.html">DISCOVER</a> 
+        <a href="collection.html" class="active">COLLECTION</a>
+    </div>
+    <div class="nav-icons">
+        <i class="fas fa-shopping-cart" id="cartIcon">
+            <span class="cart-count">0</span>
+        </i>
+        <i class="fas fa-user"></i>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<div class="collection-hero">
+    <h1>CURATED FRAGRANCE COLLECTIONS</h1>
+    <p>Discover our expertly crafted fragrance collections, each telling a unique story and designed for specific moments, moods, and memories.</p>
+</div>
+
+<!-- Main Collections -->
+<div class="collections-container">
+    <div class="section-header">
+        <h2 class="section-title">SIGNATURE COLLECTIONS</h2>
+        <p class="section-subtitle">Our most beloved fragrance sets, curated for unforgettable experiences and lasting impressions.</p>
+    </div>
+    
+    <div class="collections-grid">
+        <!-- Collection 1: Romantic Evenings -->
+        <div class="collection-card">
+            <div class="collection-badge">BEST SELLER</div>
+            <div class="collection-image">
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="collection-info">
+                <h3 class="collection-name">Romantic Evenings</h3>
+                <p class="collection-description">A sensual collection of floral and oriental fragrances perfect for intimate moments, date nights, and special occasions. Designed to leave a lasting impression.</p>
+                
+                <ul class="collection-features">
+                    <li><i class="fas fa-check"></i> 3 Full-size Fragrances</li>
+                    <li><i class="fas fa-check"></i> Premium Gift Box</li>
+                    <li><i class="fas fa-check"></i> Scent Profile Guide</li>
+                    <li><i class="fas fa-check"></i> Travel Spray Included</li>
+                </ul>
+                
+                <div class="collection-price">$295</div>
+                
+                <div class="collection-actions">
+                    <button class="collection-btn">ADD TO CART</button>
+                    <button class="collection-btn outline">VIEW DETAILS</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Collection 2: Office Elegance -->
+        <div class="collection-card">
+            <div class="collection-badge">PROFESSIONAL</div>
+            <div class="collection-image">
+                <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="collection-info">
+                <h3 class="collection-name">Office Elegance</h3>
+                <p class="collection-description">Sophisticated, subtle scents designed for professional settings. Fresh, clean, and elegant fragrances that command respect without overpowering.</p>
+                
+                <ul class="collection-features">
+                    <li><i class="fas fa-check"></i> 2 Daytime Fragrances</li>
+                    <li><i class="fas fa-check"></i> 1 Evening Scent</li>
+                    <li><i class="fas fa-check"></i> Leather Travel Case</li>
+                    <li><i class="fas fa-check"></i> Scent Layering Guide</li>
+                </ul>
+                
+                <div class="collection-price">$245</div>
+                
+                <div class="collection-actions">
+                    <button class="collection-btn">ADD TO CART</button>
+                    <button class="collection-btn outline">VIEW DETAILS</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Collection 3: Summer Escape -->
+        <div class="collection-card">
+            <div class="collection-badge">SEASONAL</div>
+            <div class="collection-image">
+                <i class="fas fa-umbrella-beach"></i>
+            </div>
+            <div class="collection-info">
+                <h3 class="collection-name">Summer Escape</h3>
+                <p class="collection-description">Light, fresh fragrances inspired by sunny days and warm breezes. Citrus, aquatic, and floral notes perfect for vacations and outdoor adventures.</p>
+                
+                <ul class="collection-features">
+                    <li><i class="fas fa-check"></i> 4 Summer Fragrances</li>
+                    <li><i class="fas fa-check"></i> Beach Tote Included</li>
+                    <li><i class="fas fa-check"></i> SPF 30 Lip Balm</li>
+                    <li><i class="fas fa-check"></i> Travel Sizes Included</li>
+                </ul>
+                
+                <div class="collection-price">$275</div>
+                
+                <div class="collection-actions">
+                    <button class="collection-btn">ADD TO CART</button>
+                    <button class="collection-btn outline">VIEW DETAILS</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Gift Sets Section -->
+    <div class="gift-sets">
+        <div class="section-header">
+            <h2 class="section-title">PERFECT GIFT SETS</h2>
+            <p class="section-subtitle">Thoughtfully curated gift collections for every occasion. Beautifully packaged with premium touches.</p>
+        </div>
+        
+        <div class="collections-grid">
+            <!-- Gift Set 1: The Ultimate Luxury -->
+            <div class="collection-card">
+                <div class="collection-badge">LUXURY</div>
+                <div class="collection-image">
+                    <i class="fas fa-gem"></i>
+                </div>
+                <div class="collection-info">
+                    <h3 class="collection-name">Ultimate Luxury Gift Set</h3>
+                    <p class="collection-description">Our most premium offering featuring rare ingredients and exclusive fragrances. Perfect for milestone celebrations and those who appreciate true luxury.</p>
+                    
+                    <ul class="collection-features">
+                        <li><i class="fas fa-check"></i> 5 Signature Fragrances</li>
+                        <li><i class="fas fa-check"></i> Crystal Atomizers</li>
+                        <li><i class="fas fa-check"></i> Personal Engraving</li>
+                        <li><i class="fas fa-check"></i> Leather Travel Case</li>
+                    </ul>
+                    
+                    <div class="collection-price">$450</div>
+                    
+                    <div class="collection-actions">
+                        <button class="collection-btn">ADD TO CART</button>
+                        <button class="collection-btn outline">CUSTOMIZE</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gift Set 2: Discovery Journey -->
+            <div class="collection-card">
+                <div class="collection-badge">BEST VALUE</div>
+                <div class="collection-image">
+                    <i class="fas fa-compass"></i>
+                </div>
+                <div class="collection-info">
+                    <h3 class="collection-name">Scent Discovery Journey</h3>
+                    <p class="collection-description">The perfect introduction to luxury fragrances. A carefully selected range of scents to explore and discover personal preferences.</p>
+                    
+                    <ul class="collection-features">
+                        <li><i class="fas fa-check"></i> 8 Travel-Size Fragrances</li>
+                        <li><i class="fas fa-check"></i> Scent Journal</li>
+                        <li><i class="fas fa-check"></i> Consultation Session</li>
+                        <li><i class="fas fa-check"></i> Full-Size Voucher</li>
+                    </ul>
+                    
+                    <div class="collection-price">$195</div>
+                    
+                    <div class="collection-actions">
+                        <button class="collection-btn">ADD TO CART</button>
+                        <button class="collection-btn outline">VIEW DETAILS</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Gift Set 3: Holiday Celebration -->
+            <div class="collection-card">
+                <div class="collection-badge">SEASONAL</div>
+                <div class="collection-image">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="collection-info">
+                    <h3 class="collection-name">Holiday Celebration Set</h3>
+                    <p class="collection-description">Festive fragrances with warm, spicy notes perfect for holiday gatherings and winter celebrations. Beautifully packaged for gifting.</p>
+                    
+                    <ul class="collection-features">
+                        <li><i class="fas fa-check"></i> 3 Holiday Scents</li>
+                        <li><i class="fas fa-check"></i> Festive Packaging</li>
+                        <li><i class="fas fa-check"></i> Gift Message Card</li>
+                        <li><i class="fas fa-check"></i> Candle Included</li>
+                    </ul>
+                    
+                    <div class="collection-price">$225</div>
+                    
+                    <div class="collection-actions">
+                        <button class="collection-btn">ADD TO CART</button>
+                        <button class="collection-btn outline">ADD GIFT WRAP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Limited Edition Section -->
+    <div class="limited-edition">
+        <h3 class="limited-title">LIMITED EDITION: GOLDEN MEMORIES</h3>
+        <p class="limited-description">Our exclusive annual collection featuring rare ingredients and unique compositions. Only 500 sets available worldwide. Each bottle is individually numbered.</p>
+        
+        <div class="limited-timer">
+            <div class="timer-unit">
+                <div class="timer-value" id="days">14</div>
+                <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-value" id="hours">06</div>
+                <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-value" id="minutes">45</div>
+                <div class="timer-label">Minutes</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-value" id="seconds">22</div>
+                <div class="timer-label">Seconds</div>
+            </div>
+        </div>
+        
+        <div class="collection-actions" style="justify-content: center;">
+            <button class="collection-btn" style="max-width: 300px;">RESERVE YOUR SET</button>
+        </div>
+    </div>
+    
+    <!-- Featured Collections -->
+    <div class="section-header">
+        <h2 class="section-title">EXPLORE BY THEME</h2>
+        <p class="section-subtitle">Browse our collections organized by mood, occasion, and scent family.</p>
+    </div>
+    
+    <div class="featured-items">
+        <div class="featured-item">
+            <div class="featured-icon">
+                <i class="fas fa-spa"></i>
+            </div>
+            <h4 class="featured-name">Floral Bouquets</h4>
+            <p class="featured-desc">Romantic floral compositions with rose, jasmine, and peony notes.</p>
+        </div>
+        
+        <div class="featured-item">
+            <div class="featured-icon">
+                <i class="fas fa-tree"></i>
+            </div>
+            <h4 class="featured-name">Woody Elegance</h4>
+            <p class="featured-desc">Rich sandalwood, cedar, and vetiver scents for sophisticated evenings.</p>
+        </div>
+        
+        <div class="featured-item">
+            <div class="featured-icon">
+                <i class="fas fa-lemon"></i>
+            </div>
+            <h4 class="featured-name">Citrus Fresh</h4>
+            <p class="featured-desc">Energizing citrus blends with bergamot, lemon, and grapefruit notes.</p>
+        </div>
+        
+        <div class="featured-item">
+            <div class="featured-icon">
+                <i class="fas fa-snowflake"></i>
+            </div>
+            <h4 class="featured-name">Winter Warmth</h4>
+            <p class="featured-desc">Cozy, spicy fragrances with vanilla, amber, and cinnamon accents.</p>
+        </div>
+        
+        <div class="featured-item">
+            <div class="featured-icon">
+                <i class="fas fa-plane"></i>
+            </div>
+            <h4 class="featured-name">Travel Essentials</h4>
+            <p class="featured-desc">Compact sets perfect for trips and on-the-go fragrance touch-ups.</p>
+        </div>
+        
+        <div class="featured-item">
+            <div class="featured-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <h4 class="featured-name">New Discoveries</h4>
+            <p class="featured-desc">Our latest releases and experimental scent combinations.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Overlay -->
+<div id="cartOverlay" class="cart-overlay"></div>
+
+<!-- Cart Modal -->
+<div id="cartModal" class="cart-modal">
+    <div class="cart-header">
+        <h2>YOUR CART</h2>
+        <span id="closeCart">&times;</span>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded here -->
+        <div class="empty-cart">
+            <i class="fas fa-shopping-bag"></i>
+            <p>Your cart is empty</p>
+        </div>
+    </div>
+
+    <div class="cart-footer">
+        <div class="cart-summary">
+            <p>SUBTOTAL: <span id="totalPrice">$0.00</span></p>
+            <p>ITEMS: <span id="itemCount">0</span></p>
+        </div>
+        <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+        <button class="continue-shopping">CONTINUE SHOPPING</button>
+    </div>
+</div>
+
+<!-- Cart Toast -->
+<div id="cartToast" class="cart-toast">
+    <span id="toastText">✓ ADDED TO CART</span>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // Collection Page JavaScript
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize cart functionality from script.js
+        if (typeof init === 'function') {
+            init();
+        }
+        
+        // Add to Cart buttons for collections
+        document.querySelectorAll('.collection-btn:not(.outline)').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const collectionCard = this.closest('.collection-card');
+                const collectionName = collectionCard.querySelector('.collection-name').textContent;
+                const collectionPrice = collectionCard.querySelector('.collection-price').textContent;
+                
+                // Create a simulated product object
+                const product = {
+                    id: 'collection-' + Math.random().toString(36).substr(2, 9),
+                    name: collectionName,
+                    price: parseInt(collectionPrice.replace('$', '')),
+                    image: collectionCard.querySelector('.collection-image i').className,
+                    brand: 'MEMOIRE Collection',
+                    size: 'Set'
+                };
+                
+                // Add to cart (simplified version)
+                let cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const existingIndex = cart.findIndex(item => item.id === product.id);
+                
+                if (existingIndex > -1) {
+                    cart[existingIndex].quantity += 1;
+                } else {
+                    product.quantity = 1;
+                    cart.push(product);
+                }
+                
+                localStorage.setItem('cart', JSON.stringify(cart));
+                
+                // Show toast
+                showCartToast(`${collectionName} added to cart`);
+                
+                // Update cart count
+                updateCartCount();
+            });
+        });
+        
+        // View Details buttons
+        document.querySelectorAll('.collection-btn.outline').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const collectionCard = this.closest('.collection-card');
+                const collectionName = collectionCard.querySelector('.collection-name').textContent;
+                
+                alert(`Details for ${collectionName} would open in a detailed view. This feature would show individual items in the collection, ingredients, and more information.`);
+            });
+        });
+        
+        // Reserve button for limited edition
+        document.querySelector('.limited-edition .collection-btn').addEventListener('click', function() {
+            alert("You would be redirected to a reservation page for the Limited Edition Golden Memories collection. Only 500 sets available!");
+        });
+        
+        // Countdown timer for limited edition
+        function updateCountdown() {
+            // Set the target date (14 days from now)
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 14);
+            
+            const now = new Date();
+            const difference = targetDate - now;
+            
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+        }
+        
+        // Initialize countdown
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
+        // Helper functions
+        function showCartToast(message) {
+            const toast = document.getElementById('cartToast');
+            const text = document.getElementById('toastText');
+            if (!toast || !text) return;
+            
+            text.textContent = '✓ ' + message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                cartCount.textContent = count;
+            }
+        }
+        
+        // Initialize cart count
+        updateCartCount();
+    });
+</script>
+
+<!-- Main Website Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Newsletter Signup Section -->
+        <div class="footer-section newsletter-section">
+            <h4 class="footer-heading">JOURNEY WITH MEMOIRE</h4>
+            <p>Sign up for exclusive access to new arrivals, personalized recommendations, and members-only offers.</p>
+            <form class="footer-newsletter">
+                <input type="email" placeholder="Enter your email" aria-label="Email address for newsletter" required>
+                <button type="submit" class="footer-submit-btn">SUBSCRIBE</button>
+            </form>
+            <p class="footer-note">By subscribing, you agree to our Privacy Policy and consent to receive updates.</p>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="footer-links-container">
+            <div class="footer-section">
+                <h4 class="footer-heading">DISCOVER</h4>
+                <ul class="footer-list">
+                    <li><a href="catalog.html?tab=perfume">Perfumes</a></li>
+                    <li><a href="catalog.html?tab=cologne">Colognes</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Gift Sets</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">SUPPORT</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">COMPANY</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Scent Journal</a></li>
+                    <li><a href="#">Store Locator</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-content">
+            <span class="footer-logo">MEMOIRE</span>
+            <span class="footer-copyright">© 2025 MEMOIRE. All scents preserved.</span>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

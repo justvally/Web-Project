@@ -1,336 +1,825 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MEMOIRE</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMOIRE - Catalog</title>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Clean Catalog Styles -->
+    <style>
+        /* Clean Catalog Styles */
+        :root {
+            --memoire-gold: #D8B96D;
+            --memoire-dark: #0A0A0A;
+            --memoire-light: #F8F5EC;
+            --memoire-cream: #FFF9E6;
+            --memoire-slate: #2C3E50;
+        }
+        
+        body {
+            background-color: var(--memoire-light);
+        }
+        
+        .catalog-hero {
+            background: linear-gradient(135deg, rgba(216, 185, 109, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .catalog-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 1px;
+        }
+        
+        .catalog-hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .catalog-hero {
+                height: 250px;
+            }
+            
+            .catalog-hero h1 {
+                font-size: 32px;
+            }
+            
+            .catalog-hero p {
+                font-size: 16px;
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .catalog-hero {
+                height: 200px;
+            }
+            
+            .catalog-hero h1 {
+                font-size: 28px;
+            }
+            
+            .catalog-hero p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
 
-        <!-- Google Font -->
-        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-        <!-- External CSS -->
-        <link rel="stylesheet" href="style.css">
-        <!-- Font Awesome (icons) -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </head>
-     
 <body>
 <!-- NAVBAR -->
 <div class="navbar">
     <div class="logo">MEMOIRE</div>
     <div class="menu">
         <a href="index.html">HOME</a> 
-        <a href="catalog.html">CATALOG</a> 
+        <a href="catalog.html" class="active">CATALOG</a> 
         <a href="discover.html">DISCOVER</a> 
         <a href="collection.html">COLLECTION</a>
     </div>
     <div class="nav-icons">
-        <i class="fas fa-shopping-cart"></i>
+        <i class="fas fa-shopping-cart" id="cartIcon">
+            <span class="cart-count">0</span>
+        </i>
         <i class="fas fa-user"></i>
     </div>
 </div>
 
-<div class="catalog-header">
+<!-- Catalog Hero Section -->
+<div class="catalog-hero">
+    <h1>LUXURY FRAGRANCES</h1>
+    <p>Discover our exclusive collection of perfumes and colognes, each telling a unique story and creating lasting memories.</p>
+</div>
 
+<div class="catalog-header">
     <!-- LEFT SIDE -->
     <div class="catalog-left">
         <div class="catalog-title">NOW BROWSING</div>
 
         <div class="catalog-tabs">
-            <button class="tab active">PERFUME</button>
-            <button class="tab">COLOGNE</button>
+            <button class="tab active" data-type="perfume">PERFUME</button>
+            <button class="tab" data-type="cologne">COLOGNE</button>
         </div>
 
-        <div class="product-count" id="productCount">0 products</div>
+        <div class="product-count" id="productCount">9 products</div>
     </div>
 
     <!-- RIGHT SIDE -->
     <div class="catalog-actions">
-        <button class="action-btn">FILTER</button>
-        <button class="action-btn outline">PERSONALIZE</button>
+        <button class="action-btn" id="filterBtn">
+            <i class="fas fa-filter"></i> FILTER
+        </button>
+        <button class="action-btn outline" id="personalizeBtn">
+            <i class="fas fa-user-edit"></i> PERSONALIZE
+        </button>
+    </div>
+</div>
+
+<!-- Active Filters Display -->
+<div class="active-filters" id="activeFilters">
+    <!-- Active filters will appear here -->
+</div>
+
+<!-- PERFUME PRODUCTS -->
+<div class="catalog-products" id="perfumeProducts">
+    <!-- Row 1 -->
+    <div class="product-row">
+        <!-- DIOR -->
+        <div class="card product-card" data-id="1" 
+             data-brand="Dior" 
+             data-price="128" 
+             data-scent="Floral" 
+             data-size="100ml"
+             data-longevity="Long"
+             data-season="Spring"
+             data-notes="Rose, Jasmine, Bergamot"
+             data-mood="Romantic"
+             data-occasion="Special"
+             data-gender="Female">
+            <img src="https://placehold.co/300x400/e1d1ff/333333?text=Miss+Dior" alt="Miss Dior Eau de Parfum">
+            <div class="price-tag">$128</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- BYREDO -->
+        <div class="card product-card" data-id="2"
+             data-brand="Byredo"
+             data-price="250"
+             data-scent="Oriental"
+             data-size="50ml"
+             data-longevity="Long"
+             data-season="Winter"
+             data-notes="Vanilla, Amber, Tonka Bean"
+             data-mood="Mysterious"
+             data-occasion="Evening"
+             data-gender="Unisex">
+            <img src="https://placehold.co/300x400/ffd1e1/333333?text=Byredo+Gypsy+Water" alt="Byredo Gypsy Water">
+            <div class="price-tag">$250</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- PRADA -->
+        <div class="card product-card" data-id="3"
+             data-brand="Prada"
+             data-price="145"
+             data-scent="Fresh"
+             data-size="100ml"
+             data-longevity="Moderate"
+             data-season="Summer"
+             data-notes="Neroli, Jasmine, Amber"
+             data-mood="Energetic"
+             data-occasion="Daily"
+             data-gender="Female">
+            <img src="https://placehold.co/300x400/d1ffe1/333333?text=Prada+Paradoxe" alt="Prada Paradoxe">
+            <div class="price-tag">$145</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="product-row">
+        <!-- CHANEL -->
+        <div class="card product-card" data-id="4"
+             data-brand="Chanel"
+             data-price="165"
+             data-scent="Floral"
+             data-size="50ml"
+             data-longevity="Long"
+             data-season="All Year"
+             data-notes="Jasmine, Rose, Aldehydes"
+             data-mood="Confident"
+             data-occasion="Special"
+             data-gender="Female">
+            <img src="https://placehold.co/300x400/fff8d1/333333?text=Chanel+No.5" alt="Chanel No. 5">
+            <div class="price-tag">$165</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- BURBERRY -->
+        <div class="card product-card" data-id="5"
+             data-brand="Burberry"
+             data-price="95"
+             data-scent="Floral"
+             data-size="100ml"
+             data-longevity="Moderate"
+             data-season="Spring"
+             data-notes="Rose, Peony, Clementine"
+             data-mood="Romantic"
+             data-occasion="Daily"
+             data-gender="Female">
+            <img src="https://placehold.co/300x400/d1f7ff/333333?text=Burberry+Her" alt="Burberry Her">
+            <div class="price-tag">$95</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- VICTORIA'S SECRET -->
+        <div class="card product-card" data-id="6"
+             data-brand="Victoria's Secret"
+             data-price="65"
+             data-scent="Fruity"
+             data-size="100ml"
+             data-longevity="Short"
+             data-season="Summer"
+             data-notes="Passionfruit, Vanilla Orchid"
+             data-mood="Playful"
+             data-occasion="Daily"
+             data-gender="Female">
+            <img src="https://placehold.co/300x400/ffd1d1/333333?text=VS+Bombshell" alt="Victoria's Secret Bombshell">
+            <div class="price-tag">$65</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="product-row">
+        <!-- MAISON MARGIELA -->
+        <div class="card product-card" data-id="7"
+             data-brand="Maison Margiela"
+             data-price="145"
+             data-scent="Woody"
+             data-size="100ml"
+             data-longevity="Long"
+             data-season="Autumn"
+             data-notes="Sandalwood, Cedar, Vetiver"
+             data-mood="Relaxed"
+             data-occasion="Evening"
+             data-gender="Unisex">
+            <img src="https://placehold.co/300x400/f0d1ff/333333?text=MM+Fireplace" alt="Maison Margiela By the Fireplace">
+            <div class="price-tag">$145</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- JO MALONE -->
+        <div class="card product-card" data-id="8"
+             data-brand="Jo Malone"
+             data-price="140"
+             data-scent="Citrus"
+             data-size="100ml"
+             data-longevity="Short"
+             data-season="Spring"
+             data-notes="Lime, Mandarin, Bergamot"
+             data-mood="Fresh"
+             data-occasion="Daily"
+             data-gender="Unisex">
+            <img src="https://placehold.co/300x400/d1ffea/333333?text=JM+Lime+Basil" alt="Jo Malone Lime Basil & Mandarin">
+            <div class="price-tag">$140</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- YSL -->
+        <div class="card product-card" data-id="9"
+             data-brand="YSL"
+             data-price="135"
+             data-scent="Gourmand"
+             data-size="90ml"
+             data-longevity="Long"
+             data-season="Winter"
+             data-notes="Coffee, Vanilla, White Flowers"
+             data-mood="Mysterious"
+             data-occasion="Evening"
+             data-gender="Female">
+            <img src="https://placehold.co/300x400/333333/ffffff?text=YSL+Black+Opium" alt="YSL Black Opium">
+            <div class="price-tag">$135</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+    </div>
+</div>
+
+<!-- COLOGNE PRODUCTS -->
+<div class="catalog-products" id="cologneProducts" style="display:none;">
+    <!-- Row 1 -->
+    <div class="product-row">
+        <!-- DIOR -->
+        <div class="card product-card" data-id="10"
+             data-brand="Dior"
+             data-price="110"
+             data-scent="Fresh"
+             data-size="100ml"
+             data-longevity="Long"
+             data-season="All Year"
+             data-notes="Bergamot, Pepper, Ambroxan"
+             data-mood="Confident"
+             data-occasion="Daily"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/d1e4ff/333333?text=Dior+Sauvage" alt="Dior Sauvage">
+            <div class="price-tag">$110</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- BYREDO -->
+        <div class="card product-card" data-id="11"
+             data-brand="Byredo"
+             data-price="220"
+             data-scent="Woody"
+             data-size="100ml"
+             data-longevity="Long"
+             data-season="Autumn"
+             data-notes="Black Violet, Vetiver, Leather"
+             data-mood="Mysterious"
+             data-occasion="Evening"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/e8d1ff/333333?text=Byredo+Mojave" alt="Byredo Mojave Ghost">
+            <div class="price-tag">$220</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- PRADA -->
+        <div class="card product-card" data-id="12"
+             data-brand="Prada"
+             data-price="95"
+             data-scent="Fresh"
+             data-size="100ml"
+             data-longevity="Moderate"
+             data-season="Spring"
+             data-notes="Lavender, Orange, Ambroxan"
+             data-mood="Relaxed"
+             data-occasion="Office"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/d1fffc/333333?text=Prada+L'Homme" alt="Prada L'Homme">
+            <div class="price-tag">$95</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+    </div>
+
+    <!-- Row 2 -->
+    <div class="product-row">
+        <!-- CHANEL -->
+        <div class="card product-card" data-id="13"
+             data-brand="Chanel"
+             data-price="125"
+             data-scent="Woody"
+             data-size="100ml"
+             data-longevity="Long"
+             data-season="All Year"
+             data-notes="Citrus, Vetiver, Cedar"
+             data-mood="Confident"
+             data-occasion="Daily"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/1a1a2e/ffffff?text=Chanel+Bleu" alt="Chanel Bleu de Chanel">
+            <div class="price-tag">$125</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- BURBERRY -->
+        <div class="card product-card" data-id="14"
+             data-brand="Burberry"
+             data-price="85"
+             data-scent="Fresh"
+             data-size="100ml"
+             data-longevity="Moderate"
+             data-season="Summer"
+             data-notes="Bergamot, Ginger, Vetiver"
+             data-mood="Fresh"
+             data-occasion="Daily"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/ffedd1/333333?text=Burberry+Brit" alt="Burberry Brit for Him">
+            <div class="price-tag">$85</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- MAISON MARGIELA -->
+        <div class="card product-card" data-id="15"
+             data-brand="Maison Margiela"
+             data-price="135"
+             data-scent="Fresh"
+             data-size="100ml"
+             data-longevity="Moderate"
+             data-season="Summer"
+             data-notes="Sea Salt, Sage, Ambrette"
+             data-mood="Relaxed"
+             data-occasion="Daily"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/d1f0ff/333333?text=MM+Sailing+Day" alt="Maison Margiela Sailing Day">
+            <div class="price-tag">$135</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+    </div>
+
+    <!-- Row 3 -->
+    <div class="product-row">
+        <!-- VERSACE -->
+        <div class="card product-card" data-id="16"
+             data-brand="Versace"
+             data-price="98"
+             data-scent="Fresh"
+             data-size="100ml"
+             data-longevity="Long"
+             data-season="Summer"
+             data-notes="Mint, Green Apple, Tonka Bean"
+             data-mood="Energetic"
+             data-occasion="Daily"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/ffd1a1/333333?text=Versace+Eros" alt="Versace Eros">
+            <div class="price-tag">$98</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- DIOR 2 -->
+        <div class="card product-card" data-id="17"
+             data-brand="Dior"
+             data-price="105"
+             data-scent="Woody"
+             data-size="100ml"
+             data-longevity="Long"
+             data-season="Autumn"
+             data-notes="Leather, Violet, Sandalwood"
+             data-mood="Mysterious"
+             data-occasion="Evening"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/2d3047/ffffff?text=Dior+Fahrenheit" alt="Dior Fahrenheit">
+            <div class="price-tag">$105</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
+        
+        <!-- CHANEL 2 -->
+        <div class="card product-card" data-id="18"
+             data-brand="Chanel"
+             data-price="95"
+             data-scent="Oriental"
+             data-size="50ml"
+             data-longevity="Moderate"
+             data-season="Winter"
+             data-notes="Vanilla, Tonka Bean, Sandalwood"
+             data-mood="Mysterious"
+             data-occasion="Date"
+             data-gender="Male">
+            <img src="https://placehold.co/300x400/ffd1f7/333333?text=Chanel+Allure" alt="Chanel Allure Homme">
+            <div class="price-tag">$95</div>
+            <div class="add-to-cart">ADD TO CART</div>
+            <div class="card-overlay">CLICK TO VIEW DETAILS</div>
+        </div>
     </div>
 </div>
 
 <!-- Filter Modal -->
 <div id="filterModal" class="modal">
-    <div class="modal-content">
-        <h2>FILTER OPTIONS</h2>
-        <button class="close-btn">x</button>
-        <!-- Show All Products Button -->
-        <button class="show-all-btn">SHOW ALL PRODUCTS</button>
+    <div class="modal-content filter-modal-content">
+        <div class="modal-header">
+            <h2>FILTER BY</h2>
+            <button class="close-btn">&times;</button>
+        </div>
+        
+        <button class="show-all-btn" id="showAllProducts">SHOW ALL PRODUCTS</button>
 
-        <!-- Brand Filter -->
-        <div class="filter-category">
-            <h3>BRAND</h3>
-            <div class="filter-options">
-                <label><input type="checkbox" name="brand" value="Dior"> Dior</label>
-                <label><input type="checkbox" name="brand" value="Chanel"> Chanel</label>
-                <label><input type="checkbox" name="brand" value="Prada"> Prada</label>
-                <label><input type="checkbox" name="brand" value="Versace"> Versace</label>
-                <label><input type="checkbox" name="brand" value="Dior"> Jo Malone</label>
-                <label><input type="checkbox" name="brand" value="Chanel"> Byredo</label>
-                <label><input type="checkbox" name="brand" value="Prada"> YSL</label>
-                <label><input type="checkbox" name="brand" value="Versace"> Victoria's Secret</label>
-                <label><input type="checkbox" name="brand" value="Dior"> Burberry</label>
-                <label><input type="checkbox" name="brand" value="Chanel"> Maison Margiela</label>
+        <div class="filter-sections">
+            <!-- Brand Filter -->
+            <div class="filter-category">
+                <h3><i class="fas fa-crown"></i> BRAND</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox" name="brand" value="Dior"> Dior</label>
+                    <label><input type="checkbox" name="brand" value="Byredo"> Byredo</label>
+                    <label><input type="checkbox" name="brand" value="Prada"> Prada</label>
+                    <label><input type="checkbox" name="brand" value="Chanel"> Chanel</label>
+                    <label><input type="checkbox" name="brand" value="Burberry"> Burberry</label>
+                    <label><input type="checkbox" name="brand" value="Victoria's Secret"> Victoria's Secret</label>
+                    <label><input type="checkbox" name="brand" value="Maison Margiela"> Maison Margiela</label>
+                    <label><input type="checkbox" name="brand" value="Jo Malone"> Jo Malone</label>
+                    <label><input type="checkbox" name="brand" value="YSL"> YSL</label>
+                    <label><input type="checkbox" name="brand" value="Versace"> Versace</label>
+                </div>
+            </div>
+
+            <!-- Price Filter -->
+            <div class="filter-category">
+                <h3><i class="fas fa-tag"></i> PRICE RANGE</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox" name="price" value="under50"> Under $50</label>
+                    <label><input type="checkbox" name="price" value="50-100"> $50-$100</label>
+                    <label><input type="checkbox" name="price" value="100-200"> $100-$200</label>
+                    <label><input type="checkbox" name="price" value="above200"> Above $200</label>
+                </div>
+            </div>
+
+            <!-- Scent Family Filter -->
+            <div class="filter-category">
+                <h3><i class="fas fa-spa"></i> SCENT FAMILY</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox" name="scent" value="Floral"> Floral</label>
+                    <label><input type="checkbox" name="scent" value="Citrus"> Citrus</label>
+                    <label><input type="checkbox" name="scent" value="Woody"> Woody</label>
+                    <label><input type="checkbox" name="scent" value="Oriental"> Oriental</label>
+                    <label><input type="checkbox" name="scent" value="Fresh"> Fresh</label>
+                    <label><input type="checkbox" name="scent" value="Gourmand"> Gourmand</label>
+                    <label><input type="checkbox" name="scent" value="Fruity"> Fruity</label>
+                    <label><input type="checkbox" name="scent" value="Spicy"> Spicy</label>
+                </div>
+            </div>
+
+            <!-- Size Filter -->
+            <div class="filter-category">
+                <h3><i class="fas fa-weight"></i> SIZE</h3>
+                <div class="filter-options">
+                    <label><input type="checkbox" name="size" value="30ml"> 30ml</label>
+                    <label><input type="checkbox" name="size" value="50ml"> 50ml</label>
+                    <label><input type="checkbox" name="size" value="90ml"> 90ml</label>
+                    <label><input type="checkbox" name="size" value="100ml"> 100ml</label>
+                    <label><input type="checkbox" name="size" value="150ml"> 150ml</label>
+                </div>
             </div>
         </div>
-
-        <!-- Price Filter -->
-        <div class="filter-category">
-            <h3>PRICE</h3>
-            <div class="filter-options">
-                <label><input type="checkbox" name="price" value="Under $50"> Under $50</label>
-                <label><input type="checkbox" name="price" value="$50-$100"> $50-$100</label>
-                <label><input type="checkbox" name="price" value="$100-$200"> $100-$200</label>
-                <label><input type="checkbox" name="price" value="Above $200"> Above $200</label>
-            </div>
+        
+        <div class="modal-footer">
+            <button class="clear-filters" id="clearFilters">CLEAR ALL</button>
+            <button class="apply-btn" id="applyFilters">APPLY FILTERS</button>
         </div>
-
-        <!-- Scent Family Filter -->
-        <div class="filter-category">
-            <h3>SCENT FAMILY</h3>
-            <div class="filter-options">
-                <label><input type="checkbox" name="scent" value="Floral"> Floral</label>
-                <label><input type="checkbox" name="scent" value="Citrus"> Citrus</label>
-                <label><input type="checkbox" name="scent" value="Woody"> Woody</label>
-                <label><input type="checkbox" name="scent" value="Oriental"> Oriental</label>
-            </div>
-        </div>
-
-        <!-- Size Filter -->
-        <div class="filter-category">
-            <h3>SIZE</h3>
-            <div class="filter-options">
-                <label><input type="checkbox" name="size" value="30ml"> 30ml</label>
-                <label><input type="checkbox" name="size" value="50ml"> 50ml</label>
-                <label><input type="checkbox" name="size" value="100ml"> 100ml</label>
-            </div>
-        </div>
-
-        <button class="apply-btn">APPLY</button>
-    </div>
     </div>
 </div>
 
 <!-- Personalize Modal -->
 <div id="personalizeModal" class="modal">
-    <div class="modal-content">
-        <h2>PERSONALIZE OPTIONS</h2>
-        <button class="close-btn">x</button>
+    <div class="modal-content personalize-modal-content">
+        <div class="modal-header">
+            <h2>PERSONALIZE YOUR SCENT</h2>
+            <button class="close-btn">&times;</button>
+        </div>
+        
+        <button class="show-all-btn" id="showAllProductsPersonalize">SHOW ALL PRODUCTS</button>
 
-        <!-- Show All Products Button -->
-        <button class="show-all-btn">SHOW ALL PRODUCTS</button>
+        <!-- Personalize Sections -->
+        <div class="personalize-sections">
+            <!-- Mood Filter -->
+            <div class="filter-category">
+                <h3><i class="fas fa-smile"></i> MOOD</h3>
+                <div class="personalize-options">
+                    <button class="personalize-btn" data-mood="Romantic">
+                        <i class="fas fa-heart"></i> Romantic
+                    </button>
+                    <button class="personalize-btn" data-mood="Energetic">
+                        <i class="fas fa-bolt"></i> Energetic
+                    </button>
+                    <button class="personalize-btn" data-mood="Relaxed">
+                        <i class="fas fa-cloud"></i> Relaxed
+                    </button>
+                    <button class="personalize-btn" data-mood="Confident">
+                        <i class="fas fa-crown"></i> Confident
+                    </button>
+                    <button class="personalize-btn" data-mood="Mysterious">
+                        <i class="fas fa-moon"></i> Mysterious
+                    </button>
+                    <button class="personalize-btn" data-mood="Playful">
+                        <i class="fas fa-laugh"></i> Playful
+                    </button>
+                    <button class="personalize-btn" data-mood="Elegant">
+                        <i class="fas fa-gem"></i> Elegant
+                    </button>
+                    <button class="personalize-btn" data-mood="Fresh">
+                        <i class="fas fa-leaf"></i> Fresh
+                    </button>
+                </div>
+            </div>
 
-        <!-- Mood Filter -->
-        <div class="filter-category">
-            <h3>MOOD</h3>
-            <div class="filter-options">
-                <label><input type="checkbox" name="mood" value="Romantic"> Romantic</label>
-                <label><input type="checkbox" name="mood" value="Energetic"> Energetic</label>
-                <label><input type="checkbox" name="mood" value="Relaxing"> Relaxing</label>
-                <label><input type="checkbox" name="mood" value="Confident"> Confident</label>
+            <!-- Season Filter -->
+            <div class="filter-category">
+                <h3><i class="fas fa-sun"></i> SEASON</h3>
+                <div class="personalize-options">
+                    <button class="personalize-btn" data-season="Spring">
+                        <i class="fas fa-seedling"></i> Spring
+                    </button>
+                    <button class="personalize-btn" data-season="Summer">
+                        <i class="fas fa-sun"></i> Summer
+                    </button>
+                    <button class="personalize-btn" data-season="Autumn">
+                        <i class="fas fa-leaf"></i> Autumn
+                    </button>
+                    <button class="personalize-btn" data-season="Winter">
+                        <i class="fas fa-snowflake"></i> Winter
+                    </button>
+                    <button class="personalize-btn" data-season="All Year">
+                        <i class="fas fa-calendar-alt"></i> All Year
+                    </button>
+                </div>
+            </div>
+
+            <!-- Longevity Filter -->
+            <div class="filter-category">
+                <h3><i class="fas fa-clock"></i> LONGEVITY</h3>
+                <div class="personalize-options">
+                    <button class="personalize-btn" data-longevity="Short">
+                        Short (4-6 hours)
+                    </button>
+                    <button class="personalize-btn" data-longevity="Moderate">
+                        Moderate (6-8 hours)
+                    </button>
+                    <button class="personalize-btn" data-longevity="Long">
+                        Long (8+ hours)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scent Notes Preference -->
+            <div class="filter-category">
+                <h3><i class="fas fa-star"></i> PREFERRED NOTES</h3>
+                <div class="note-preferences">
+                    <button class="note-btn" data-note="Rose">Rose</button>
+                    <button class="note-btn" data-note="Jasmine">Jasmine</button>
+                    <button class="note-btn" data-note="Vanilla">Vanilla</button>
+                    <button class="note-btn" data-note="Bergamot">Bergamot</button>
+                    <button class="note-btn" data-note="Sandalwood">Sandalwood</button>
+                    <button class="note-btn" data-note="Citrus">Citrus</button>
+                    <button class="note-btn" data-note="Amber">Amber</button>
+                    <button class="note-btn" data-note="Leather">Leather</button>
+                    <button class="note-btn" data-note="Woody">Woody</button>
+                    <button class="note-btn" data-note="Spicy">Spicy</button>
+                </div>
+            </div>
+
+            <!-- Occasion Filter -->
+            <div class="filter-category">
+                <h3><i class="fas fa-calendar-alt"></i> OCCASION</h3>
+                <div class="personalize-options">
+                    <button class="personalize-btn" data-occasion="Daily">Daily Wear</button>
+                    <button class="personalize-btn" data-occasion="Office">Office</button>
+                    <button class="personalize-btn" data-occasion="Date">Date Night</button>
+                    <button class="personalize-btn" data-occasion="Evening">Evening</button>
+                    <button class="personalize-btn" data-occasion="Special">Special Events</button>
+                    <button class="personalize-btn" data-occasion="Casual">Casual</button>
+                </div>
             </div>
         </div>
-
-        <!-- Season Filter -->
-        <div class="filter-category">
-            <h3>SEASON</h3>
-            <div class="filter-options">
-                <label><input type="checkbox" name="season" value="Spring"> Spring</label>
-                <label><input type="checkbox" name="season" value="Summer"> Summer</label>
-                <label><input type="checkbox" name="season" value="Autumn"> Autumn</label>
-                <label><input type="checkbox" name="season" value="Winter"> Winter</label>
-            </div>
+        
+        <div class="modal-footer">
+            <button class="clear-filters" id="clearPersonalize">CLEAR ALL</button>
+            <button class="apply-btn" id="applyPersonalize">FIND MY SCENT</button>
         </div>
-
-        <!-- Longevity Filter -->
-        <div class="filter-category">
-            <h3>LONGEVITY</h3>
-            <div class="filter-options">
-                <label><input type="checkbox" name="longevity" value="Short"> Short</label>
-                <label><input type="checkbox" name="longevity" value="Moderate"> Moderate</label>
-                <label><input type="checkbox" name="longevity" value="Long"> Long</label>
-            </div>
-        </div>
-
-        <!-- Scent Notes Filter -->
-        <div class="filter-category">
-            <h3>SCENT NOTES</h3>
-            <div class="filter-options">
-                <label><input type="checkbox" name="notes" value="Floral"> Floral</label>
-                <label><input type="checkbox" name="notes" value="Citrus"> Citrus</label>
-                <label><input type="checkbox" name="notes" value="Woody"> Woody</label>
-                <label><input type="checkbox" name="notes" value="Oriental"> Oriental</label>
-            </div>
-        </div>
-
-        <button class="apply-btn">APPLY</button>
-
     </div>
 </div>
 
-<div class="catalog-products">
-    <span class="product-count" id="perfumeCount">0 products</span>
-    <!-- Row 1 -->
-    <div class="product-row">
-        <div class="card">
-            <img src="perfumes/Miss dior.png" alt="Miss Dior">
-            <div class="price-tag">$120</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/chanelle gabrielle.png" alt="Chanelle Gabrielle">
-            <div class="price-tag">$135</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/prada paradoxe.png" alt="Prada Paradoxe">
-            <div class="price-tag">$150</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="product-row">
-        <div class="card">
-            <img src="perfumes/versace eros.png" alt="Versace Eros">
-            <div class="price-tag">$140</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/Miss dior.png" alt="Miss Dior">
-            <div class="price-tag">$120</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/chanelle gabrielle.png" alt="Chanelle Gabrielle">
-            <div class="price-tag">$135</div>
-            <div class="add-to-cart">ADD TO CART</div>
+<!-- Product Detail Modal -->
+<div id="productModal" class="modal product-modal">
+    <div class="modal-content product-modal-content">
+        <button class="close-btn">&times;</button>
+        <div class="product-detail">
+            <div class="product-detail-image">
+                <img id="productDetailImg" src="" alt="Product Image">
+            </div>
+            <div class="product-detail-info">
+                <h3 id="productDetailName">Product Name</h3>
+                <div class="product-brand" id="productDetailBrand">Brand</div>
+                <div class="product-price" id="productDetailPrice">$0.00</div>
+                <div class="product-description" id="productDetailDesc">
+                    Loading description...
+                </div>
+                <div class="product-specs">
+                    <div class="spec"><span>Size:</span> <span id="productDetailSize">100ml</span></div>
+                    <div class="spec"><span>Scent Family:</span> <span id="productDetailScent">Floral</span></div>
+                    <div class="spec"><span>Longevity:</span> <span id="productDetailLongevity">6-8 hours</span></div>
+                    <div class="spec"><span>Season:</span> <span id="productDetailSeason">All Year</span></div>
+                </div>
+                <div class="product-actions">
+                    <button class="add-to-cart-detail" id="addToCartDetail">
+                        <i class="fas fa-shopping-cart"></i> ADD TO CART
+                    </button>
+                    <button class="wishlist-btn">
+                        <i class="far fa-heart"></i> ADD TO WISHLIST
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
-
-    <!-- Row 3 -->
-    <div class="product-row">
-        <div class="card">
-            <img src="perfumes/prada paradoxe.png" alt="Prada Paradoxe">
-            <div class="price-tag">$150</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/versace eros.png" alt="Versace Eros">
-            <div class="price-tag">$140</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/Miss dior.png" alt="Miss Dior">
-            <div class="price-tag">$120</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-    </div>
-
 </div>
-
-<!-- COLOGNE TAB CONTENT -->
-<div class="catalog-products cologne-tab" style="display: none;">
-
-    <!-- Row 1 -->
-    <div class="product-row">
-        <div class="card">
-            <img src="perfumes/chanelle gabrielle.png" alt="Cologne 1">
-            <div class="price-tag">$95</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/versace eros.png" alt="Cologne 2">
-            <div class="price-tag">$110</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/Miss dior.png" alt="Cologne 3">
-            <div class="price-tag">$105</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-    </div>
-
-    <!-- Row 2 -->
-    <div class="product-row">
-        <div class="card">
-            <img src="perfumes/prada paradoxe.png" alt="Cologne 4">
-            <div class="price-tag">$120</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/chanelle gabrielle.png" alt="Cologne 5">
-            <div class="price-tag">$115</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            <img src="perfumes/versace eros.png" alt="Cologne 6">
-            <div class="price-tag">$100</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-    </div>
-
-    <!-- Row 3 -->
-    <div class="product-row">
-        <div class="card">
-            data-brand="prada"
-            data-price="120"
-            data-scent="Citrus"
-            data-size="50ml">
-            <img src="perfumes/prada paradoxe.png" alt="Cologne 7">
-            <div class="price-tag">$130</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            data-brand="Dior"
-            data-price="120"
-            data-scent="Floral"
-            data-size="50ml">
-            <img src="perfumes/Miss dior.png" alt="Cologne 8">
-            <div class="price-tag">$125</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-        <div class="card">
-            data-brand="Chanel"
-            data-price="120"
-            data-scent="woody"
-            data-size="50ml">
-            <img src="perfumes/chanelle gabrielle.png" alt="Cologne 9">
-            <div class="price-tag">$110</div>
-            <div class="add-to-cart">ADD TO CART</div>
-        </div>
-    </div>
-
-</div>
-
-<!-- CART MODAL OVERLAY -->
-<div class="cart-overlay" id="cartOverlay"></div>
 
 <!-- Cart Overlay -->
-<div id="cartOverlay"></div>
+<div id="cartOverlay" class="cart-overlay"></div>
 
 <!-- Cart Modal -->
-<div id="cartModal">
+<div id="cartModal" class="cart-modal">
     <div class="cart-header">
         <h2>YOUR CART</h2>
         <span id="closeCart">&times;</span>
     </div>
 
-    <div id="cartItems"></div>
+    <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded here -->
+        <div class="empty-cart">
+            <i class="fas fa-shopping-bag"></i>
+            <p>Your cart is empty</p>
+        </div>
+    </div>
 
     <div class="cart-footer">
-        <p>ITEMS: <span id="itemCount">0</span></p>
-        <p>TOTAL: <span id="totalPrice">$0</span></p>
+        <div class="cart-summary">
+            <p>SUBTOTAL: <span id="totalPrice">$0.00</span></p>
+            <p>ITEMS: <span id="itemCount">0</span></p>
+        </div>
+        <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+        <button class="continue-shopping">CONTINUE SHOPPING</button>
     </div>
 </div>
 
+<!-- Cart Toast -->
 <div id="cartToast" class="cart-toast">
-    <span id="toastText">ADDED TO CART!</span>
+    <span id="toastText">✓ ADDED TO CART</span>
 </div>
 
-
 <script src="script.js"></script>
+<!-- Main Website Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Newsletter Signup Section -->
+        <div class="footer-section newsletter-section">
+            <h4 class="footer-heading">JOURNEY WITH MEMOIRE</h4>
+            <p>Sign up for exclusive access to new arrivals, personalized recommendations, and members-only offers.</p>
+            <form class="footer-newsletter">
+                <input type="email" placeholder="Enter your email" aria-label="Email address for newsletter" required>
+                <button type="submit" class="footer-submit-btn">SUBSCRIBE</button>
+            </form>
+            <p class="footer-note">By subscribing, you agree to our Privacy Policy and consent to receive updates.</p>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="footer-links-container">
+            <div class="footer-section">
+                <h4 class="footer-heading">DISCOVER</h4>
+                <ul class="footer-list">
+                    <li><a href="catalog.html?tab=perfume">Perfumes</a></li>
+                    <li><a href="catalog.html?tab=cologne">Colognes</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Gift Sets</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">SUPPORT</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">COMPANY</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Scent Journal</a></li>
+                    <li><a href="#">Store Locator</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-content">
+            <span class="footer-logo">MEMOIRE</span>
+            <span class="footer-copyright">© 2025 MEMOIRE. All scents preserved.</span>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

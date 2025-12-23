@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEMOIRE - Discover Your Scent</title>
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome (icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Quiz Specific CSS -->
+    <style>
+        /* Color Variables - MEMOIRE Theme */
+        :root {
+            --memoire-gold: #D8B96D;
+            --memoire-dark: #0A0A0A;
+            --memoire-light: #F8F5EC;
+            --memoire-bronze: #B8860B;
+            --memoire-cream: #FFF9E6;
+            --memoire-rose: #E8C4C4;
+            --memoire-lavender: #D4C2FC;
+            --memoire-mint: #C2E8D4;
+            --memoire-sand: #E8D4B4;
+            --memoire-slate: #2C3E50;
+        }
+        
+        body {
+            background-color: var(--memoire-light);
+        }
+        
+        /* Quiz Specific Styles */
+        .quiz-container {
+            padding: 40px 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+            border-radius: 20px;
+            color: white;
+            box-shadow: 0 15px 35px rgba(216, 185, 109, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quiz-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .quiz-title {
+            font-size: 52px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quiz-subtitle {
+            font-size: 20px;
+            margin: 0 auto 30px;
+            max-width: 700px;
+            line-height: 1.6;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quiz-progress-container {
+            background: rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 5px;
+            margin: 30px auto;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quiz-progress {
+            width: 100%;
+            height: 12px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        .quiz-progress-bar {
+            height: 100%;
+            background: white;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        
+        .quiz-progress-text {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 15px;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .quiz-step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            border: 2px solid var(--memoire-cream);
+        }
+        
+        .quiz-step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .step-question {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.3;
+            color: var(--memoire-slate);
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .step-question::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--memoire-gold);
+            border-radius: 2px;
+        }
+        
+        .step-description {
+            font-size: 18px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            padding: 0 20px;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+        
+        @media (min-width: 768px) {
+            .options-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        .quiz-option {
+            border: 3px solid #f0f0f0;
+            border-radius: 15px;
+            padding: 35px 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            background: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quiz-option::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--memoire-gold);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .quiz-option:hover {
+            border-color: var(--memoire-gold);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(216, 185, 109, 0.2);
+        }
+        
+        .quiz-option:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .quiz-option.selected {
+            border-color: var(--memoire-gold);
+            background: linear-gradient(135deg, rgba(216, 185, 109, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
+            box-shadow: 0 15px 35px rgba(216, 185, 109, 0.25);
+            transform: translateY(-5px);
+        }
+        
+        .quiz-option.selected::before {
+            transform: scaleX(1);
+            background: var(--memoire-bronze);
+        }
+        
+        .option-icon {
+            font-size: 40px;
+            color: var(--memoire-gold);
+            margin-bottom: 20px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option:hover .option-icon {
+            transform: scale(1.2);
+        }
+        
+        .quiz-option.selected .option-icon {
+            color: var(--memoire-bronze);
+        }
+        
+        .option-text {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--memoire-slate);
+        }
+        
+        .option-desc {
+            font-size: 14px;
+            color: #777;
+            line-height: 1.4;
+        }
+        
+        .quiz-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 40px;
+            border-top: 2px solid var(--memoire-cream);
+        }
+        
+        .quiz-btn {
+            padding: 18px 45px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
+        }
+        
+        .btn-prev {
+            background: transparent;
+            color: var(--memoire-slate);
+            border: 3px solid #eee;
+        }
+        
+        .btn-prev:hover {
+            background: var(--memoire-light);
+            border-color: var(--memoire-gold);
+            color: var(--memoire-dark);
+            transform: translateX(-5px);
+        }
+        
+        .btn-next, .btn-submit {
+            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(216, 185, 109, 0.3);
+        }
+        
+        .btn-next:hover, .btn-submit:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(216, 185, 109, 0.4);
+        }
+        
+        .btn-submit {
+            background: linear-gradient(135deg, var(--memoire-dark) 0%, var(--memoire-slate) 100%);
+            box-shadow: 0 8px 20px rgba(10, 10, 10, 0.3);
+        }
+        
+        .btn-submit:hover {
+            box-shadow: 0 15px 30px rgba(10, 10, 10, 0.4);
+        }
+        
+        .btn-hidden {
+            visibility: hidden;
+        }
+        
+        /* Advertisement Banner */
+        .quiz-ad-banner {
+            background: linear-gradient(135deg, var(--memoire-rose) 0%, var(--memoire-lavender) 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 60px 0;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: 0 15px 35px rgba(212, 194, 252, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .quiz-ad-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="none"><path d="M0,0 C100,50 100,150 200,200 L200,0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .ad-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .ad-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--memoire-slate);
+            margin-bottom: 15px;
+        }
+        
+        .ad-text {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .ad-cta {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--memoire-slate);
+            color: white;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--memoire-slate);
+        }
+        
+        .ad-cta:hover {
+            background: transparent;
+            color: var(--memoire-slate);
+            transform: translateY(-3px);
+        }
+        
+        .ad-image {
+            flex: 0 0 300px;
+            height: 250px;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: var(--memoire-gold);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .ad-image::before {
+            content: "NEW";
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--memoire-gold);
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        /* Results Page */
+        .results-container {
+            text-align: center;
+            padding: 40px 0;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+            border-radius: 20px;
+            padding: 60px 40px;
+            color: white;
+            margin-bottom: 60px;
+            box-shadow: 0 15px 35px rgba(216, 185, 109, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .results-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .results-icon {
+            font-size: 80px;
+            color: white;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .results-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .results-subtitle {
+            font-size: 22px;
+            opacity: 0.9;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .results-profile {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin: 40px auto;
+            max-width: 900px;
+            text-align: left;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            border: 2px solid var(--memoire-cream);
+        }
+        
+        .profile-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--memoire-slate);
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .profile-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: var(--memoire-gold);
+            border-radius: 2px;
+        }
+        
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .profile-item {
+            margin-bottom: 20px;
+        }
+        
+        .profile-label {
+            font-size: 14px;
+            color: var(--memoire-gold);
+            margin-bottom: 8px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .profile-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--memoire-dark);
+        }
+        
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .profile-tag {
+            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(216, 185, 109, 0.2);
+        }
+        
+        .recommendations {
+            margin: 80px 0;
+        }
+        
+        .recommendations-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .recommendations-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--memoire-slate);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .recommendations-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: var(--memoire-gold);
+            border-radius: 2px;
+        }
+        
+        .recommendations-subtitle {
+            font-size: 20px;
+            color: #666;
+            max-width: 700px;
+            margin: 20px auto 0;
+            line-height: 1.6;
+        }
+        
+        .recommendation-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .recommendation-cards {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+        
+        .recommendation-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 2px solid var(--memoire-cream);
+        }
+        
+        .recommendation-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(216, 185, 109, 0.2);
+            border-color: var(--memoire-gold);
+        }
+        
+        .rec-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--memoire-gold);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 2;
+        }
+        
+        .rec-image {
+            height: 280px;
+            background: linear-gradient(135deg, var(--memoire-cream) 0%, var(--memoire-sand) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: var(--memoire-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rec-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .rec-info {
+            padding: 30px;
+        }
+        
+        .rec-name {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--memoire-slate);
+        }
+        
+        .rec-brand {
+            font-size: 16px;
+            color: var(--memoire-gold);
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .rec-desc {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .rec-match {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .match-text {
+            font-size: 14px;
+            color: #666;
+            margin-right: 10px;
+            font-weight: 600;
+        }
+        
+        .match-bar {
+            flex: 1;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .match-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+            border-radius: 4px;
+        }
+        
+        .rec-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .rec-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--memoire-dark);
+        }
+        
+        .rec-btn {
+            padding: 12px 25px;
+            background: linear-gradient(135deg, var(--memoire-dark) 0%, var(--memoire-slate) 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(10,10,10,0.2);
+        }
+        
+        .rec-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(10,10,10,0.3);
+        }
+        
+        .results-actions {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .action-retake {
+            padding: 18px 45px;
+            background: transparent;
+            border: 3px solid var(--memoire-gold);
+            color: var(--memoire-gold);
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        
+        .action-retake:hover {
+            background: var(--memoire-gold);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(216, 185, 109, 0.3);
+        }
+        
+        .action-browse {
+            padding: 18px 45px;
+            background: linear-gradient(135deg, var(--memoire-gold) 0%, var(--memoire-bronze) 100%);
+            border: none;
+            color: white;
+            border-radius: 50px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(216, 185, 109, 0.3);
+        }
+        
+        .action-browse:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(216, 185, 109, 0.4);
+        }
+        
+        /* Featured Collections Banner */
+        .featured-collections {
+            background: linear-gradient(135deg, var(--memoire-mint) 0%, #a8e6cf 100%);
+            border-radius: 20px;
+            padding: 50px;
+            margin: 80px 0;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(194, 232, 212, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-collections::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="none"><path d="M0,100 C50,0 150,200 200,100 L200,0 L0,0 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+        
+        .collections-title {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--memoire-slate);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .collections-subtitle {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .collection-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        
+        .collection-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .collection-icon {
+            font-size: 40px;
+            color: var(--memoire-gold);
+            margin-bottom: 20px;
+        }
+        
+        .collection-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--memoire-slate);
+        }
+        
+        .collection-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .collections-cta {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--memoire-slate);
+            color: white;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .collections-cta:hover {
+            background: var(--memoire-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(10,10,10,0.2);
+        }
+        
+        /* Skip Section */
+        .skip-section {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid var(--memoire-cream);
+        }
+        
+        .skip-text {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .skip-btn {
+            padding: 15px 40px;
+            background: transparent;
+            border: 3px solid #ddd;
+            color: #666;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+        
+        .skip-btn:hover {
+            border-color: var(--memoire-gold);
+            color: var(--memoire-gold);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .quiz-header {
+                padding: 30px 20px;
+            }
+            
+            .quiz-title {
+                font-size: 36px;
+            }
+            
+            .quiz-step {
+                padding: 30px 20px;
+            }
+            
+            .step-question {
+                font-size: 28px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quiz-ad-banner {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+            
+            .ad-image {
+                flex: 0 0 250px;
+                width: 100%;
+            }
+            
+            .collections-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            
+            .profile-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .options-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            
+            .recommendation-cards {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            
+            .quiz-btn {
+                padding: 15px 25px;
+                font-size: 14px;
+            }
+            
+            .action-retake, .action-browse {
+                padding: 15px 25px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">MEMOIRE</div>
+    <div class="menu">
+        <a href="index.html">HOME</a> 
+        <a href="catalog.html">CATALOG</a> 
+        <a href="discover.html" class="active">DISCOVER</a> 
+        <a href="collection.html">COLLECTION</a>
+    </div>
+    <div class="nav-icons">
+        <i class="fas fa-shopping-cart" id="cartIcon">
+            <span class="cart-count">0</span>
+        </i>
+        <i class="fas fa-user"></i>
+    </div>
+</div>
+
+<!-- Quiz Container -->
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1 class="quiz-title">FIND YOUR SIGNATURE SCENT</h1>
+        <p class="quiz-subtitle">Our personalized scent discovery quiz helps you find fragrances that match your unique personality, style, and preferences. Begin your olfactory journey today.</p>
+        
+        <div class="quiz-progress-container">
+            <div class="quiz-progress">
+                <div class="quiz-progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+        <div class="quiz-progress-text" id="progressText">QUESTION <span id="currentStep">1</span> OF 8</div>
+    </div>
+    
+    <!-- Advertisement Banner -->
+    <div class="quiz-ad-banner">
+        <div class="ad-content">
+            <h3 class="ad-title">NEW LIMITED EDITION: GOLDEN MEMORIES</h3>
+            <p class="ad-text">Experience our exclusive collection inspired by timeless moments. Rich amber, rare oud, and golden saffron create a scent that lingers in memory. Limited stock available.</p>
+            <a href="catalog.html" class="ad-cta">SHOP NOW</a>
+        </div>
+        <div class="ad-image">
+            <i class="fas fa-crown"></i>
+        </div>
+    </div>
+    
+    <!-- Quiz Steps -->
+    <form id="scentQuiz">
+        <!-- Step 1: Gender -->
+        <div class="quiz-step active" id="step1">
+            <h2 class="step-question">How do you identify?</h2>
+            <p class="step-description">Select how you identify to receive personalized fragrance recommendations tailored to your preferences.</p>
+            
+            <div class="options-grid">
+                <div class="quiz-option" data-value="female">
+                    <div class="option-icon">
+                        <i class="fas fa-female"></i>
+                    </div>
+                    <div class="option-text">Woman</div>
+                    <div class="option-desc">Feminine & elegant fragrances</div>
+                </div>
+                
+                <div class="quiz-option" data-value="male">
+                    <div class="option-icon">
+                        <i class="fas fa-male"></i>
+                    </div>
+                    <div class="option-text">Man</div>
+                    <div class="option-desc">Masculine & bold scents</div>
+                </div>
+                
+                <div class="quiz-option" data-value="nonbinary">
+                    <div class="option-icon">
+                        <i class="fas fa-transgender-alt"></i>
+                    </div>
+                    <div class="option-text">Non-binary</div>
+                    <div class="option-desc">Gender-neutral creations</div>
+                </div>
+                
+                <div class="quiz-option" data-value="all">
+                    <div class="option-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="option-text">Show me all</div>
+                    <div class="option-desc">Explore complete collection</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 2: Scent Family Preference -->
+        <div class="quiz-step" id="step2">
+            <h2 class="step-question">Which scent family speaks to you?</h2>
+            <p class="step-description">Choose the fragrance category that resonates with your personality and style.</p>
+            
+            <div class="options-grid">
+                <div class="quiz-option" data-value="floral">
+                    <div class="option-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <div class="option-text">Floral</div>
+                    <div class="option-desc">Romantic, delicate, feminine</div>
+                </div>
+                
+                <div class="quiz-option" data-value="woody">
+                    <div class="option-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="option-text">Woody</div>
+                    <div class="option-desc">Earthy, warm, sophisticated</div>
+                </div>
+                
+                <div class="quiz-option" data-value="fresh">
+                    <div class="option-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div class="option-text">Fresh</div>
+                    <div class="option-desc">Clean, vibrant, energizing</div>
+                </div>
+                
+                <div class="quiz-option" data-value="oriental">
+                    <div class="option-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="option-text">Oriental</div>
+                    <div class="option-desc">Spicy, exotic, mysterious</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Featured Collections Banner -->
+        <div class="featured-collections">
+            <h3 class="collections-title">EXPLORE OUR CURATED COLLECTIONS</h3>
+            <p class="collections-subtitle">Discover scents organized by mood, occasion, and season for a seamless shopping experience.</p>
+            
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <div class="collection-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4 class="collection-name">Romantic Evenings</h4>
+                    <p class="collection-desc">Sensual fragrances for intimate moments and special dates.</p>
+                </div>
+                
+                <div class="collection-card">
+                    <div class="collection-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4 class="collection-name">Office Elegance</h4>
+                    <p class="collection-desc">Sophisticated scents perfect for professional settings.</p>
+                </div>
+                
+                <div class="collection-card">
+                    <div class="collection-icon">
+                        <i class="fas fa-umbrella-beach"></i>
+                    </div>
+                    <h4 class="collection-name">Summer Vibes</h4>
+                    <p class="collection-desc">Light, fresh fragrances for warm days and sunny adventures.</p>
+                </div>
+            </div>
+            
+            <a href="collection.html" class="collections-cta">VIEW ALL COLLECTIONS</a>
+        </div>
+        
+        <!-- Step 3: Mood -->
+        <div class="quiz-step" id="step3">
+            <h2 class="step-question">What mood do you want to express?</h2>
+            <p class="step-description">Fragrances can amplify emotions and create lasting impressions.</p>
+            
+            <div class="options-grid">
+                <div class="quiz-option" data-value="romantic">
+                    <div class="option-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="option-text">Romantic</div>
+                    <div class="option-desc">Alluring, soft, intimate</div>
+                </div>
+                
+                <div class="quiz-option" data-value="confident">
+                    <div class="option-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div class="option-text">Confident</div>
+                    <div class="option-desc">Bold, powerful, memorable</div>
+                </div>
+                
+                <div class="quiz-option" data-value="energetic">
+                    <div class="option-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="option-text">Energetic</div>
+                    <div class="option-desc">Vibrant, uplifting, fresh</div>
+                </div>
+                
+                <div class="quiz-option" data-value="relaxed">
+                    <div class="option-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <div class="option-text">Relaxed</div>
+                    <div class="option-desc">Calm, soothing, comforting</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 4: Season -->
+        <div class="quiz-step" id="step4">
+            <h2 class="step-question">When will you wear this fragrance most?</h2>
+            <p class="step-description">Seasonal scents enhance your experience throughout the year.</p>
+            
+            <div class="options-grid">
+                <div class="quiz-option" data-value="spring">
+                    <div class="option-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="option-text">Spring</div>
+                    <div class="option-desc">Blooming florals, fresh greens</div>
+                </div>
+                
+                <div class="quiz-option" data-value="summer">
+                    <div class="option-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="option-text">Summer</div>
+                    <div class="option-desc">Citrus, aquatic, beachy vibes</div>
+                </div>
+                
+                <div class="quiz-option" data-value="autumn">
+                    <div class="option-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="option-text">Autumn</div>
+                    <div class="option-desc">Warm spices, cozy woods</div>
+                </div>
+                
+                <div class="quiz-option" data-value="winter">
+                    <div class="option-icon">
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                    <div class="option-text">Winter</div>
+                    <div class="option-desc">Rich, deep, luxurious notes</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Advertisement Banner 2 -->
+        <div class="quiz-ad-banner" style="background: linear-gradient(135deg, var(--memoire-sand) 0%, #f0d8a8 100%);">
+            <div class="ad-image" style="background: linear-gradient(135deg, #fff 0%, #f8f0e3 100%);">
+                <i class="fas fa-gift"></i>
+            </div>
+            <div class="ad-content">
+                <h3 class="ad-title">PERFECT GIFT SETS FOR EVERY OCCASION</h3>
+                <p class="ad-text">Our curated gift sets include travel sizes, luxury cases, and complementary scents. Free engraving and gift wrapping available.</p>
+                <a href="catalog.html?tab=gifts" class="ad-cta">SHOP GIFTS</a>
+            </div>
+        </div>
+        
+        <!-- Step 5: Occasion -->
+        <div class="quiz-step" id="step5">
+            <h2 class="step-question">Where will this fragrance make memories?</h2>
+            <p class="step-description">Choose the setting where you'll create unforgettable scent memories.</p>
+            
+            <div class="options-grid">
+                <div class="quiz-option" data-value="daily">
+                    <div class="option-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="option-text">Daily Wear</div>
+                    <div class="option-desc">Office, everyday elegance</div>
+                </div>
+                
+                <div class="quiz-option" data-value="evening">
+                    <div class="option-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <div class="option-text">Evening/Date</div>
+                    <div class="option-desc">Night outs, romantic moments</div>
+                </div>
+                
+                <div class="quiz-option" data-value="special">
+                    <div class="option-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="option-text">Special Occasions</div>
+                    <div class="option-desc">Celebrations, milestones</div>
+                </div>
+                
+                <div class="quiz-option" data-value="casual">
+                    <div class="option-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="option-text">Casual/Weekend</div>
+                    <div class="option-desc">Relaxed, comfortable settings</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 6: Longevity -->
+        <div class="quiz-step" id="step6">
+            <h2 class="step-question">How long should your scent linger?</h2>
+            <p class="step-description">Select your preferred staying power for the perfect fragrance experience.</p>
+            
+            <div class="options-grid">
+                <div class="quiz-option" data-value="short">
+                    <div class="option-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="option-text">4-6 Hours</div>
+                    <div class="option-desc">Light, refreshing presence</div>
+                </div>
+                
+                <div class="quiz-option" data-value="moderate">
+                    <div class="option-icon">
+                        <i class="far fa-clock"></i>
+                    </div>
+                    <div class="option-text">6-8 Hours</div>
+                    <div class="option-desc">Balanced, all-day wear</div>
+                </div>
+                
+                <div class="quiz-option" data-value="long">
+                    <div class="option-icon">
+                        <i class="fas fa-hourglass-end"></i>
+                    </div>
+                    <div class="option-text">8+ Hours</div>
+                    <div class="option-desc">Long-lasting, memorable</div>
+                </div>
+                
+                <div class="quiz-option" data-value="allDay">
+                    <div class="option-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="option-text">All Day & Night</div>
+                    <div class="option-desc">Maximum staying power</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 7: Notes -->
+        <div class="quiz-step" id="step7">
+            <h2 class="step-question">Which notes captivate your senses?</h2>
+            <p class="step-description">Select up to three fragrance notes that you're naturally drawn to.</p>
+            
+            <div class="options-grid">
+                <div class="quiz-option" data-value="rose">
+                    <div class="option-icon">
+                        <i class="fas fa-rose"></i>
+                    </div>
+                    <div class="option-text">Rose</div>
+                    <div class="option-desc">Romantic, classic, elegant</div>
+                </div>
+                
+                <div class="quiz-option" data-value="vanilla">
+                    <div class="option-icon">
+                        <i class="fas fa-cookie"></i>
+                    </div>
+                    <div class="option-text">Vanilla</div>
+                    <div class="option-desc">Sweet, warm, comforting</div>
+                </div>
+                
+                <div class="quiz-option" data-value="citrus">
+                    <div class="option-icon">
+                        <i class="fas fa-lemon"></i>
+                    </div>
+                    <div class="option-text">Citrus</div>
+                    <div class="option-desc">Fresh, zesty, energizing</div>
+                </div>
+                
+                <div class="quiz-option" data-value="sandalwood">
+                    <div class="option-icon">
+                        <i class="fas fa-mountain"></i>
+                    </div>
+                    <div class="option-text">Sandalwood</div>
+                    <div class="option-desc">Creamy, woody, luxurious</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Step 8: Experience -->
+        <div class="quiz-step" id="step8">
+            <h2 class="step-question">What's your fragrance journey?</h2>
+            <p class="step-description">Tell us about your experience to receive perfectly tailored recommendations.</p>
+            
+            <div class="options-grid">
+                <div class="quiz-option" data-value="beginner">
+                    <div class="option-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div class="option-text">Beginner</div>
+                    <div class="option-desc">New to fragrances, exploring</div>
+                </div>
+                
+                <div class="quiz-option" data-value="intermediate">
+                    <div class="option-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="option-text">Intermediate</div>
+                    <div class="option-desc">Know my preferences, discovering</div>
+                </div>
+                
+                <div class="quiz-option" data-value="expert">
+                    <div class="option-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <div class="option-text">Expert</div>
+                    <div class="option-desc">Knowledgeable, seeking depth</div>
+                </div>
+                
+                <div class="quiz-option" data-value="collector">
+                    <div class="option-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <div class="option-text">Collector</div>
+                    <div class="option-desc">Seasoned, pursuing rare finds</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navigation Buttons -->
+        <div class="quiz-navigation">
+            <button type="button" class="quiz-btn btn-prev btn-hidden" id="prevBtn">Previous</button>
+            <button type="button" class="quiz-btn btn-next" id="nextBtn">Next Question</button>
+            <button type="submit" class="quiz-btn btn-submit" id="submitBtn" style="display: none;">Get My Results</button>
+        </div>
+    </form>
+    
+    <!-- Skip Section -->
+    <div class="skip-section">
+        <p class="skip-text">Looking for something specific? Browse our complete collection instead</p>
+        <a href="catalog.html" class="skip-btn">BROWSE ALL FRAGRANCES</a>
+    </div>
+    
+    <!-- Results Section (Initially Hidden) -->
+    <div id="resultsSection" style="display: none;">
+        <div class="results-header">
+            <div class="results-icon">
+                <i class="fas fa-award"></i>
+            </div>
+            
+            <h2 class="results-title">YOUR SCENT PROFILE IS READY</h2>
+            <p class="results-subtitle">Based on your unique preferences, we've curated a personalized selection of fragrances that match your personality and style.</p>
+        </div>
+        
+        <!-- Profile Summary -->
+        <div class="results-profile">
+            <h3 class="profile-title">YOUR PERSONALIZED SCENT PROFILE</h3>
+            <div class="profile-grid">
+                <div class="profile-item">
+                    <div class="profile-label">Scent Family</div>
+                    <div class="profile-value" id="profileScent">Floral & Fresh</div>
+                </div>
+                
+                <div class="profile-item">
+                    <div class="profile-label">Desired Mood</div>
+                    <div class="profile-value" id="profileMood">Confident & Romantic</div>
+                </div>
+                
+                <div class="profile-item">
+                    <div class="profile-label">Perfect For</div>
+                    <div class="profile-value" id="profileOccasion">Evening & Special Events</div>
+                </div>
+                
+                <div class="profile-item">
+                    <div class="profile-label">Longevity</div>
+                    <div class="profile-value" id="profileLongevity">6-8 hours</div>
+                </div>
+                
+                <div class="profile-item">
+                    <div class="profile-label">Ideal Season</div>
+                    <div class="profile-value" id="profileSeason">All Year</div>
+                </div>
+                
+                <div class="profile-item">
+                    <div class="profile-label">Experience Level</div>
+                    <div class="profile-value" id="profileExperience">Intermediate Explorer</div>
+                </div>
+            </div>
+            
+            <div class="profile-item">
+                <div class="profile-label">Favorite Notes</div>
+                <div class="profile-tags" id="profileNotes">
+                    <span class="profile-tag">Rose</span>
+                    <span class="profile-tag">Jasmine</span>
+                    <span class="profile-tag">Bergamot</span>
+                    <span class="profile-tag">Sandalwood</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Advertisement Banner 3 -->
+        <div class="quiz-ad-banner" style="background: linear-gradient(135deg, var(--memoire-lavender) 0%, #c4b3f7 100%); margin: 60px auto; max-width: 900px;">
+            <div class="ad-content">
+                <h3 class="ad-title">MEMOIRE SCENT CLUB: CURATED MONTHLY DISCOVERY</h3>
+                <p class="ad-text">Join our exclusive subscription and receive a new luxury fragrance every month. Cancel anytime, free shipping, and member-only discounts.</p>
+                <a href="#" class="ad-cta">JOIN NOW</a>
+            </div>
+            <div class="ad-image" style="background: linear-gradient(135deg, #fff 0%, #f0ecff 100%);">
+                <i class="fas fa-box-open"></i>
+            </div>
+        </div>
+        
+        <!-- Recommendations -->
+        <div class="recommendations">
+            <div class="recommendations-header">
+                <h3 class="recommendations-title">YOUR PERFECT MATCHES</h3>
+                <p class="recommendations-subtitle">Based on your scent profile, these fragrances are tailored to your unique preferences and personality.</p>
+            </div>
+            
+            <div class="recommendation-cards">
+                <!-- Recommendation 1 -->
+                <div class="recommendation-card">
+                    <div class="rec-badge">BEST MATCH</div>
+                    <div class="rec-image">
+                        <i class="fas fa-wine-bottle"></i>
+                    </div>
+                    <div class="rec-info">
+                        <h4 class="rec-name">Miss Dior Eau de Parfum</h4>
+                        <div class="rec-brand">DIOR</div>
+                        <p class="rec-desc">A timeless floral fragrance capturing romance with bergamot, Grasse rose, and patchouli. Elegant and unforgettable.</p>
+                        
+                        <div class="rec-match">
+                            <span class="match-text">Your Match:</span>
+                            <div class="match-bar">
+                                <div class="match-fill" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="rec-actions">
+                            <div class="rec-price">$128</div>
+                            <button class="rec-btn">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recommendation 2 -->
+                <div class="recommendation-card">
+                    <div class="rec-badge">POPULAR CHOICE</div>
+                    <div class="rec-image">
+                        <i class="fas fa-wine-bottle"></i>
+                    </div>
+                    <div class="rec-info">
+                        <h4 class="rec-name">Chanel Gabrielle Essence</h4>
+                        <div class="rec-brand">CHANEL</div>
+                        <p class="rec-desc">Luminous floral scent radiating confidence with jasmine, orange blossom, and tuberose. Sophisticated luxury.</p>
+                        
+                        <div class="rec-match">
+                            <span class="match-text">Your Match:</span>
+                            <div class="match-bar">
+                                <div class="match-fill" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="rec-actions">
+                            <div class="rec-price">$165</div>
+                            <button class="rec-btn">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recommendation 3 -->
+                <div class="recommendation-card">
+                    <div class="rec-badge">EDITOR'S PICK</div>
+                    <div class="rec-image">
+                        <i class="fas fa-wine-bottle"></i>
+                    </div>
+                    <div class="rec-info">
+                        <h4 class="rec-name">Byredo Gypsy Water</h4>
+                        <div class="rec-brand">BYREDO</div>
+                        <p class="rec-desc">Woody aromatic freedom with bergamot, juniper, sandalwood, and amber. Free-spirited sophistication.</p>
+                        
+                        <div class="rec-match">
+                            <span class="match-text">Your Match:</span>
+                            <div class="match-bar">
+                                <div class="match-fill" style="width: 82%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="rec-actions">
+                            <div class="rec-price">$250</div>
+                            <button class="rec-btn">ADD TO CART</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-actions">
+                <button class="action-retake" id="retakeBtn">RETAKE QUIZ</button>
+                <a href="catalog.html" class="action-browse">BROWSE ALL SCENTS</a>
+            </div>
+        </div>
+        
+        <!-- Featured Collections -->
+        <div class="featured-collections">
+            <h3 class="collections-title">CONTINUE YOUR SCENT JOURNEY</h3>
+            <p class="collections-subtitle">Explore these curated collections based on your profile to discover more fragrances you'll love.</p>
+            
+            <div class="collections-grid">
+                <div class="collection-card">
+                    <div class="collection-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h4 class="collection-name">Evening Elegance</h4>
+                    <p class="collection-desc">Sophisticated scents perfect for night outs and special occasions.</p>
+                </div>
+                
+                <div class="collection-card">
+                    <div class="collection-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4 class="collection-name">Romantic Florals</h4>
+                    <p class="collection-desc">Delicate floral bouquets for intimate moments and connection.</p>
+                </div>
+                
+                <div class="collection-card">
+                    <div class="collection-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="collection-name">Luxury Collection</h4>
+                    <p class="collection-desc">Premium fragrances for those who appreciate the finest scents.</p>
+                </div>
+            </div>
+            
+            <a href="collection.html" class="collections-cta">EXPLORE MORE COLLECTIONS</a>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+<script>
+    // Quiz Logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const quizSteps = document.querySelectorAll('.quiz-step');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const submitBtn = document.getElementById('submitBtn');
+        const progressBar = document.getElementById('progressBar');
+        const currentStepEl = document.getElementById('currentStep');
+        const progressText = document.getElementById('progressText');
+        const quizOptions = document.querySelectorAll('.quiz-option');
+        const retakeBtn = document.getElementById('retakeBtn');
+        
+        let currentStep = 0;
+        const totalSteps = quizSteps.length;
+        const userSelections = {};
+        
+        // Initialize progress
+        updateProgress();
+        
+        // Option selection
+        quizOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                const stepId = this.closest('.quiz-step').id;
+                const value = this.getAttribute('data-value');
+                
+                // Remove selection from other options in same step
+                const siblingOptions = this.closest('.quiz-step').querySelectorAll('.quiz-option');
+                siblingOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // Select current option
+                this.classList.add('selected');
+                
+                // Store selection
+                userSelections[stepId] = value;
+                
+                // For step 7 (notes), allow multiple selections
+                if (stepId === 'step7') {
+                    if (!userSelections.notes) userSelections.notes = [];
+                    if (userSelections.notes.includes(value)) {
+                        // Deselect if already selected
+                        userSelections.notes = userSelections.notes.filter(note => note !== value);
+                        this.classList.remove('selected');
+                    } else {
+                        // Select if not already selected (max 3)
+                        if (userSelections.notes.length < 3) {
+                            userSelections.notes.push(value);
+                        } else {
+                            // If already 3 selected, remove the first and add new
+                            userSelections.notes.shift();
+                            userSelections.notes.push(value);
+                            
+                            // Update UI to reflect only 3 selected
+                            const selectedNotes = this.closest('.quiz-step').querySelectorAll('.quiz-option.selected');
+                            if (selectedNotes.length > 3) {
+                                selectedNotes[0].classList.remove('selected');
+                            }
+                        }
+                    }
+                }
+                
+                // Enable next button
+                nextBtn.disabled = false;
+            });
+        });
+        
+        // Next button
+        nextBtn.addEventListener('click', function() {
+            if (currentStep < totalSteps - 1) {
+                // Move to next step
+                quizSteps[currentStep].classList.remove('active');
+                currentStep++;
+                quizSteps[currentStep].classList.add('active');
+                
+                // Update buttons
+                updateButtons();
+                updateProgress();
+                
+                // Scroll to top of step
+                quizSteps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else if (currentStep === totalSteps - 1) {
+                // Show submit button on last step
+                nextBtn.style.display = 'none';
+                submitBtn.style.display = 'inline-block';
+            }
+        });
+        
+        // Previous button
+        prevBtn.addEventListener('click', function() {
+            if (currentStep > 0) {
+                // Move to previous step
+                quizSteps[currentStep].classList.remove('active');
+                currentStep--;
+                quizSteps[currentStep].classList.add('active');
+                
+                // Update buttons
+                updateButtons();
+                updateProgress();
+                
+                // Scroll to top of step
+                quizSteps[currentStep].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+        
+        // Submit button
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Hide quiz, show results
+            document.getElementById('scentQuiz').style.display = 'none';
+            document.querySelector('.skip-section').style.display = 'none';
+            document.getElementById('resultsSection').style.display = 'block';
+            
+            // Generate profile based on selections
+            generateProfile();
+            
+            // Scroll to results
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+        
+        // Retake quiz button
+        retakeBtn.addEventListener('click', function() {
+            // Reset everything
+            currentStep = 0;
+            
+            // Hide results, show quiz
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('scentQuiz').style.display = 'block';
+            document.querySelector('.skip-section').style.display = 'block';
+            
+            // Reset steps
+            quizSteps.forEach((step, index) => {
+                step.classList.remove('active');
+                if (index === 0) step.classList.add('active');
+                
+                // Clear selections in UI
+                const options = step.querySelectorAll('.quiz-option');
+                options.forEach(option => option.classList.remove('selected'));
+            });
+            
+            // Reset buttons
+            nextBtn.style.display = 'inline-block';
+            submitBtn.style.display = 'none';
+            prevBtn.classList.add('btn-hidden');
+            nextBtn.disabled = true;
+            
+            // Clear selections
+            for (let key in userSelections) {
+                delete userSelections[key];
+            }
+            
+            // Reset progress
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Helper functions
+        function updateButtons() {
+            // Show/hide previous button
+            if (currentStep > 0) {
+                prevBtn.classList.remove('btn-hidden');
+            } else {
+                prevBtn.classList.add('btn-hidden');
+            }
+            
+            // Update next button text on last step
+            if (currentStep === totalSteps - 1) {
+                nextBtn.textContent = 'View My Results';
+            } else {
+                nextBtn.textContent = 'Next Question';
+            }
+            
+            // Enable/disable next based on selection
+            const currentStepEl = quizSteps[currentStep];
+            const hasSelection = currentStepEl.querySelector('.quiz-option.selected');
+            nextBtn.disabled = !hasSelection;
+        }
+        
+        function updateProgress() {
+            const progress = ((currentStep + 1) / totalSteps) * 100;
+            progressBar.style.width = `${progress}%`;
+            currentStepEl.textContent = currentStep + 1;
+            progressText.textContent = `QUESTION ${currentStep + 1} OF ${totalSteps}`;
+        }
+        
+        function generateProfile() {
+            // Map selections to profile (simplified for demo)
+            // In a real app, this would involve more complex logic and backend processing
+            
+            // Scent Family
+            if (userSelections.step2) {
+                const scentMap = {
+                    'floral': 'Floral & Romantic',
+                    'woody': 'Woody & Earthy',
+                    'fresh': 'Fresh & Vibrant',
+                    'oriental': 'Oriental & Spicy'
+                };
+                document.getElementById('profileScent').textContent = scentMap[userSelections.step2] || 'Floral & Fresh';
+            }
+            
+            // Mood
+            if (userSelections.step3) {
+                const moodMap = {
+                    'romantic': 'Romantic & Alluring',
+                    'confident': 'Confident & Powerful',
+                    'energetic': 'Energetic & Uplifting',
+                    'relaxed': 'Relaxed & Soothing'
+                };
+                document.getElementById('profileMood').textContent = moodMap[userSelections.step3] || 'Confident & Romantic';
+            }
+            
+            // Occasion
+            if (userSelections.step5) {
+                const occasionMap = {
+                    'daily': 'Daily Wear & Office',
+                    'evening': 'Evening & Date Nights',
+                    'special': 'Special Occasions',
+                    'casual': 'Casual & Weekend'
+                };
+                document.getElementById('profileOccasion').textContent = occasionMap[userSelections.step5] || 'Evening & Special Events';
+            }
+            
+            // Longevity
+            if (userSelections.step6) {
+                const longevityMap = {
+                    'short': '4-6 hours (Light)',
+                    'moderate': '6-8 hours (Balanced)',
+                    'long': '8+ hours (Long-lasting)',
+                    'allDay': 'All Day & Night'
+                };
+                document.getElementById('profileLongevity').textContent = longevityMap[userSelections.step6] || '6-8 hours';
+            }
+            
+            // Season
+            if (userSelections.step4) {
+                const seasonMap = {
+                    'spring': 'Spring',
+                    'summer': 'Summer',
+                    'autumn': 'Autumn',
+                    'winter': 'Winter'
+                };
+                document.getElementById('profileSeason').textContent = seasonMap[userSelections.step4] || 'All Year';
+            }
+            
+            // Experience
+            if (userSelections.step8) {
+                const experienceMap = {
+                    'beginner': 'Beginner Explorer',
+                    'intermediate': 'Intermediate Connoisseur',
+                    'expert': 'Expert Enthusiast',
+                    'collector': 'Seasoned Collector'
+                };
+                document.getElementById('profileExperience').textContent = experienceMap[userSelections.step8] || 'Intermediate Explorer';
+            }
+            
+            // Notes
+            if (userSelections.notes && userSelections.notes.length > 0) {
+                const notesContainer = document.getElementById('profileNotes');
+                notesContainer.innerHTML = '';
+                
+                const noteLabels = {
+                    'rose': 'Rose',
+                    'vanilla': 'Vanilla',
+                    'citrus': 'Citrus',
+                    'sandalwood': 'Sandalwood',
+                    'jasmine': 'Jasmine',
+                    'bergamot': 'Bergamot'
+                };
+                
+                userSelections.notes.forEach(note => {
+                    const tag = document.createElement('span');
+                    tag.className = 'profile-tag';
+                    tag.textContent = noteLabels[note] || note;
+                    notesContainer.appendChild(tag);
+                });
+            }
+        }
+        
+        // Initialize next button as disabled
+        nextBtn.disabled = true;
+    });
+</script>
+
+<!-- Main Website Footer -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <!-- Newsletter Signup Section -->
+        <div class="footer-section newsletter-section">
+            <h4 class="footer-heading">JOURNEY WITH MEMOIRE</h4>
+            <p>Sign up for exclusive access to new arrivals, personalized recommendations, and members-only offers.</p>
+            <form class="footer-newsletter">
+                <input type="email" placeholder="Enter your email" aria-label="Email address for newsletter" required>
+                <button type="submit" class="footer-submit-btn">SUBSCRIBE</button>
+            </form>
+            <p class="footer-note">By subscribing, you agree to our Privacy Policy and consent to receive updates.</p>
+        </div>
+
+        <!-- Quick Links Section -->
+        <div class="footer-links-container">
+            <div class="footer-section">
+                <h4 class="footer-heading">DISCOVER</h4>
+                <ul class="footer-list">
+                    <li><a href="catalog.html?tab=perfume">Perfumes</a></li>
+                    <li><a href="catalog.html?tab=cologne">Colognes</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Gift Sets</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">SUPPORT</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Size Guide</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4 class="footer-heading">COMPANY</h4>
+                <ul class="footer-list">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Scent Journal</a></li>
+                    <li><a href="#">Store Locator</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+        <div class="footer-bottom-content">
+            <span class="footer-logo">MEMOIRE</span>
+            <span class="footer-copyright">© 2025 MEMOIRE. All scents preserved.</span>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
