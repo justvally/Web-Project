@@ -34,94 +34,201 @@
         }
         
         /* Hero Section - Black with Gold Radial Blur */
-        .quiz-hero {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            position: relative;
-            padding: 60px 20px;
-            margin-bottom: 40px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .quiz-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(216, 185, 109, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(216, 185, 109, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(216, 185, 109, 0.08) 0%, transparent 60%),
-                radial-gradient(circle at 90% 10%, rgba(216, 185, 109, 0.12) 0%, transparent 35%);
-            filter: blur(40px);
-            z-index: 1;
-        }
-        
-        .quiz-hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .hero-title {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--primary-gold), var(--light-gold), var(--primary-gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-family: "Josefin Sans", sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(216, 185, 109, 0.2);
-        }
-        
-        .hero-subtitle {
-            font-size: 20px;
-            color: var(--light-gold);
-            max-width: 800px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
-            font-family: "Josefin Sans", sans-serif;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-        
-        .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-            margin-top: 50px;
-        }
-        
-        .stat-item {
-            text-align: center;
-        }
-        
-        .stat-number {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--primary-gold);
-            font-family: "Josefin Sans", sans-serif;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .stat-label {
-            font-size: 14px;
-            color: var(--light-gold);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.8;
-            font-family: "Josefin Sans", sans-serif;
-        }
+        /* ============ DISCOVER HERO SECTION ============ */
+
+.discover-hero {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+/* Background Image Container */
+.discover-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.discover-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Dark Overlay for Text Readability */
+.discover-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
+    z-index: 2;
+}
+
+/* Hero Content with original text styling */
+.discover-hero-content {
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    color: #ffffff;
+    z-index: 3;
+}
+
+.discover-hero-content h1 {
+    font-size: 60px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-family: "Josefin Sans", sans-serif;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.discover-hero-content h2 {
+    font-size: 15px;
+    margin-top: 0;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: none;
+    font-family: "Josefin Sans", sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero Text - Same as original index.html */
+.discover-hero-content .hero-text {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-transform: uppercase;
+    max-width: 300px;
+    color: white;
+    font-family: "Josefin Sans", sans-serif;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Explore button matching original */
+.discover-hero-content .explore-btn {
+    display: inline-block;
+    padding: 15px 25px;
+    background: #0a0a0a;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Josefin Sans", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 20px;
+}
+
+.discover-hero-content .explore-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+/* ============ RESPONSIVE STYLES FOR DISCOVER HERO ============ */
+
+@media (max-width: 992px) {
+    .discover-hero {
+        height: 450px;
+    }
+    
+    .discover-hero-content {
+        left: 10%;
+        top: 30%;
+    }
+    
+    .discover-hero-content h1 {
+        font-size: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .discover-hero {
+        height: 400px;
+    }
+    
+    .discover-hero-content {
+        left: 8%;
+        right: 8%;
+        top: 25%;
+    }
+    
+    .discover-hero-content h1 {
+        font-size: 42px;
+    }
+    
+    .discover-hero-content h2 {
+        font-size: 14px;
+    }
+    
+    .discover-hero-content .hero-text {
+        font-size: 18px;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .discover-hero {
+        height: 350px;
+    }
+    
+    .discover-hero-content {
+        left: 5%;
+        right: 5%;
+        top: 20%;
+        text-align: center;
+    }
+    
+    .discover-hero-content h1 {
+        font-size: 36px;
+    }
+    
+    .discover-hero-content h2 {
+        font-size: 13px;
+    }
+    
+    .discover-hero-content .hero-text {
+        font-size: 16px;
+        line-height: 1.4;
+        margin: 15px auto;
+    }
+    
+    .discover-hero-content .explore-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 375px) {
+    .discover-hero {
+        height: 300px;
+    }
+    
+    .discover-hero-content h1 {
+        font-size: 28px;
+    }
+    
+    .discover-hero-content h2 {
+        font-size: 12px;
+    }
+    
+    .discover-hero-content .hero-text {
+        font-size: 14px;
+    }
+}
         
         @media (max-width: 768px) {
             .quiz-hero {
@@ -176,7 +283,7 @@
             max-width: 1200px;
             margin: 0 auto;
             background: var(--cream);
-            border-radius: 20px;
+
             box-shadow: 0 10px 30px var(--shadow);
             position: relative;
             overflow: hidden;
@@ -208,8 +315,8 @@
             text-align: center;
             margin-bottom: 40px;
             padding: 30px;
-            background: var(--pale-gold);
-            border-radius: 15px;
+            background: #161616;
+         
             border: 1px solid var(--light-gold);
             box-shadow: 0 5px 15px var(--shadow-gold);
             position: relative;
@@ -231,10 +338,11 @@
             font-weight: 700;
             margin-bottom: 15px;
             letter-spacing: 1px;
-            color: var(--rich-brown);
+            color: #fcfcfc;
             font-family: "Josefin Sans", sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
+            
         }
         
         @media (min-width: 768px) {
@@ -251,7 +359,7 @@
         
         .quiz-subtitle {
             font-size: 16px;
-            color: var(--medium-text);
+            color: white;
             max-width: 700px;
             margin: 0 auto 30px;
             line-height: 1.6;
@@ -1128,29 +1236,26 @@
 </div>
 
 <!-- Hero Section -->
-<div class="quiz-hero">
-    <div class="quiz-hero-content">
-        <h1 class="hero-title">DISCOVER YOUR SIGNATURE SCENT</h1>
-        <p class="hero-subtitle">Take our personalized quiz to find fragrances that match your unique style, mood, and personality. Your scent journey begins here.</p>
+<div class="discover-hero">
+    <!-- Background Image -->
+    <div class="discover-hero-image">
+        <img src="images/discovery-hero.jpg" alt="Discover Your Scent">
+    </div>
+    
+    <!-- Overlay for better text readability -->
+    <div class="discover-hero-overlay"></div>
+    
+    <!-- Hero Content -->
+    <div class="discover-hero-content">
+        <h1>DISCOVER YOUR SCENT</h1>
+        <h2>Find the fragrance that speaks to your soul</h2>
         
-        <div class="hero-stats">
-            <div class="stat-item">
-                <div class="stat-number">8</div>
-                <div class="stat-label">Quick Questions</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">95%</div>
-                <div class="stat-label">Match Accuracy</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">3</div>
-                <div class="stat-label">Personalized Picks</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">2min</div>
-                <div class="stat-label">Average Time</div>
-            </div>
+        <div class="hero-text">
+            TAKE OUR PERSONALIZED QUIZ.<br>
+            FIND YOUR PERFECT MATCH.
         </div>
+        
+        <a href="#quiz" class="explore-btn">START QUIZ</a>
     </div>
 </div>
 
@@ -1170,7 +1275,7 @@
     <form id="scentQuiz">
         <!-- Step 1: Gender -->
         <div class="quiz-step active" id="step1">
-            <h2 class="step-question">How do you identify?</h2>
+            <h2 class="step-question">HOW DO YOU IDENTIFY?</h2>
             <p class="step-description">This helps us tailor fragrance recommendations to your preferences.</p>
             
             <div class="options-grid">
@@ -1685,6 +1790,39 @@
             </div>
         </div>
     </div>
+
+    <!-- Cart Overlay -->
+<div id="cartOverlay" class="cart-overlay"></div>
+
+<!-- Cart Modal -->
+<div id="cartModal" class="cart-modal">
+    <div class="cart-header">
+        <h2>YOUR CART</h2>
+        <span id="closeCart">&times;</span>
+    </div>
+
+    <div class="cart-items" id="cartItems">
+        <!-- Cart items will be loaded here -->
+        <div class="empty-cart">
+            <i class="fas fa-shopping-bag"></i>
+            <p>Your cart is empty</p>
+        </div>
+    </div>
+
+    <div class="cart-footer">
+        <div class="cart-summary">
+            <p>SUBTOTAL: <span id="totalPrice">$0.00</span></p>
+            <p>ITEMS: <span id="itemCount">0</span></p>
+        </div>
+        <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+        <button class="continue-shopping">CONTINUE SHOPPING</button>
+    </div>
+</div>
+
+<!-- Cart Toast -->
+<div id="cartToast" class="cart-toast">
+    <span id="toastText">✓ ADDED TO CART</span>
+</div>
 </div>
 
 <script src="script.js"></script>

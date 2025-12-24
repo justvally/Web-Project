@@ -1962,3 +1962,843 @@ body {
         gap: 10px;
     }
 }
+
+/* ============ RESPONSIVE STYLES (NO COLOR CHANGES) ============ */
+
+/* Large screens (1200px and above) - already optimized */
+@media (max-width: 1200px) {
+    .featured-track {
+        width: 900px;
+        gap: 30px;
+    }
+    
+    .card {
+        flex: 0 0 28%;
+    }
+    
+    .footer-container {
+        padding: 50px 30px;
+    }
+}
+
+/* Medium screens (992px to 1199px) */
+@media (max-width: 992px) {
+    /* NAVBAR */
+    .navbar {
+        padding: 25px 20px;
+        flex-wrap: wrap;
+    }
+    
+    .navbar .logo {
+        font-size: 20px;
+    }
+    
+    .navbar .menu {
+        order: 3;
+        width: 100%;
+        margin-top: 20px;
+        justify-content: center;
+        display: flex;
+    }
+    
+    .navbar .menu a {
+        margin: 0 8px;
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+    
+    .navbar .nav-icons {
+        position: absolute;
+        right: 20px;
+        top: 25px;
+    }
+    
+    /* HERO BANNER */
+    .hero-content {
+        left: 10%;
+        top: 30%;
+    }
+    
+    .hero-content h1 {
+        font-size: 45px;
+    }
+    
+    .hero-text {
+        font-size: 18px;
+        max-width: 250px;
+    }
+    
+    .explore-btn {
+        padding: 18px 22px;
+        font-size: 18px;
+    }
+    
+    /* FEATURED SECTIONS */
+    .featured-track {
+        width: 700px;
+        gap: 25px;
+    }
+    
+    .card {
+        flex: 0 0 40%;
+    }
+    
+    .featured-title,
+    .quiz-title,
+    .section-title {
+        font-size: 28px;
+    }
+    
+    .featured-sub,
+    .quiz-sub,
+    .section-sub {
+        font-size: 14px;
+    }
+    
+    /* QUIZ TAB */
+    .quiz-tab {
+        margin: 30px 5%;
+    }
+    
+    .quiz-text {
+        font-size: 24px;
+        max-width: 200px;
+        right: 10%;
+    }
+    
+    /* CATALOG */
+    .catalog-header {
+        padding: 40px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 25px;
+    }
+    
+    .catalog-actions {
+        align-self: flex-start;
+    }
+    
+    .catalog-products {
+        padding: 0 30px 30px;
+    }
+    
+    .product-row {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .card {
+        width: 45%;
+        margin-bottom: 30px;
+    }
+    
+    /* FOOTER */
+    .footer-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    .footer-links-container {
+        width: 100%;
+    }
+    
+    /* AD PANEL */
+    .ad-slide {
+        height: 80vh;
+    }
+}
+
+/* Small screens (768px to 991px) */
+@media (max-width: 768px) {
+    /* GENERAL */
+    .section-title {
+        font-size: 26px;
+        margin: 40px 0 8px;
+    }
+    
+    .section-sub {
+        font-size: 13px;
+        margin-bottom: 40px;
+    }
+    
+    /* NAVBAR */
+    .navbar {
+        padding: 20px 15px;
+    }
+    
+    .navbar .menu {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .navbar .menu a {
+        font-size: 14px;
+        padding: 6px 12px;
+        margin: 0 5px;
+    }
+    
+    .navbar .nav-icons i {
+        font-size: 18px;
+        margin-left: 15px;
+    }
+    
+    /* HERO BANNER */
+    .hero-content {
+        left: 8%;
+        top: 28%;
+    }
+    
+    .hero-content h1 {
+        font-size: 36px;
+    }
+    
+    .hero-content h2 {
+        font-size: 13px;
+    }
+    
+    .hero-text {
+        font-size: 16px;
+        line-height: 1.4;
+        max-width: 200px;
+    }
+    
+    .explore-btn {
+        padding: 15px 18px;
+        font-size: 16px;
+    }
+    
+    /* FEATURED SECTIONS */
+    .featured-track {
+        width: 90vw;
+        gap: 20px;
+        margin-top: 30px;
+    }
+    
+    .featured-title,
+    .quiz-title {
+        font-size: 24px;
+        margin-right: 5%;
+        margin-left: 5%;
+    }
+    
+    .featured-sub,
+    .quiz-sub {
+        font-size: 13px;
+        margin-right: 5%;
+        margin-left: 5%;
+        max-width: 90%;
+    }
+    
+    .featured-tab {
+        align-items: center;
+    }
+    
+    /* QUIZ TAB */
+    .quiz-tab {
+        flex-direction: column;
+        margin: 20px 5%;
+    }
+    
+    .quiz-tab img {
+        width: 100%;
+        height: 200px;
+    }
+    
+    .quiz-text {
+        position: relative;
+        top: auto;
+        right: auto;
+        max-width: 100%;
+        text-align: center;
+        padding: 20px;
+        margin: 0;
+        font-size: 20px;
+    }
+    
+    .find-btn {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin: 20px auto;
+        display: block;
+        width: 200px;
+    }
+    
+    /* CATALOG */
+    .catalog-hero {
+        height: 250px;
+    }
+    
+    .catalog-hero h1 {
+        font-size: 32px;
+    }
+    
+    .catalog-hero p {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+    
+    .catalog-header {
+        padding: 30px 20px 10px;
+    }
+    
+    .catalog-title {
+        font-size: 36px;
+    }
+    
+    .catalog-tabs {
+        gap: 15px;
+    }
+    
+    .tab {
+        font-size: 16px;
+    }
+    
+    .catalog-actions {
+        gap: 15px;
+    }
+    
+    .action-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .catalog-products {
+        padding: 0 20px 30px;
+    }
+    
+    .product-row {
+        gap: 20px;
+    }
+    
+    .card {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .active-filters {
+        padding: 15px 20px;
+    }
+    
+    /* MODALS */
+    .modal-content,
+    .filter-modal-content,
+    .personalize-modal-content {
+        width: 90vw;
+        padding: 30px;
+    }
+    
+    .product-modal-content {
+        padding: 30px;
+    }
+    
+    .product-detail {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .product-detail-image {
+        max-width: 100%;
+    }
+    
+    /* CART */
+    #cartModal {
+        width: 100%;
+        max-width: 350px;
+    }
+    
+    /* AD PANEL */
+    .ad-panel {
+        height: 60vh;
+    }
+    
+    .ad-slide {
+        height: 60vh;
+    }
+    
+    /* FOOTER POSTER */
+    .view-btn {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 20%;
+        padding: 15px 60px;
+        font-size: 18px;
+    }
+    
+    .footer-poster img {
+        height: 300px;
+        object-fit: cover;
+    }
+}
+
+/* Extra small screens (576px to 767px) */
+@media (max-width: 576px) {
+    /* NAVBAR */
+    .navbar {
+        padding: 15px 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .navbar .menu {
+        order: 2;
+        width: 100%;
+        margin: 15px 0;
+        justify-content: space-between;
+    }
+    
+    .navbar .menu a {
+        margin: 0;
+        font-size: 13px;
+        padding: 5px 10px;
+        flex: 1;
+        text-align: center;
+    }
+    
+    .navbar .nav-icons {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+    }
+    
+    /* HERO BANNER */
+    .hero-content {
+        position: relative;
+        top: auto;
+        left: auto;
+        padding: 30px 20px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .hero-content h1 {
+        font-size: 32px;
+    }
+    
+    .hero-text {
+        font-size: 14px;
+        max-width: 100%;
+        margin: 15px auto;
+    }
+    
+    .explore-btn {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    /* FEATURED SECTIONS */
+    .featured-track {
+        width: 95vw;
+        gap: 15px;
+        padding: 0 10px;
+    }
+    
+    .card {
+        flex: 0 0 80%;
+    }
+    
+    .featured-title,
+    .quiz-title,
+    .section-title {
+        font-size: 20px;
+        text-align: center;
+        margin: 30px 0 5px;
+    }
+    
+    .featured-sub,
+    .quiz-sub,
+    .section-sub {
+        font-size: 12px;
+        text-align: center;
+        margin: 0 5% 20px;
+    }
+    
+    /* QUIZ TAB */
+    .quiz-text {
+        font-size: 18px;
+        padding: 15px;
+    }
+    
+    .find-btn {
+        padding: 15px 20px;
+        font-size: 16px;
+        width: 180px;
+    }
+    
+    /* CATALOG */
+    .catalog-hero {
+        height: 200px;
+    }
+    
+    .catalog-hero h1 {
+        font-size: 28px;
+        padding: 0 20px;
+    }
+    
+    .catalog-hero p {
+        font-size: 14px;
+    }
+    
+    .catalog-title {
+        font-size: 28px;
+    }
+    
+    .catalog-tabs {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .catalog-actions {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+    
+    .action-btn {
+        width: 100%;
+        text-align: center;
+    }
+    
+    /* PRICE TAGS */
+    .price-tag {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    /* ADD TO CART BUTTONS */
+    .add-to-cart {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+    
+    /* FOOTER */
+    .footer-container {
+        padding: 30px 15px;
+    }
+    
+    .footer-section {
+        min-width: 100%;
+    }
+    
+    .footer-heading {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-list a {
+        font-size: 13px;
+    }
+    
+    .footer-newsletter input {
+        padding: 14px;
+        font-size: 14px;
+    }
+    
+    .footer-submit-btn {
+        padding: 14px 20px;
+        font-size: 13px;
+    }
+    
+    .footer-bottom {
+        padding: 20px 15px;
+    }
+    
+    .footer-bottom-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    /* AD PANEL */
+    .ad-panel {
+        height: 50vh;
+    }
+    
+    .ad-slide {
+        height: 50vh;
+    }
+    
+    .ad-slide img {
+        width: 95%;
+    }
+    
+    /* BRAND PANEL */
+    .brand-panel img {
+        width: 95%;
+    }
+}
+
+/* Mobile screens (up to 575px) */
+@media (max-width: 480px) {
+    /* NAVBAR */
+    .navbar .menu a {
+        font-size: 11px;
+        padding: 4px 8px;
+        letter-spacing: 0.5px;
+    }
+    
+    .navbar .nav-icons i {
+        font-size: 16px;
+        margin-left: 10px;
+    }
+    
+    /* HERO BANNER */
+    .hero-content h1 {
+        font-size: 28px;
+    }
+    
+    .hero-text {
+        font-size: 13px;
+        line-height: 1.3;
+    }
+    
+    /* FEATURED SECTIONS */
+    .featured-track {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card {
+        flex: 0 0 100%;
+        max-width: 280px;
+    }
+    
+    /* MODALS */
+    .modal-content {
+        padding: 20px;
+    }
+    
+    .product-specs {
+        grid-template-columns: 1fr;
+    }
+    
+    /* CART TOAST */
+    .cart-toast {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    /* VIEW BUTTON */
+    .view-btn {
+        padding: 12px 40px;
+        font-size: 16px;
+        bottom: 15%;
+    }
+}
+
+/* Very small screens (up to 375px) */
+@media (max-width: 375px) {
+    /* NAVBAR */
+    .navbar .menu a {
+        font-size: 10px;
+        padding: 3px 6px;
+    }
+    
+    .navbar .logo {
+        font-size: 18px;
+    }
+    
+    /* HERO BANNER */
+    .hero-content h1 {
+        font-size: 24px;
+    }
+    
+    .hero-content h2 {
+        font-size: 11px;
+    }
+    
+    .hero-text {
+        font-size: 12px;
+    }
+    
+    .explore-btn {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+    
+    /* FEATURED TITLES */
+    .featured-title,
+    .quiz-title,
+    .section-title {
+        font-size: 18px;
+    }
+    
+    /* CART */
+    #cartModal {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .cart-header h2 {
+        font-size: 20px;
+    }
+    
+    /* PRODUCT DETAIL */
+    .product-detail-info h3 {
+        font-size: 24px;
+    }
+    
+    .product-price {
+        font-size: 22px;
+    }
+    
+    .product-actions {
+        flex-direction: column;
+    }
+    
+    .add-to-cart-detail,
+    .wishlist-btn {
+        width: 100%;
+    }
+}
+
+/* ============ TOUCH DEVICE OPTIMIZATIONS ============ */
+@media (hover: none) and (pointer: coarse) {
+    /* Make buttons easier to tap */
+    .menu a,
+    .action-btn,
+    .tab,
+    .add-to-cart,
+    .find-btn,
+    .explore-btn,
+    .view-btn {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Increase tap targets for cart buttons */
+    .quantity-btn {
+        width: 44px;
+        height: 44px;
+    }
+    
+    /* Remove hover effects for touch devices */
+    .card:hover img {
+        transform: none;
+    }
+    
+    .card:hover::after {
+        opacity: 0;
+    }
+    
+    .card:hover .add-to-cart {
+        transform: translateY(100%);
+    }
+    
+    /* Show add to cart button always on mobile */
+    .card .add-to-cart {
+        transform: translateY(0);
+        opacity: 1;
+        position: relative;
+        margin-top: -4px;
+    }
+}
+
+/* ============ LANDSCAPE ORIENTATION ============ */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hero {
+        height: 100vh;
+    }
+    
+    .hero img {
+        height: 100vh;
+        object-fit: cover;
+    }
+    
+    .hero-content {
+        top: 25%;
+    }
+    
+    .ad-slide {
+        height: 80vh;
+    }
+    
+    .catalog-hero {
+        height: 200px;
+    }
+}
+
+/* ============ PRINT STYLES ============ */
+@media print {
+    .navbar,
+    .footer,
+    .explore-btn,
+    .find-btn,
+    .view-btn,
+    .add-to-cart,
+    .nav-icons {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
+
+/* ============ FIX FOR SPECIFIC ELEMENTS ============ */
+
+/* Ensure all black/white colors stay the same */
+@media (max-width: 768px) {
+    /* Hero section maintains black background on buttons */
+    .explore-btn,
+    .find-btn,
+    .view-btn,
+    .add-to-cart {
+        background: #0a0a0a !important;
+        color: white !important;
+    }
+    
+    /* Navbar maintains gold background */
+    .navbar {
+        background-color: #D8B96D !important;
+    }
+    
+    /* Footer maintains black background */
+    .site-footer {
+        background-color: #0a0a0a !important;
+    }
+    
+    /* Modal backgrounds stay white */
+    .modal-content {
+        background: white !important;
+    }
+    
+    /* Price tags stay black */
+    .price-tag {
+        background: black !important;
+        color: white !important;
+    }
+}
+
+/* Fix for cards on mobile */
+@media (max-width: 576px) {
+    .card {
+        border-radius: 0 !important;
+    }
+    
+    .card img {
+        border-radius: 0 !important;
+    }
+}
+
+/* Ensure text colors don't change */
+@media (max-width: 768px) {
+    .hero-content h1,
+    .hero-content h2,
+    .hero-text,
+    .section-title,
+    .featured-title,
+    .quiz-title,
+    .catalog-title,
+    .footer-heading,
+    .footer-logo {
+        color: inherit !important;
+    }
+}

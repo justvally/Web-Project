@@ -30,7 +30,7 @@
         
         /* Hero Section */
         .collection-hero {
-            background: linear-gradient(135deg, rgba(216, 185, 109, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
+            background: var(--memoire-dark);
             height: 400px;
             display: flex;
             flex-direction: column;
@@ -41,17 +41,6 @@
             padding: 0 20px;
             position: relative;
             overflow: hidden;
-        }
-        
-        .collection-hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
         }
         
         .collection-hero h1 {
@@ -117,29 +106,35 @@
             clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
         }
         
-        .collection-image {
-            height: 250px;
-            background: linear-gradient(135deg, var(--memoire-cream) 0%, #f5f0e1 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 70px;
-            color: var(--memoire-gold);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .collection-image::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.1)"/></svg>');
-            background-size: cover;
-        }
-        
+        /* Update the .collection-image class to handle images */
+.collection-image {
+    height: 250px;
+    background: linear-gradient(135deg, var(--memoire-cream) 0%, #f5f0e1 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Style for the images */
+.collection-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This makes images fill the space without distortion */
+    transition: transform 0.3s ease;
+}
+
+/* Optional: Add zoom effect on hover */
+.collection-card:hover .collection-image img {
+    transform: scale(1.05);
+}
+
+/* Remove the ::before pseudo-element on the image container if you want pure images */
+.collection-image::before {
+    display: none; /* This removes the circle pattern overlay */
+}
+
         .collection-info {
             padding: 30px;
         }
@@ -260,123 +255,9 @@
             margin: 80px 0;
         }
         
-        /* Limited Edition Section */
-        .limited-edition {
-            background: linear-gradient(135deg, var(--memoire-cream) 0%, #fff5e6 100%);
-            border-radius: 0; /* Changed from 20px to 0 */
-            padding: 60px;
-            margin: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .limited-edition::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.2)"/></svg>');
-            background-size: cover;
-        }
-        
-        .limited-title {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--memoire-slate);
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .limited-description {
-            font-size: 18px;
-            color: #555;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .limited-timer {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .timer-unit {
-            text-align: center;
-        }
-        
-        .timer-value {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--memoire-gold);
-            margin-bottom: 5px;
-        }
-        
-        .timer-label {
-            font-size: 14px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        /* Featured Items */
-        .featured-items {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .featured-item {
-            background: white;
-            border-radius: 0; /* Changed from 15px to 0 */
-            padding: 25px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .featured-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--memoire-gold);
-            box-shadow: 0 15px 30px rgba(216, 185, 109, 0.1);
-        }
-        
-        .featured-icon {
-            font-size: 40px;
-            color: var(--memoire-gold);
-            margin-bottom: 20px;
-        }
-        
-        .featured-name {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--memoire-slate);
-        }
-        
-        .featured-desc {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.5;
-        }
-        
         /* Responsive */
         @media (max-width: 1200px) {
             .collections-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .featured-items {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -410,26 +291,6 @@
             .section-subtitle {
                 font-size: 18px;
             }
-            
-            .limited-edition {
-                padding: 40px 20px;
-            }
-            
-            .limited-title {
-                font-size: 28px;
-            }
-            
-            .featured-items {
-                grid-template-columns: 1fr;
-            }
-            
-            .timer-unit {
-                flex: 1;
-            }
-            
-            .timer-value {
-                font-size: 32px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -447,14 +308,6 @@
             
             .collection-btn {
                 width: 100%;
-            }
-            
-            .timer-value {
-                font-size: 24px;
-            }
-            
-            .timer-label {
-                font-size: 12px;
             }
         }
     </style>
@@ -496,7 +349,7 @@
         <div class="collection-card">
             <div class="collection-badge">BEST SELLER</div>
             <div class="collection-image">
-                <i class="fas fa-heart"></i>
+                <img src="images/romantic.jpg" >
             </div>
             <div class="collection-info">
                 <h3 class="collection-name">Romantic Evenings</h3>
@@ -522,7 +375,7 @@
         <div class="collection-card">
             <div class="collection-badge">PROFESSIONAL</div>
             <div class="collection-image">
-                <i class="fas fa-briefcase"></i>
+                <img src="images/office.jpg"> 
             </div>
             <div class="collection-info">
                 <h3 class="collection-name">Office Elegance</h3>
@@ -548,7 +401,7 @@
         <div class="collection-card">
             <div class="collection-badge">SEASONAL</div>
             <div class="collection-image">
-                <i class="fas fa-umbrella-beach"></i>
+                <img src="images/collection-set-3.jpg">
             </div>
             <div class="collection-info">
                 <h3 class="collection-name">Summer Escape</h3>
@@ -583,7 +436,7 @@
             <div class="collection-card">
                 <div class="collection-badge">LUXURY</div>
                 <div class="collection-image">
-                    <i class="fas fa-gem"></i>
+                    <img src="images/luxury.jpg">
                 </div>
                 <div class="collection-info">
                     <h3 class="collection-name">Ultimate Luxury Gift Set</h3>
@@ -609,7 +462,7 @@
             <div class="collection-card">
                 <div class="collection-badge">BEST VALUE</div>
                 <div class="collection-image">
-                    <i class="fas fa-compass"></i>
+                    <img src="images/discovery.jpg">
                 </div>
                 <div class="collection-info">
                     <h3 class="collection-name">Scent Discovery Journey</h3>
@@ -635,7 +488,7 @@
             <div class="collection-card">
                 <div class="collection-badge">SEASONAL</div>
                 <div class="collection-image">
-                    <i class="fas fa-gift"></i>
+                    <img src="images/holidaay1.jpg">
                 </div>
                 <div class="collection-info">
                     <h3 class="collection-name">Holiday Celebration Set</h3>
@@ -656,91 +509,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- Limited Edition Section -->
-    <div class="limited-edition">
-        <h3 class="limited-title">LIMITED EDITION: GOLDEN MEMORIES</h3>
-        <p class="limited-description">Our exclusive annual collection featuring rare ingredients and unique compositions. Only 500 sets available worldwide. Each bottle is individually numbered.</p>
-        
-        <div class="limited-timer">
-            <div class="timer-unit">
-                <div class="timer-value" id="days">14</div>
-                <div class="timer-label">Days</div>
-            </div>
-            <div class="timer-unit">
-                <div class="timer-value" id="hours">06</div>
-                <div class="timer-label">Hours</div>
-            </div>
-            <div class="timer-unit">
-                <div class="timer-value" id="minutes">45</div>
-                <div class="timer-label">Minutes</div>
-            </div>
-            <div class="timer-unit">
-                <div class="timer-value" id="seconds">22</div>
-                <div class="timer-label">Seconds</div>
-            </div>
-        </div>
-        
-        <div class="collection-actions" style="justify-content: center;">
-            <button class="collection-btn" style="max-width: 300px;">RESERVE YOUR SET</button>
-        </div>
-    </div>
-    
-    <!-- Featured Collections -->
-    <div class="section-header">
-        <h2 class="section-title">EXPLORE BY THEME</h2>
-        <p class="section-subtitle">Browse our collections organized by mood, occasion, and scent family.</p>
-    </div>
-    
-    <div class="featured-items">
-        <div class="featured-item">
-            <div class="featured-icon">
-                <i class="fas fa-spa"></i>
-            </div>
-            <h4 class="featured-name">Floral Bouquets</h4>
-            <p class="featured-desc">Romantic floral compositions with rose, jasmine, and peony notes.</p>
-        </div>
-        
-        <div class="featured-item">
-            <div class="featured-icon">
-                <i class="fas fa-tree"></i>
-            </div>
-            <h4 class="featured-name">Woody Elegance</h4>
-            <p class="featured-desc">Rich sandalwood, cedar, and vetiver scents for sophisticated evenings.</p>
-        </div>
-        
-        <div class="featured-item">
-            <div class="featured-icon">
-                <i class="fas fa-lemon"></i>
-            </div>
-            <h4 class="featured-name">Citrus Fresh</h4>
-            <p class="featured-desc">Energizing citrus blends with bergamot, lemon, and grapefruit notes.</p>
-        </div>
-        
-        <div class="featured-item">
-            <div class="featured-icon">
-                <i class="fas fa-snowflake"></i>
-            </div>
-            <h4 class="featured-name">Winter Warmth</h4>
-            <p class="featured-desc">Cozy, spicy fragrances with vanilla, amber, and cinnamon accents.</p>
-        </div>
-        
-        <div class="featured-item">
-            <div class="featured-icon">
-                <i class="fas fa-plane"></i>
-            </div>
-            <h4 class="featured-name">Travel Essentials</h4>
-            <p class="featured-desc">Compact sets perfect for trips and on-the-go fragrance touch-ups.</p>
-        </div>
-        
-        <div class="featured-item">
-            <div class="featured-icon">
-                <i class="fas fa-star"></i>
-            </div>
-            <h4 class="featured-name">New Discoveries</h4>
-            <p class="featured-desc">Our latest releases and experimental scent combinations.</p>
         </div>
     </div>
 </div>
@@ -834,37 +602,6 @@
                 alert(`Details for ${collectionName} would open in a detailed view. This feature would show individual items in the collection, ingredients, and more information.`);
             });
         });
-        
-        // Reserve button for limited edition
-        document.querySelector('.limited-edition .collection-btn').addEventListener('click', function() {
-            alert("You would be redirected to a reservation page for the Limited Edition Golden Memories collection. Only 500 sets available!");
-        });
-        
-        // Countdown timer for limited edition
-        function updateCountdown() {
-            // Set the target date (14 days from now)
-            const targetDate = new Date();
-            targetDate.setDate(targetDate.getDate() + 14);
-            
-            const now = new Date();
-            const difference = targetDate - now;
-            
-            if (difference > 0) {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-                
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            }
-        }
-        
-        // Initialize countdown
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
         
         // Helper functions
         function showCartToast(message) {

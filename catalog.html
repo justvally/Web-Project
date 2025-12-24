@@ -11,8 +11,7 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
     <!-- Font Awesome (icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- Clean Catalog Styles -->
     <style>
         /* Clean Catalog Styles */
@@ -29,68 +28,212 @@
         }
         
         .catalog-hero {
-            background: linear-gradient(135deg, rgba(216, 185, 109, 0.9) 0%, rgba(10, 10, 10, 0.9) 100%);
-            height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .catalog-hero h1 {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 1px;
-        }
-        
-        .catalog-hero p {
-            font-size: 18px;
-            max-width: 600px;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .catalog-hero {
-                height: 250px;
-            }
-            
-            .catalog-hero h1 {
-                font-size: 32px;
-            }
-            
-            .catalog-hero p {
-                font-size: 16px;
-                padding: 0 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .catalog-hero {
-                height: 200px;
-            }
-            
-            .catalog-hero h1 {
-                font-size: 28px;
-            }
-            
-            .catalog-hero p {
-                font-size: 14px;
-            }
-        }
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+/* Background Image Container */
+.catalog-hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.catalog-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Dark Overlay for Text Readability */
+.catalog-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 2;
+}
+
+/* Hero Content */
+.catalog-hero-content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.catalog-hero-content h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.catalog-hero-content p {
+    font-size: 20px;
+    max-width: 400px;
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 1px;
+    font-weight: 400;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
+}
+       @media (max-width: 992px) {
+    .catalog-hero {
+        height: 350px;
+    }
+    
+    .catalog-hero-content h1 {
+        font-size: 42px;
+    }
+    
+    .catalog-hero-content p {
+        font-size: 18px;
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .catalog-hero {
+        height: 300px;
+    }
+    
+    .catalog-hero-content h1 {
+        font-size: 36px;
+        margin-bottom: 15px;
+    }
+    
+    .catalog-hero-content p {
+        font-size: 16px;
+        padding: 0 20px;
+    }
+    .product-row {
+        flex-direction: column;
+        align-items: center; /* This centers the cards */
+        gap: 30px; /* Add consistent spacing */
+    }
+    
+    /* Center each individual card */
+    .card {
+        width: 100%;
+        max-width: 280px; /* Control max width */
+        margin: 0 auto 20px; /* Center with auto margins */
+    }
+    
+    /* Center the entire featured track on homepage too */
+    .featured-track {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    
+    /* Catalog header adjustments for mobile */
+    .catalog-header {
+        align-items: center;
+        text-align: center;
+    }
+    
+    .catalog-left {
+        align-items: center;
+    }
+    
+    .catalog-actions {
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .catalog-hero {
+        height: 250px;
+    }
+    
+    .catalog-hero-content h1 {
+        font-size: 28px;
+        letter-spacing: 1.5px;
+    }
+    
+    .catalog-hero-content p {
+        font-size: 14px;
+        padding: 0 15px;
+    }
+    /* Force cards to center */
+    .product-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    /* Each card takes full width but limited max-width */
+    .card {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto 25px;
+    }
+    
+    /* Center catalog products container */
+    .catalog-products {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 15px 30px;
+    }
+    
+    /* Center homepage featured cards too */
+    .featured-track {
+        justify-content: center;
+        padding: 0 10px;
+    }
+    
+    .featured-track .card {
+        max-width: 260px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 375px) {
+    .catalog-hero {
+        height: 200px;
+    }
+    
+    .catalog-hero-content h1 {
+        font-size: 24px;
+    }
+    
+    .catalog-hero-content p {
+        font-size: 13px;
+    }
+    .card {
+        max-width: 220px;
+    }
+    
+    .product-row {
+        gap: 20px;
+    }
+}
     </style>
 </head>
 
@@ -114,8 +257,19 @@
 
 <!-- Catalog Hero Section -->
 <div class="catalog-hero">
-    <h1>LUXURY FRAGRANCES</h1>
-    <p>Discover our exclusive collection of perfumes and colognes, each telling a unique story and creating lasting memories.</p>
+    <!-- Background Image -->
+    <div class="catalog-hero-image">
+        <img src="images/catalog-hero.jpg" alt="Perfume Collection">
+    </div>
+    
+    <!-- Overlay for better text readability -->
+    <div class="catalog-hero-overlay"></div>
+
+    <!-- Hero Content -->
+    <div class="catalog-hero-content">
+        <h1>FRAGRANCE CATALOG</h1>
+        <p>Discover our curated collection of luxury perfumes and colognes</p>
+    </div>
 </div>
 
 <div class="catalog-header">
