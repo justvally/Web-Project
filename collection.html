@@ -29,39 +29,64 @@
         }
         
         /* Hero Section */
-        .collection-hero {
-            background: var(--memoire-dark);
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 0 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .collection-hero h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            letter-spacing: 1px;
-        }
-        
-        .collection-hero p {
-            font-size: 20px;
-            max-width: 700px;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 1;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-        
+        /* Hero Section */
+.collection-hero {
+    background: var(--memoire-dark);
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.collection-hero img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7; /* Adjust this value (0-1) for image transparency */
+    z-index: 0;
+}
+
+.collection-hero h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adds shadow for better readability */
+}
+
+.collection-hero p {
+    font-size: 20px;
+    max-width: 700px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+    opacity: 0.9;
+    line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Adds shadow for better readability */
+}
+
+/* Optional: Add a dark overlay behind text for better contrast */
+.collection-hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2));
+    z-index: 0;
+}
         /* Collections Grid */
         .collections-container {
             max-width: 1400px;
@@ -333,6 +358,7 @@
 
 <!-- Hero Section -->
 <div class="collection-hero">
+    <img src="images/collection-hero.jpg">
     <h1>CURATED FRAGRANCE COLLECTIONS</h1>
     <p>Discover our expertly crafted fragrance collections, each telling a unique story and designed for specific moments, moods, and memories.</p>
 </div>

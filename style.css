@@ -417,7 +417,15 @@ body {
     opacity: 0.9;
     line-height: 1.6;
 }
-
+@media (max-width: 768px) {
+    .hero img{
+        position: relative;
+    }
+    .hero-content h1{
+        position: absolute;
+        top: 20%;
+    }
+}
 /* Responsive */
 @media (max-width: 768px) {
     .catalog-hero {
@@ -2795,10 +2803,11 @@ body {
     .hero-text,
     .section-title,
     .featured-title,
-    .quiz-title,
+
     .catalog-title,
     .footer-heading,
     .footer-logo {
         color: inherit !important;
     }
 }
+

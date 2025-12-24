@@ -15,8 +15,8 @@
     
     <!-- Quiz Specific CSS -->
     <style>
+        /* ============ DISCOVER QUIZ CSS ============ */
         :root {
-            /* MEMOIRE Color Palette - Matched to catalog page */
             --primary-gold: #D8B96D;
             --dark-gold: #B89A54;
             --light-gold: #E8D4A2;
@@ -32,275 +32,137 @@
             --shadow: rgba(26, 26, 26, 0.1);
             --shadow-gold: rgba(216, 185, 109, 0.15);
         }
-        
-        /* Hero Section - Black with Gold Radial Blur */
+
+        body {
+            background: var(--cream);
+            position: relative;
+            min-height: 100vh;
+            font-family: "Josefin Sans", sans-serif;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(216, 185, 109, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 115, 85, 0.05) 0%, transparent 20%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
         /* ============ DISCOVER HERO SECTION ============ */
-
-.discover-hero {
-    position: relative;
-    height: 500px;
-    overflow: hidden;
-    margin-bottom: 40px;
-}
-
-/* Background Image Container */
-.discover-hero-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
-
-.discover-hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* Dark Overlay for Text Readability */
-.discover-hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.3) 0%,
-        rgba(0, 0, 0, 0.5) 100%
-    );
-    z-index: 2;
-}
-
-/* Hero Content with original text styling */
-.discover-hero-content {
-    position: absolute;
-    top: 20%;
-    left: 15%;
-    color: #ffffff;
-    z-index: 3;
-}
-
-.discover-hero-content h1 {
-    font-size: 60px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    font-family: "Josefin Sans", sans-serif;
-    text-transform: uppercase;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.discover-hero-content h2 {
-    font-size: 15px;
-    margin-top: 0;
-    font-weight: 400;
-    letter-spacing: 2px;
-    text-transform: none;
-    font-family: "Josefin Sans", sans-serif;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-/* Hero Text - Same as original index.html */
-.discover-hero-content .hero-text {
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 1.5;
-    text-transform: uppercase;
-    max-width: 300px;
-    color: white;
-    font-family: "Josefin Sans", sans-serif;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-/* Explore button matching original */
-.discover-hero-content .explore-btn {
-    display: inline-block;
-    padding: 15px 25px;
-    background: #0a0a0a;
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: "Josefin Sans", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 20px;
-}
-
-.discover-hero-content .explore-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-}
-
-/* ============ RESPONSIVE STYLES FOR DISCOVER HERO ============ */
-
-@media (max-width: 992px) {
-    .discover-hero {
-        height: 450px;
-    }
-    
-    .discover-hero-content {
-        left: 10%;
-        top: 30%;
-    }
-    
-    .discover-hero-content h1 {
-        font-size: 50px;
-    }
-}
-
-@media (max-width: 768px) {
-    .discover-hero {
-        height: 400px;
-    }
-    
-    .discover-hero-content {
-        left: 8%;
-        right: 8%;
-        top: 25%;
-    }
-    
-    .discover-hero-content h1 {
-        font-size: 42px;
-    }
-    
-    .discover-hero-content h2 {
-        font-size: 14px;
-    }
-    
-    .discover-hero-content .hero-text {
-        font-size: 18px;
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 576px) {
-    .discover-hero {
-        height: 350px;
-    }
-    
-    .discover-hero-content {
-        left: 5%;
-        right: 5%;
-        top: 20%;
-        text-align: center;
-    }
-    
-    .discover-hero-content h1 {
-        font-size: 36px;
-    }
-    
-    .discover-hero-content h2 {
-        font-size: 13px;
-    }
-    
-    .discover-hero-content .hero-text {
-        font-size: 16px;
-        line-height: 1.4;
-        margin: 15px auto;
-    }
-    
-    .discover-hero-content .explore-btn {
-        padding: 12px 20px;
-        font-size: 14px;
-    }
-}
-
-@media (max-width: 375px) {
-    .discover-hero {
-        height: 300px;
-    }
-    
-    .discover-hero-content h1 {
-        font-size: 28px;
-    }
-    
-    .discover-hero-content h2 {
-        font-size: 12px;
-    }
-    
-    .discover-hero-content .hero-text {
-        font-size: 14px;
-    }
-}
-        
-        @media (max-width: 768px) {
-            .quiz-hero {
-                padding: 40px 15px;
-                margin-bottom: 30px;
-            }
-            
-            .hero-title {
-                font-size: 36px;
-            }
-            
-            .hero-subtitle {
-                font-size: 18px;
-                margin-bottom: 30px;
-            }
-            
-            .hero-stats {
-                gap: 30px;
-                margin-top: 40px;
-            }
-            
-            .stat-number {
-                font-size: 28px;
-            }
+        .discover-hero {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            margin-bottom: 40px;
         }
-        
-        @media (max-width: 480px) {
-            .quiz-hero {
-                padding: 30px 15px;
-            }
-            
-            .hero-title {
-                font-size: 28px;
-            }
-            
-            .hero-subtitle {
-                font-size: 16px;
-            }
-            
-            .hero-stats {
-                gap: 20px;
-            }
-            
-            .stat-number {
-                font-size: 24px;
-            }
+
+        .discover-hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
         }
-        
-        /* Quiz Specific Styles */
+
+        .discover-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .discover-hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.3) 0%,
+                rgba(0, 0, 0, 0.5) 100%
+            );
+            z-index: 2;
+        }
+
+        .discover-hero-content {
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            color: #ffffff;
+            z-index: 3;
+        }
+
+        .discover-hero-content h1 {
+            font-size: 60px;
+            margin-bottom: 10px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .discover-hero-content h2 {
+            font-size: 15px;
+            margin-top: 0;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: none;
+            font-family: "Josefin Sans", sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .discover-hero-content .hero-text {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 1.5;
+            text-transform: uppercase;
+            max-width: 300px;
+            color: white;
+            font-family: "Josefin Sans", sans-serif;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .discover-hero-content .explore-btn {
+            display: inline-block;
+            padding: 15px 25px;
+            background: #0a0a0a;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-family: "Josefin Sans", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+        }
+
+        .discover-hero-content .explore-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+        }
+
+        /* ============ QUIZ CONTAINER ============ */
         .quiz-container {
             padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
             background: var(--cream);
-
             box-shadow: 0 10px 30px var(--shadow);
             position: relative;
             overflow: hidden;
         }
-        
-        @media (min-width: 768px) {
-            .quiz-container {
-                padding: 40px 60px;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .quiz-container {
-                padding: 40px 80px;
-            }
-        }
-        
+
         .quiz-container::before {
             content: '';
             position: absolute;
@@ -310,18 +172,22 @@
             height: 4px;
             background: linear-gradient(90deg, var(--primary-gold), var(--dark-gold), var(--primary-gold));
         }
-        
+
+        /* ============ QUIZ HEADER ============ */
         .quiz-header {
-            text-align: center;
+            text-align: center !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 40px;
             padding: 30px;
             background: #161616;
-         
             border: 1px solid var(--light-gold);
             box-shadow: 0 5px 15px var(--shadow-gold);
             position: relative;
         }
-        
+
         .quiz-header::after {
             content: '';
             position: absolute;
@@ -332,31 +198,23 @@
             height: 2px;
             background: var(--primary-gold);
         }
-        
+
         .quiz-title {
             font-size: 36px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block !important;
+            width: 100% !important;
             letter-spacing: 1px;
             color: #fcfcfc;
             font-family: "Josefin Sans", sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
-            
         }
-        
-        @media (min-width: 768px) {
-            .quiz-title {
-                font-size: 42px;
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .quiz-title {
-                font-size: 48px;
-            }
-        }
-        
+
         .quiz-subtitle {
             font-size: 16px;
             color: white;
@@ -366,13 +224,8 @@
             font-family: "Josefin Sans", sans-serif;
             font-weight: 300;
         }
-        
-        @media (min-width: 768px) {
-            .quiz-subtitle {
-                font-size: 18px;
-            }
-        }
-        
+
+        /* ============ QUIZ PROGRESS ============ */
         .quiz-progress {
             width: 100%;
             height: 6px;
@@ -381,7 +234,7 @@
             margin: 30px 0;
             overflow: hidden;
         }
-        
+
         .quiz-progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--light-gold), var(--primary-gold), var(--dark-gold));
@@ -389,7 +242,7 @@
             transition: width 0.5s ease;
             border-radius: 3px;
         }
-        
+
         .quiz-progress-text {
             font-size: 14px;
             color: var(--warm-taupe);
@@ -399,7 +252,8 @@
             letter-spacing: 1px;
             font-family: "Josefin Sans", sans-serif;
         }
-        
+
+        /* ============ QUIZ STEPS ============ */
         .quiz-step {
             display: none;
             padding: 30px;
@@ -410,13 +264,7 @@
             margin-top: 30px;
             position: relative;
         }
-        
-        @media (min-width: 768px) {
-            .quiz-step {
-                padding: 40px;
-            }
-        }
-        
+
         .quiz-step::before {
             content: '';
             position: absolute;
@@ -427,11 +275,11 @@
             background: var(--primary-gold);
             border-radius: 15px 15px 0 0;
         }
-        
+
         .quiz-step.active {
             display: block;
         }
-        
+
         .step-question {
             font-size: 28px;
             font-weight: 600;
@@ -443,13 +291,7 @@
             position: relative;
             padding-bottom: 20px;
         }
-        
-        @media (min-width: 768px) {
-            .step-question {
-                font-size: 32px;
-            }
-        }
-        
+
         .step-question::after {
             content: '';
             position: absolute;
@@ -460,7 +302,7 @@
             height: 2px;
             background: var(--light-gold);
         }
-        
+
         .step-description {
             font-size: 16px;
             color: var(--medium-text);
@@ -477,26 +319,15 @@
             border-radius: 8px;
             border-left: 4px solid var(--primary-gold);
         }
-        
+
+        /* ============ QUIZ OPTIONS ============ */
         .options-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: 20px;
             margin-bottom: 40px;
         }
-        
-        @media (min-width: 640px) {
-            .options-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        
-        @media (min-width: 1024px) {
-            .options-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-        
+
         .quiz-option {
             border: 2px solid var(--soft-beige);
             border-radius: 12px;
@@ -513,18 +344,18 @@
             position: relative;
             overflow: hidden;
         }
-        
+
         .quiz-option:hover {
             border-color: var(--primary-gold);
             box-shadow: 0 8px 20px var(--shadow-gold);
         }
-        
+
         .quiz-option.selected {
             border-color: var(--primary-gold);
             background: var(--pale-gold);
             box-shadow: 0 5px 15px var(--shadow-gold);
         }
-        
+
         .quiz-option.selected::after {
             content: '✓';
             position: absolute;
@@ -541,7 +372,7 @@
             font-size: 14px;
             font-weight: bold;
         }
-        
+
         .option-icon {
             font-size: 32px;
             color: var(--primary-gold);
@@ -555,17 +386,17 @@
             border-radius: 50%;
             transition: all 0.2s ease;
         }
-        
+
         .quiz-option:hover .option-icon {
             background: var(--primary-gold);
             color: white;
         }
-        
+
         .quiz-option.selected .option-icon {
             background: var(--primary-gold);
             color: white;
         }
-        
+
         .option-text {
             font-size: 18px;
             font-weight: 600;
@@ -573,7 +404,7 @@
             color: var(--rich-brown);
             font-family: "Josefin Sans", sans-serif;
         }
-        
+
         .option-desc {
             font-size: 14px;
             color: var(--medium-text);
@@ -581,7 +412,8 @@
             font-family: "Josefin Sans", sans-serif;
             font-weight: 300;
         }
-        
+
+        /* ============ QUIZ NAVIGATION ============ */
         .quiz-navigation {
             display: flex;
             justify-content: space-between;
@@ -590,7 +422,7 @@
             border-top: 2px solid var(--soft-beige);
             margin-top: 20px;
         }
-        
+
         .quiz-btn {
             padding: 12px 25px;
             font-size: 14px;
@@ -606,63 +438,50 @@
             position: relative;
             overflow: hidden;
         }
-        
-        @media (min-width: 768px) {
-            .quiz-btn {
-                padding: 15px 35px;
-                font-size: 16px;
-            }
-        }
-        
+
         .btn-prev {
             background: transparent;
-            color: var(--warm-taupe);
+            color: rgb(0, 0, 0);
             border: 2px solid var(--soft-beige);
         }
-        
+
         .btn-prev:hover {
             background: var(--soft-beige);
-            color: var(--rich-brown);
+            color: black;
             border-color: var(--light-gold);
         }
-        
+
         .btn-next {
-            background: linear-gradient(45deg, var(--rich-brown), var(--warm-taupe));
+            background: black;
             color: white;
         }
-        
+
         .btn-next:hover {
-            background: linear-gradient(45deg, var(--warm-taupe), var(--rich-brown));
+            background: black;
             box-shadow: 0 5px 15px var(--shadow);
         }
-        
+
         .btn-submit {
-            background: linear-gradient(45deg, var(--primary-gold), var(--dark-gold));
-            color: var(--rich-brown);
+            background: black;
+            color: white;
             font-weight: 700;
         }
-        
+
         .btn-submit:hover {
-            background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
+            background: black;
             box-shadow: 0 5px 15px var(--shadow-gold);
         }
-        
+
         .btn-hidden {
             visibility: hidden;
         }
-        
-        /* Results Page */
+
+        /* ============ RESULTS SECTION ============ */
         .results-container {
             text-align: center;
             padding: 30px 0;
         }
-        
-        @media (min-width: 768px) {
-            .results-container {
-                padding: 40px 0;
-            }
-        }
-        
+
         .results-icon {
             font-size: 60px;
             color: var(--primary-gold);
@@ -678,16 +497,7 @@
             justify-content: center;
             box-shadow: 0 5px 15px var(--shadow-gold);
         }
-        
-        @media (min-width: 768px) {
-            .results-icon {
-                font-size: 70px;
-                width: 120px;
-                height: 120px;
-                line-height: 120px;
-            }
-        }
-        
+
         .results-title {
             font-size: 36px;
             font-weight: 600;
@@ -699,13 +509,7 @@
             position: relative;
             padding-bottom: 20px;
         }
-        
-        @media (min-width: 768px) {
-            .results-title {
-                font-size: 42px;
-            }
-        }
-        
+
         .results-title::after {
             content: '';
             position: absolute;
@@ -716,7 +520,7 @@
             height: 3px;
             background: linear-gradient(90deg, var(--light-gold), var(--primary-gold), var(--light-gold));
         }
-        
+
         .results-subtitle {
             font-size: 18px;
             color: var(--medium-text);
@@ -732,13 +536,8 @@
             border-radius: 10px;
             border-left: 4px solid var(--primary-gold);
         }
-        
-        @media (min-width: 768px) {
-            .results-subtitle {
-                font-size: 20px;
-            }
-        }
-        
+
+        /* ============ RESULTS PROFILE ============ */
         .results-profile {
             background: linear-gradient(135deg, var(--cream), white);
             border-radius: 15px;
@@ -751,14 +550,7 @@
             position: relative;
             overflow: hidden;
         }
-        
-        @media (min-width: 768px) {
-            .results-profile {
-                padding: 40px;
-                margin: 40px auto;
-            }
-        }
-        
+
         .results-profile::before {
             content: '';
             position: absolute;
@@ -768,7 +560,7 @@
             height: 6px;
             background: linear-gradient(90deg, var(--light-gold), var(--primary-gold), var(--dark-gold));
         }
-        
+
         .profile-title {
             font-size: 22px;
             font-weight: 600;
@@ -781,27 +573,14 @@
             padding-bottom: 15px;
             border-bottom: 2px solid var(--soft-beige);
         }
-        
-        @media (min-width: 768px) {
-            .profile-title {
-                font-size: 24px;
-            }
-        }
-        
+
         .profile-grid {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: 15px;
             margin-bottom: 25px;
         }
-        
-        @media (min-width: 640px) {
-            .profile-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-        }
-        
+
         .profile-item {
             margin-bottom: 15px;
             padding: 15px;
@@ -810,7 +589,7 @@
             border-left: 4px solid var(--light-gold);
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
-        
+
         .profile-label {
             font-size: 14px;
             color: var(--warm-taupe);
@@ -820,21 +599,21 @@
             font-weight: 600;
             font-family: "Josefin Sans", sans-serif;
         }
-        
+
         .profile-value {
             font-size: 18px;
             font-weight: 600;
             color: var(--dark-text);
             font-family: "Josefin Sans", sans-serif;
         }
-        
+
         .profile-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
             margin-top: 10px;
         }
-        
+
         .profile-tag {
             background: linear-gradient(45deg, var(--pale-gold), var(--light-gold));
             color: var(--rich-brown);
@@ -845,17 +624,12 @@
             border: 1px solid var(--light-gold);
             font-family: "Josefin Sans", sans-serif;
         }
-        
+
+        /* ============ RECOMMENDATIONS ============ */
         .recommendations {
             margin: 40px 0;
         }
-        
-        @media (min-width: 768px) {
-            .recommendations {
-                margin: 60px 0;
-            }
-        }
-        
+
         .recommendations-title {
             font-size: 28px;
             font-weight: 600;
@@ -868,14 +642,7 @@
             position: relative;
             padding-bottom: 20px;
         }
-        
-        @media (min-width: 768px) {
-            .recommendations-title {
-                font-size: 32px;
-                margin-bottom: 40px;
-            }
-        }
-        
+
         .recommendations-title::after {
             content: '';
             position: absolute;
@@ -886,22 +653,14 @@
             height: 3px;
             background: linear-gradient(90deg, var(--light-gold), var(--primary-gold), var(--light-gold));
         }
-        
+
         .recommendation-cards {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
             gap: 25px;
             margin-bottom: 40px;
         }
-        
-        @media (min-width: 768px) {
-            .recommendation-cards {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px;
-                margin-bottom: 50px;
-            }
-        }
-        
+
         .recommendation-card {
             background: white;
             border-radius: 15px;
@@ -911,11 +670,11 @@
             border: 1px solid var(--soft-beige);
             position: relative;
         }
-        
+
         .recommendation-card:hover {
             box-shadow: 0 15px 35px var(--shadow-gold);
         }
-        
+
         .recommendation-card::before {
             content: '';
             position: absolute;
@@ -925,7 +684,7 @@
             height: 4px;
             background: linear-gradient(90deg, var(--light-gold), var(--primary-gold));
         }
-        
+
         .rec-image {
             height: 200px;
             background: linear-gradient(135deg, var(--pale-gold), var(--cream));
@@ -937,24 +696,11 @@
             position: relative;
             overflow: hidden;
         }
-        
-        @media (min-width: 768px) {
-            .rec-image {
-                height: 250px;
-                font-size: 60px;
-            }
-        }
-        
+
         .rec-info {
             padding: 20px;
         }
-        
-        @media (min-width: 768px) {
-            .rec-info {
-                padding: 25px;
-            }
-        }
-        
+
         .rec-name {
             font-size: 20px;
             font-weight: 600;
@@ -962,13 +708,7 @@
             color: var(--rich-brown);
             font-family: "Josefin Sans", sans-serif;
         }
-        
-        @media (min-width: 768px) {
-            .rec-name {
-                font-size: 22px;
-            }
-        }
-        
+
         .rec-brand {
             font-size: 14px;
             color: var(--warm-taupe);
@@ -977,7 +717,7 @@
             text-transform: uppercase;
             font-family: "Josefin Sans", sans-serif;
         }
-        
+
         .rec-desc {
             font-size: 14px;
             color: var(--medium-text);
@@ -986,13 +726,13 @@
             font-family: "Josefin Sans", sans-serif;
             font-weight: 300;
         }
-        
+
         .rec-match {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
         }
-        
+
         .match-text {
             font-size: 14px;
             color: var(--warm-taupe);
@@ -1000,7 +740,7 @@
             font-weight: 600;
             font-family: "Josefin Sans", sans-serif;
         }
-        
+
         .match-bar {
             flex: 1;
             height: 8px;
@@ -1008,32 +748,26 @@
             border-radius: 4px;
             overflow: hidden;
         }
-        
+
         .match-fill {
             height: 100%;
             background: linear-gradient(90deg, var(--light-gold), var(--primary-gold));
             border-radius: 4px;
         }
-        
+
         .rec-actions {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .rec-price {
             font-size: 20px;
             font-weight: 600;
             color: var(--rich-brown);
             font-family: "Josefin Sans", sans-serif;
         }
-        
-        @media (min-width: 768px) {
-            .rec-price {
-                font-size: 22px;
-            }
-        }
-        
+
         .rec-btn {
             padding: 10px 20px;
             background: linear-gradient(45deg, var(--rich-brown), var(--warm-taupe));
@@ -1047,12 +781,13 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .rec-btn:hover {
             background: linear-gradient(45deg, var(--warm-taupe), var(--rich-brown));
             box-shadow: 0 5px 15px var(--shadow);
         }
-        
+
+        /* ============ RESULTS ACTIONS ============ */
         .results-actions {
             display: flex;
             flex-direction: column;
@@ -1060,15 +795,7 @@
             margin-top: 40px;
             align-items: center;
         }
-        
-        @media (min-width: 768px) {
-            .results-actions {
-                flex-direction: row;
-                justify-content: center;
-                gap: 20px;
-            }
-        }
-        
+
         .action-retake {
             padding: 12px 25px;
             background: transparent;
@@ -1082,13 +809,13 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-        
+
         .action-retake:hover {
             background: var(--rich-brown);
             color: white;
             box-shadow: 0 5px 15px var(--shadow);
         }
-        
+
         .action-browse {
             padding: 12px 25px;
             background: linear-gradient(45deg, var(--primary-gold), var(--dark-gold));
@@ -1105,13 +832,13 @@
             display: inline-block;
             text-align: center;
         }
-        
+
         .action-browse:hover {
             background: linear-gradient(45deg, var(--dark-gold), var(--primary-gold));
             box-shadow: 0 5px 15px var(--shadow-gold);
         }
-        
-        /* Skip Section */
+
+        /* ============ SKIP SECTION ============ */
         .skip-section {
             text-align: center;
             margin-top: 40px;
@@ -1121,13 +848,7 @@
             padding: 25px;
             border-radius: 15px;
         }
-        
-        @media (min-width: 768px) {
-            .skip-section {
-                padding: 30px;
-            }
-        }
-        
+
         .skip-text {
             font-size: 16px;
             color: var(--medium-text);
@@ -1135,7 +856,7 @@
             font-family: "Josefin Sans", sans-serif;
             font-weight: 300;
         }
-        
+
         .skip-btn {
             padding: 12px 25px;
             background: transparent;
@@ -1151,36 +872,517 @@
             text-decoration: none;
             display: inline-block;
         }
-        
+
         .skip-btn:hover {
             border-color: var(--primary-gold);
             color: var(--rich-brown);
             background: var(--light-gold);
         }
-        
-        /* Background pattern - simplified */
-        body {
-            background: var(--cream);
+
+        /* ============ CART STYLES ============ */
+        #cartIcon {
             position: relative;
-            min-height: 100vh;
-            font-family: "Josefin Sans", sans-serif;
+            cursor: pointer;
         }
-        
-        body::before {
-            content: '';
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--primary-gold);
+            color: var(--rich-brown);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .cart-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(216, 185, 109, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(139, 115, 85, 0.05) 0%, transparent 20%);
-            pointer-events: none;
-            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            display: none;
         }
-        
-        /* Responsive adjustments */
+
+        .cart-overlay.show {
+            display: block;
+        }
+
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100%;
+            background: white;
+            z-index: 1001;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-modal.show {
+            transform: translateX(0);
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--soft-beige);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h2 {
+            margin: 0;
+            font-size: 20px;
+            color: var(--rich-brown);
+        }
+
+        #closeCart {
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--medium-text);
+        }
+
+        #closeCart:hover {
+            color: var(--rich-brown);
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--light-text);
+        }
+
+        .empty-cart i {
+            font-size: 50px;
+            margin-bottom: 20px;
+            color: var(--light-gold);
+        }
+
+        .empty-cart p {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--soft-beige);
+        }
+
+        .cart-item-img {
+            width: 60px;
+            height: 60px;
+            background: var(--pale-gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .cart-item-img i {
+            font-size: 24px;
+            color: var(--primary-gold);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-details h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+            color: var(--rich-brown);
+        }
+
+        .cart-item-details p {
+            margin: 0 0 10px 0;
+            font-size: 14px;
+            color: var(--warm-taupe);
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            width: 25px;
+            height: 25px;
+            border: 1px solid var(--soft-beige);
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qty-btn:hover {
+            background: var(--pale-gold);
+        }
+
+        .cart-item-quantity span {
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .cart-item-price {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .cart-item-price span {
+            font-weight: 600;
+            color: var(--rich-brown);
+        }
+
+        .remove-item {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: var(--light-text);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .remove-item:hover {
+            color: var(--rich-brown);
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid var(--soft-beige);
+        }
+
+        .cart-summary {
+            margin-bottom: 20px;
+        }
+
+        .cart-summary p {
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            color: var(--medium-text);
+        }
+
+        .cart-summary span {
+            color: var(--rich-brown);
+            font-weight: 600;
+        }
+
+        .checkout-btn,
+        .continue-shopping {
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(45deg, var(--rich-brown), var(--warm-taupe));
+            color: white;
+        }
+
+        .checkout-btn:hover {
+            background: linear-gradient(45deg, var(--warm-taupe), var(--rich-brown));
+        }
+
+        .continue-shopping {
+            background: transparent;
+            border: 2px solid var(--soft-beige);
+            color: var(--medium-text);
+        }
+
+        .continue-shopping:hover {
+            background: var(--soft-beige);
+            border-color: var(--light-gold);
+        }
+
+        .cart-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--rich-brown);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+
+        .cart-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #toastText {
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* ============ RESPONSIVE STYLES ============ */
+        @media (min-width: 1024px) {
+            .quiz-container {
+                padding: 40px 80px;
+            }
+            
+            .quiz-title {
+                font-size: 48px;
+            }
+            
+            .quiz-subtitle {
+                font-size: 18px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .quiz-btn {
+                padding: 15px 35px;
+                font-size: 16px;
+            }
+            
+            .results-container {
+                padding: 40px 0;
+            }
+            
+            .results-icon {
+                font-size: 70px;
+                width: 120px;
+                height: 120px;
+                line-height: 120px;
+            }
+            
+            .results-title {
+                font-size: 42px;
+            }
+            
+            .results-subtitle {
+                font-size: 20px;
+            }
+            
+            .results-profile {
+                padding: 40px;
+                margin: 40px auto;
+            }
+            
+            .profile-title {
+                font-size: 24px;
+            }
+            
+            .profile-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .recommendations {
+                margin: 60px 0;
+            }
+            
+            .recommendations-title {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+            
+            .recommendation-cards {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                margin-bottom: 50px;
+            }
+            
+            .rec-image {
+                height: 250px;
+                font-size: 60px;
+            }
+            
+            .rec-info {
+                padding: 25px;
+            }
+            
+            .rec-name {
+                font-size: 22px;
+            }
+            
+            .rec-price {
+                font-size: 22px;
+            }
+            
+            .results-actions {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .skip-section {
+                padding: 30px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .quiz-container {
+                padding: 40px 60px;
+            }
+            
+            .quiz-title {
+                font-size: 42px;
+                color: #fcfcfc;
+            }
+            
+            .quiz-subtitle {
+                font-size: 18px;
+            }
+            
+            .quiz-step {
+                padding: 40px;
+            }
+            
+            .step-question {
+                font-size: 32px;
+            }
+            
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quiz-btn {
+                padding: 15px 35px;
+                font-size: 16px;
+            }
+            
+            .results-icon {
+                font-size: 70px;
+                width: 120px;
+                height: 120px;
+                line-height: 120px;
+            }
+            
+            .results-title {
+                font-size: 42px;
+            }
+            
+            .results-subtitle {
+                font-size: 20px;
+            }
+            
+            .results-profile {
+                padding: 40px;
+                margin: 40px auto;
+            }
+            
+            .profile-title {
+                font-size: 24px;
+            }
+            
+            .profile-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .recommendations {
+                margin: 60px 0;
+            }
+            
+            .recommendations-title {
+                font-size: 32px;
+                margin-bottom: 40px;
+            }
+            
+            .recommendation-cards {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                margin-bottom: 50px;
+            }
+            
+            .rec-image {
+                height: 250px;
+                font-size: 60px;
+            }
+            
+            .rec-info {
+                padding: 25px;
+            }
+            
+            .rec-name {
+                font-size: 22px;
+            }
+            
+            .rec-price {
+                font-size: 22px;
+            }
+            
+            .results-actions {
+                flex-direction: row;
+                justify-content: center;
+                gap: 20px;
+            }
+            
+            .skip-section {
+                padding: 30px;
+            }
+        }
+
+        @media (min-width: 640px) and (max-width: 767px) {
+            .options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .profile-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .discover-hero {
+                height: 450px;
+            }
+            
+            .discover-hero-content {
+                left: 10%;
+                top: 30%;
+            }
+            
+            .discover-hero-content h1 {
+                font-size: 50px;
+            }
+
+            .cart-modal {
+                width: 100%;
+            }
+        }
+
         @media (max-width: 640px) {
             .quiz-container {
                 padding: 20px 15px;
@@ -1194,6 +1396,7 @@
             
             .quiz-title {
                 font-size: 28px;
+                color: #fcfcfc;
             }
             
             .quiz-step {
@@ -1212,6 +1415,79 @@
             
             .option-text {
                 font-size: 16px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .discover-hero {
+                height: 400px;
+            }
+            
+            .discover-hero-content {
+                left: 8%;
+                right: 8%;
+                top: 25%;
+            }
+            
+            .discover-hero-content h1 {
+                font-size: 42px;
+            }
+            
+            .discover-hero-content h2 {
+                font-size: 14px;
+            }
+            
+            .discover-hero-content .hero-text {
+                font-size: 18px;
+                max-width: 100%;
+            }
+            
+            .discover-hero {
+                height: 350px;
+            }
+            
+            .discover-hero-content {
+                left: 5%;
+                right: 5%;
+                top: 20%;
+                text-align: center;
+            }
+            
+            .discover-hero-content h1 {
+                font-size: 36px;
+            }
+            
+            .discover-hero-content h2 {
+                font-size: 13px;
+            }
+            
+            .discover-hero-content .hero-text {
+                font-size: 16px;
+                line-height: 1.4;
+                margin: 15px auto;
+            }
+            
+            .discover-hero-content .explore-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .discover-hero {
+                height: 300px;
+            }
+            
+            .discover-hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .discover-hero-content h2 {
+                font-size: 12px;
+            }
+            
+            .discover-hero-content .hero-text {
+                font-size: 14px;
             }
         }
     </style>
@@ -1314,9 +1590,9 @@
 
             <!-- Navigation Buttons inside the quiz tab -->
             <div class="quiz-navigation">
-                <button type="button" class="quiz-btn btn-prev btn-hidden" id="prevBtn">Previous</button>
-                <button type="button" class="quiz-btn btn-next" id="nextBtn">Next Question</button>
-                <button type="submit" class="quiz-btn btn-submit" id="submitBtn" style="display: none;">Get My Results</button>
+                <button type="button" class="quiz-btn btn-prev btn-hidden">Previous</button>
+                <button type="button" class="quiz-btn btn-next">Next Question</button>
+                <button type="button" class="quiz-btn btn-submit" style="display: none;">Get My Results</button>
             </div>
         </div>
         
@@ -1361,8 +1637,8 @@
             
             <!-- Navigation Buttons inside the quiz tab -->
             <div class="quiz-navigation">
-                <button type="button" class="quiz-btn btn-prev" id="prevBtn2">Previous</button>
-                <button type="button" class="quiz-btn btn-next" id="nextBtn2">Next Question</button>
+                <button type="button" class="quiz-btn btn-prev">Previous</button>
+                <button type="button" class="quiz-btn btn-next">Next Question</button>
             </div>
         </div>
         
@@ -1407,8 +1683,8 @@
             
             <!-- Navigation Buttons inside the quiz tab -->
             <div class="quiz-navigation">
-                <button type="button" class="quiz-btn btn-prev" id="prevBtn3">Previous</button>
-                <button type="button" class="quiz-btn btn-next" id="nextBtn3">Next Question</button>
+                <button type="button" class="quiz-btn btn-prev">Previous</button>
+                <button type="button" class="quiz-btn btn-next">Next Question</button>
             </div>
         </div>
         
@@ -1453,8 +1729,8 @@
             
             <!-- Navigation Buttons inside the quiz tab -->
             <div class="quiz-navigation">
-                <button type="button" class="quiz-btn btn-prev" id="prevBtn4">Previous</button>
-                <button type="button" class="quiz-btn btn-next" id="nextBtn4">Next Question</button>
+                <button type="button" class="quiz-btn btn-prev">Previous</button>
+                <button type="button" class="quiz-btn btn-next">Next Question</button>
             </div>
         </div>
         
@@ -1499,8 +1775,8 @@
             
             <!-- Navigation Buttons inside the quiz tab -->
             <div class="quiz-navigation">
-                <button type="button" class="quiz-btn btn-prev" id="prevBtn5">Previous</button>
-                <button type="button" class="quiz-btn btn-next" id="nextBtn5">Next Question</button>
+                <button type="button" class="quiz-btn btn-prev">Previous</button>
+                <button type="button" class="quiz-btn btn-next">Next Question</button>
             </div>
         </div>
         
@@ -1545,8 +1821,8 @@
             
             <!-- Navigation Buttons inside the quiz tab -->
             <div class="quiz-navigation">
-                <button type="button" class="quiz-btn btn-prev" id="prevBtn6">Previous</button>
-                <button type="button" class="quiz-btn btn-next" id="nextBtn6">Next Question</button>
+                <button type="button" class="quiz-btn btn-prev">Previous</button>
+                <button type="button" class="quiz-btn btn-next">Next Question</button>
             </div>
         </div>
         
@@ -1591,8 +1867,8 @@
             
             <!-- Navigation Buttons inside the quiz tab -->
             <div class="quiz-navigation">
-                <button type="button" class="quiz-btn btn-prev" id="prevBtn7">Previous</button>
-                <button type="button" class="quiz-btn btn-next" id="nextBtn7">Next Question</button>
+                <button type="button" class="quiz-btn btn-prev">Previous</button>
+                <button type="button" class="quiz-btn btn-next">Next Question</button>
             </div>
         </div>
         
@@ -1637,8 +1913,8 @@
             
             <!-- Navigation Buttons inside the quiz tab -->
             <div class="quiz-navigation">
-                <button type="button" class="quiz-btn btn-prev" id="prevBtn8">Previous</button>
-                <button type="button" class="quiz-btn btn-submit" id="submitBtn8">Get My Results</button>
+                <button type="button" class="quiz-btn btn-prev">Previous</button>
+                <button type="button" class="quiz-btn btn-submit">Get My Results</button>
             </div>
         </div>
     </form>
@@ -1729,7 +2005,7 @@
                             
                             <div class="rec-actions">
                                 <div class="rec-price">$128</div>
-                                <button class="rec-btn">ADD TO CART</button>
+                                <button class="rec-btn add-to-cart" data-name="Miss Dior Eau de Parfum" data-brand="DIOR" data-price="128">ADD TO CART</button>
                             </div>
                         </div>
                     </div>
@@ -1753,7 +2029,7 @@
                             
                             <div class="rec-actions">
                                 <div class="rec-price">$165</div>
-                                <button class="rec-btn">ADD TO CART</button>
+                                <button class="rec-btn add-to-cart" data-name="Chanel Gabrielle Essence" data-brand="CHANEL" data-price="165">ADD TO CART</button>
                             </div>
                         </div>
                     </div>
@@ -1777,7 +2053,7 @@
                             
                             <div class="rec-actions">
                                 <div class="rec-price">$250</div>
-                                <button class="rec-btn">ADD TO CART</button>
+                                <button class="rec-btn add-to-cart" data-name="Byredo Gypsy Water" data-brand="BYREDO" data-price="250">ADD TO CART</button>
                             </div>
                         </div>
                     </div>
@@ -1792,312 +2068,331 @@
     </div>
 
     <!-- Cart Overlay -->
-<div id="cartOverlay" class="cart-overlay"></div>
+    <div id="cartOverlay" class="cart-overlay"></div>
 
-<!-- Cart Modal -->
-<div id="cartModal" class="cart-modal">
-    <div class="cart-header">
-        <h2>YOUR CART</h2>
-        <span id="closeCart">&times;</span>
-    </div>
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-header">
+            <h2>YOUR CART</h2>
+            <span id="closeCart">&times;</span>
+        </div>
 
-    <div class="cart-items" id="cartItems">
-        <!-- Cart items will be loaded here -->
-        <div class="empty-cart">
-            <i class="fas fa-shopping-bag"></i>
-            <p>Your cart is empty</p>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be loaded here -->
+            <div class="empty-cart">
+                <i class="fas fa-shopping-bag"></i>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-summary">
+                <p>SUBTOTAL: <span id="totalPrice">$0.00</span></p>
+                <p>ITEMS: <span id="itemCount">0</span></p>
+            </div>
+            <button class="checkout-btn">PROCEED TO CHECKOUT</button>
+            <button class="continue-shopping">CONTINUE SHOPPING</button>
         </div>
     </div>
 
-    <div class="cart-footer">
-        <div class="cart-summary">
-            <p>SUBTOTAL: <span id="totalPrice">$0.00</span></p>
-            <p>ITEMS: <span id="itemCount">0</span></p>
-        </div>
-        <button class="checkout-btn">PROCEED TO CHECKOUT</button>
-        <button class="continue-shopping">CONTINUE SHOPPING</button>
+    <!-- Cart Toast -->
+    <div id="cartToast" class="cart-toast">
+        <span id="toastText">✓ ADDED TO CART</span>
     </div>
-</div>
-
-<!-- Cart Toast -->
-<div id="cartToast" class="cart-toast">
-    <span id="toastText">✓ ADDED TO CART</span>
-</div>
 </div>
 
 <script src="script.js"></script>
 <script>
-    // Quiz Logic
-    document.addEventListener('DOMContentLoaded', function() {
-        const quizSteps = document.querySelectorAll('.quiz-step');
-        const userSelections = {};
-        
-        // Initialize current step
-        let currentStep = 0;
-        const totalSteps = quizSteps.length;
-        
-        // Progress elements
-        const progressBar = document.getElementById('progressBar');
-        const currentStepEl = document.getElementById('currentStep');
-        const progressText = document.getElementById('progressText');
-        
-        // Update progress
-        function updateProgress() {
-            const progress = ((currentStep + 1) / totalSteps) * 100;
-            progressBar.style.width = `${progress}%`;
-            currentStepEl.textContent = currentStep + 1;
-            progressText.textContent = `Question ${currentStep + 1} of ${totalSteps}`;
-        }
-        
-        // Option selection
-        document.querySelectorAll('.quiz-option').forEach(option => {
-            option.addEventListener('click', function() {
-                const stepId = this.closest('.quiz-step').id;
-                const value = this.getAttribute('data-value');
-                
-                // Remove selection from other options in same step
-                const siblingOptions = this.closest('.quiz-step').querySelectorAll('.quiz-option');
-                siblingOptions.forEach(opt => opt.classList.remove('selected'));
-                
-                // Select current option
-                this.classList.add('selected');
-                
-                // Store selection
-                userSelections[stepId] = value;
-                
-                // For step 7 (notes), allow multiple selections
-                if (stepId === 'step7') {
-                    if (!userSelections.notes) userSelections.notes = [];
-                    if (userSelections.notes.includes(value)) {
-                        // Deselect if already selected
-                        userSelections.notes = userSelections.notes.filter(note => note !== value);
-                        this.classList.remove('selected');
+// ============ DISCOVER QUIZ JAVASCRIPT ============
+document.addEventListener('DOMContentLoaded', function() {
+    const quizSteps = document.querySelectorAll('.quiz-step');
+    const userSelections = {};
+    
+    // Initialize current step
+    let currentStep = 0;
+    const totalSteps = quizSteps.length;
+    
+    // Progress elements
+    const progressBar = document.getElementById('progressBar');
+    const currentStepEl = document.getElementById('currentStep');
+    const progressText = document.getElementById('progressText');
+    
+    // Update progress
+    function updateProgress() {
+        const progress = ((currentStep + 1) / totalSteps) * 100;
+        progressBar.style.width = `${progress}%`;
+        currentStepEl.textContent = currentStep + 1;
+        progressText.textContent = `Question ${currentStep + 1} of ${totalSteps}`;
+    }
+    
+    // Option selection
+    document.querySelectorAll('.quiz-option').forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.preventDefault();
+            const stepId = this.closest('.quiz-step').id;
+            const value = this.getAttribute('data-value');
+            
+            // Remove selection from other options in same step
+            const siblingOptions = this.closest('.quiz-step').querySelectorAll('.quiz-option');
+            siblingOptions.forEach(opt => opt.classList.remove('selected'));
+            
+            // Select current option
+            this.classList.add('selected');
+            
+            // Store selection
+            userSelections[stepId] = value;
+            
+            // For step 7 (notes), allow multiple selections
+            if (stepId === 'step7') {
+                if (!userSelections.notes) userSelections.notes = [];
+                if (userSelections.notes.includes(value)) {
+                    // Deselect if already selected
+                    userSelections.notes = userSelections.notes.filter(note => note !== value);
+                    this.classList.remove('selected');
+                } else {
+                    // Select if not already selected (max 3)
+                    if (userSelections.notes.length < 3) {
+                        userSelections.notes.push(value);
                     } else {
-                        // Select if not already selected (max 3)
-                        if (userSelections.notes.length < 3) {
-                            userSelections.notes.push(value);
-                        } else {
-                            // If already 3 selected, remove the first and add new
-                            userSelections.notes.shift();
-                            userSelections.notes.push(value);
-                            
-                            // Update UI to reflect only 3 selected
-                            const selectedNotes = this.closest('.quiz-step').querySelectorAll('.quiz-option.selected');
-                            if (selectedNotes.length > 3) {
-                                selectedNotes[0].classList.remove('selected');
-                            }
+                        // If already 3 selected, remove the first and add new
+                        userSelections.notes.shift();
+                        userSelections.notes.push(value);
+                        
+                        // Update UI to reflect only 3 selected
+                        const selectedNotes = this.closest('.quiz-step').querySelectorAll('.quiz-option.selected');
+                        if (selectedNotes.length > 3) {
+                            selectedNotes[0].classList.remove('selected');
                         }
                     }
                 }
-                
-                // Enable navigation buttons for current step
-                enableNavigation(currentStep);
-            });
+            }
+            
+            // Enable navigation buttons for current step
+            enableNavigation(currentStep);
         });
-        
-        // Navigation functions
-        function goToNextStep() {
-            if (currentStep < totalSteps - 1) {
-                quizSteps[currentStep].classList.remove('active');
-                currentStep++;
-                quizSteps[currentStep].classList.add('active');
-                updateProgress();
-                enableNavigation(currentStep);
-                window.scrollTo({ top: quizSteps[currentStep].offsetTop - 100, behavior: 'smooth' });
-            }
-        }
-        
-        function goToPrevStep() {
-            if (currentStep > 0) {
-                quizSteps[currentStep].classList.remove('active');
-                currentStep--;
-                quizSteps[currentStep].classList.add('active');
-                updateProgress();
-                enableNavigation(currentStep);
-                window.scrollTo({ top: quizSteps[currentStep].offsetTop - 100, behavior: 'smooth' });
-            }
-        }
-        
-        function enableNavigation(stepIndex) {
-            // Enable/disable previous button
-            const prevButtons = quizSteps[stepIndex].querySelectorAll('.btn-prev');
-            prevButtons.forEach(btn => {
-                btn.disabled = stepIndex === 0;
-                if (stepIndex === 0) {
-                    btn.classList.add('btn-hidden');
-                } else {
-                    btn.classList.remove('btn-hidden');
-                }
-            });
-            
-            // Enable/disable next button based on selection
-            const nextButtons = quizSteps[stepIndex].querySelectorAll('.btn-next');
-            const submitButtons = quizSteps[stepIndex].querySelectorAll('.btn-submit');
-            const hasSelection = quizSteps[stepIndex].querySelector('.quiz-option.selected');
-            
-            if (stepIndex === totalSteps - 1) {
-                // Last step - enable submit button
-                nextButtons.forEach(btn => btn.style.display = 'none');
-                submitButtons.forEach(btn => {
-                    btn.style.display = 'inline-block';
-                    btn.disabled = !hasSelection;
-                });
-            } else {
-                // Other steps - enable next button
-                nextButtons.forEach(btn => {
-                    btn.style.display = 'inline-block';
-                    btn.disabled = !hasSelection;
-                });
-                submitButtons.forEach(btn => btn.style.display = 'none');
-            }
-        }
-        
-        // Set up navigation event listeners for each step
-        for (let i = 1; i <= totalSteps; i++) {
-            const stepElement = document.getElementById(`step${i}`);
-            
-            // Next button
-            const nextBtn = stepElement.querySelector('.btn-next');
-            if (nextBtn) {
-                nextBtn.addEventListener('click', goToNextStep);
-            }
-            
-            // Previous button
-            const prevBtn = stepElement.querySelector('.btn-prev');
-            if (prevBtn) {
-                prevBtn.addEventListener('click', goToPrevStep);
-            }
-            
-            // Submit button (for last step)
-            const submitBtn = stepElement.querySelector('.btn-submit');
-            if (submitBtn) {
-                submitBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    showResults();
-                });
-            }
-        }
-        
-        // Retake quiz button
-        document.getElementById('retakeBtn').addEventListener('click', function() {
-            // Reset everything
-            currentStep = 0;
-            
-            // Hide results, show quiz
-            document.getElementById('resultsSection').style.display = 'none';
-            document.getElementById('scentQuiz').style.display = 'block';
-            document.querySelector('.skip-section').style.display = 'block';
-            
-            // Reset steps
-            quizSteps.forEach((step, index) => {
-                step.classList.remove('active');
-                if (index === 0) {
-                    step.classList.add('active');
-                }
-                
-                // Clear selections in UI
-                const options = step.querySelectorAll('.quiz-option');
-                options.forEach(option => option.classList.remove('selected'));
-            });
-            
-            // Clear selections
-            for (let key in userSelections) {
-                delete userSelections[key];
-            }
-            
-            // Reset progress
+    });
+    
+    // Navigation functions
+    function goToNextStep() {
+        if (currentStep < totalSteps - 1) {
+            quizSteps[currentStep].classList.remove('active');
+            currentStep++;
+            quizSteps[currentStep].classList.add('active');
             updateProgress();
-            enableNavigation(0);
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            enableNavigation(currentStep);
+            return false;
+        }
+    }
+    
+    function goToPrevStep() {
+        if (currentStep > 0) {
+            quizSteps[currentStep].classList.remove('active');
+            currentStep--;
+            quizSteps[currentStep].classList.add('active');
+            updateProgress();
+            enableNavigation(currentStep);
+            return false;
+        }
+    }
+    
+    function enableNavigation(stepIndex) {
+        // Enable/disable previous button
+        const prevButtons = quizSteps[stepIndex].querySelectorAll('.btn-prev');
+        prevButtons.forEach(btn => {
+            if (stepIndex === 0) {
+                btn.classList.add('btn-hidden');
+            } else {
+                btn.classList.remove('btn-hidden');
+            }
         });
         
-        function showResults() {
-            // Hide quiz, show results
-            document.getElementById('scentQuiz').style.display = 'none';
-            document.querySelector('.skip-section').style.display = 'none';
-            document.getElementById('resultsSection').style.display = 'block';
-            
-            // Generate profile based on selections
-            generateProfile();
-            
-            // Scroll to results
-            window.scrollTo({ top: document.getElementById('resultsSection').offsetTop - 50, behavior: 'smooth' });
+        // Enable/disable next button based on selection
+        const nextButtons = quizSteps[stepIndex].querySelectorAll('.btn-next');
+        const submitButtons = quizSteps[stepIndex].querySelectorAll('.btn-submit');
+        const hasSelection = quizSteps[stepIndex].querySelector('.quiz-option.selected');
+        
+        if (stepIndex === totalSteps - 1) {
+            // Last step - enable submit button
+            nextButtons.forEach(btn => btn.style.display = 'none');
+            submitButtons.forEach(btn => {
+                btn.style.display = 'inline-block';
+            });
+        } else {
+            // Other steps - enable next button
+            nextButtons.forEach(btn => {
+                btn.style.display = 'inline-block';
+            });
+            submitButtons.forEach(btn => btn.style.display = 'none');
+        }
+    }
+    
+    // Set up navigation event listeners
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('btn-next')) {
+            e.preventDefault();
+            e.stopPropagation();
+            goToNextStep();
         }
         
-        function generateProfile() {
-            // Map selections to profile (simplified for demo)
-            
-            // Scent Family
-            if (userSelections.step2) {
-                const scentMap = {
-                    'floral': 'Floral',
-                    'woody': 'Woody',
-                    'fresh': 'Fresh',
-                    'oriental': 'Oriental'
-                };
-                document.getElementById('profileScent').textContent = scentMap[userSelections.step2] || 'Floral & Fresh';
+        if (e.target.classList.contains('btn-prev')) {
+            e.preventDefault();
+            e.stopPropagation();
+            goToPrevStep();
+        }
+        
+        if (e.target.classList.contains('btn-submit')) {
+            e.preventDefault();
+            e.stopPropagation();
+            showResults();
+        }
+    });
+    
+    // Also prevent the form from submitting
+    const scentQuizForm = document.getElementById('scentQuiz');
+    if (scentQuizForm) {
+        scentQuizForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            return false;
+        });
+    }
+    
+    // Retake quiz button
+    const retakeBtn = document.getElementById('retakeBtn');
+    if (retakeBtn) {
+        retakeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            resetQuiz();
+        });
+    }
+    
+    function resetQuiz() {
+        // Reset everything
+        currentStep = 0;
+        
+        // Hide results, show quiz
+        const resultsSection = document.getElementById('resultsSection');
+        const scentQuiz = document.getElementById('scentQuiz');
+        const skipSection = document.querySelector('.skip-section');
+        
+        if (resultsSection) resultsSection.style.display = 'none';
+        if (scentQuiz) scentQuiz.style.display = 'block';
+        if (skipSection) skipSection.style.display = 'block';
+        
+        // Reset steps
+        quizSteps.forEach((step, index) => {
+            step.classList.remove('active');
+            if (index === 0) {
+                step.classList.add('active');
             }
             
-            // Mood
-            if (userSelections.step3) {
-                const moodMap = {
-                    'romantic': 'Romantic',
-                    'confident': 'Confident',
-                    'energetic': 'Energetic',
-                    'relaxed': 'Relaxed'
-                };
-                document.getElementById('profileMood').textContent = moodMap[userSelections.step3] || 'Confident & Romantic';
-            }
-            
-            // Occasion
-            if (userSelections.step5) {
-                const occasionMap = {
-                    'daily': 'Daily Wear',
-                    'evening': 'Evening & Date Nights',
-                    'special': 'Special Occasions',
-                    'casual': 'Casual & Weekend'
-                };
-                document.getElementById('profileOccasion').textContent = occasionMap[userSelections.step5] || 'Evening & Special Events';
-            }
-            
-            // Longevity
-            if (userSelections.step6) {
-                const longevityMap = {
-                    'short': '4-6 hours',
-                    'moderate': '6-8 hours',
-                    'long': '8+ hours',
-                    'allDay': 'All Day'
-                };
-                document.getElementById('profileLongevity').textContent = longevityMap[userSelections.step6] || '6-8 hours';
-            }
-            
-            // Season
-            if (userSelections.step4) {
-                const seasonMap = {
-                    'spring': 'Spring',
-                    'summer': 'Summer',
-                    'autumn': 'Autumn',
-                    'winter': 'Winter'
-                };
-                document.getElementById('profileSeason').textContent = seasonMap[userSelections.step4] || 'All Year';
-            }
-            
-            // Experience
-            if (userSelections.step8) {
-                const experienceMap = {
-                    'beginner': 'Beginner',
-                    'intermediate': 'Intermediate',
-                    'expert': 'Expert',
-                    'collector': 'Collector'
-                };
-                document.getElementById('profileExperience').textContent = experienceMap[userSelections.step8] || 'Intermediate';
-            }
-            
-            // Notes
-            if (userSelections.notes && userSelections.notes.length > 0) {
-                const notesContainer = document.getElementById('profileNotes');
+            // Clear selections in UI
+            const options = step.querySelectorAll('.quiz-option');
+            options.forEach(option => option.classList.remove('selected'));
+        });
+        
+        // Clear selections
+        for (let key in userSelections) {
+            delete userSelections[key];
+        }
+        
+        // Reset progress
+        updateProgress();
+        enableNavigation(0);
+    }
+    
+    function showResults() {
+        // Hide quiz, show results
+        const scentQuiz = document.getElementById('scentQuiz');
+        const skipSection = document.querySelector('.skip-section');
+        const resultsSection = document.getElementById('resultsSection');
+        
+        if (scentQuiz) scentQuiz.style.display = 'none';
+        if (skipSection) skipSection.style.display = 'none';
+        if (resultsSection) resultsSection.style.display = 'block';
+        
+        // Generate profile based on selections
+        generateProfile();
+    }
+    
+    function generateProfile() {
+        // Map selections to profile (simplified for demo)
+        
+        // Scent Family
+        if (userSelections.step2) {
+            const scentMap = {
+                'floral': 'Floral',
+                'woody': 'Woody',
+                'fresh': 'Fresh',
+                'oriental': 'Oriental'
+            };
+            const profileScent = document.getElementById('profileScent');
+            if (profileScent) profileScent.textContent = scentMap[userSelections.step2] || 'Floral & Fresh';
+        }
+        
+        // Mood
+        if (userSelections.step3) {
+            const moodMap = {
+                'romantic': 'Romantic',
+                'confident': 'Confident',
+                'energetic': 'Energetic',
+                'relaxed': 'Relaxed'
+            };
+            const profileMood = document.getElementById('profileMood');
+            if (profileMood) profileMood.textContent = moodMap[userSelections.step3] || 'Confident & Romantic';
+        }
+        
+        // Occasion
+        if (userSelections.step5) {
+            const occasionMap = {
+                'daily': 'Daily Wear',
+                'evening': 'Evening & Date Nights',
+                'special': 'Special Occasions',
+                'casual': 'Casual & Weekend'
+            };
+            const profileOccasion = document.getElementById('profileOccasion');
+            if (profileOccasion) profileOccasion.textContent = occasionMap[userSelections.step5] || 'Evening & Special Events';
+        }
+        
+        // Longevity
+        if (userSelections.step6) {
+            const longevityMap = {
+                'short': '4-6 hours',
+                'moderate': '6-8 hours',
+                'long': '8+ hours',
+                'allDay': 'All Day'
+            };
+            const profileLongevity = document.getElementById('profileLongevity');
+            if (profileLongevity) profileLongevity.textContent = longevityMap[userSelections.step6] || '6-8 hours';
+        }
+        
+        // Season
+        if (userSelections.step4) {
+            const seasonMap = {
+                'spring': 'Spring',
+                'summer': 'Summer',
+                'autumn': 'Autumn',
+                'winter': 'Winter'
+            };
+            const profileSeason = document.getElementById('profileSeason');
+            if (profileSeason) profileSeason.textContent = seasonMap[userSelections.step4] || 'All Year';
+        }
+        
+        // Experience
+        if (userSelections.step8) {
+            const experienceMap = {
+                'beginner': 'Beginner',
+                'intermediate': 'Intermediate',
+                'expert': 'Expert',
+                'collector': 'Collector'
+            };
+            const profileExperience = document.getElementById('profileExperience');
+            if (profileExperience) profileExperience.textContent = experienceMap[userSelections.step8] || 'Intermediate';
+        }
+        
+        // Notes
+        if (userSelections.notes && userSelections.notes.length > 0) {
+            const notesContainer = document.getElementById('profileNotes');
+            if (notesContainer) {
                 notesContainer.innerHTML = '';
                 
                 const noteLabels = {
@@ -2117,11 +2412,180 @@
                 });
             }
         }
+    }
+    
+    // Initialize navigation for first step
+    updateProgress();
+    enableNavigation(0);
+});
+
+// ============ CART FUNCTIONALITY ============
+document.addEventListener('DOMContentLoaded', function() {
+    // Cart elements
+    const cartIcon = document.getElementById('cartIcon');
+    const cartModal = document.getElementById('cartModal');
+    const cartOverlay = document.getElementById('cartOverlay');
+    const closeCart = document.getElementById('closeCart');
+    const cartItems = document.getElementById('cartItems');
+    const totalPriceEl = document.getElementById('totalPrice');
+    const itemCountEl = document.getElementById('itemCount');
+    const cartCount = document.querySelector('.cart-count');
+    const cartToast = document.getElementById('cartToast');
+    const toastText = document.getElementById('toastText');
+    
+    // Cart state
+    let cart = JSON.parse(localStorage.getItem('memoireCart')) || [];
+    
+    // Update cart display
+    function updateCartDisplay() {
+        // Update cart count
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+        itemCountEl.textContent = totalItems;
         
-        // Initialize navigation for first step
-        updateProgress();
-        enableNavigation(0);
+        // Calculate total price
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        totalPriceEl.textContent = `$${total.toFixed(2)}`;
+        
+        // Update cart items display
+        if (cart.length === 0) {
+            cartItems.innerHTML = `
+                <div class="empty-cart">
+                    <i class="fas fa-shopping-bag"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            `;
+        } else {
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item" data-id="${item.id}">
+                    <div class="cart-item-img">
+                        <i class="fas fa-wine-bottle"></i>
+                    </div>
+                    <div class="cart-item-details">
+                        <h4>${item.name}</h4>
+                        <p>${item.brand}</p>
+                        <div class="cart-item-quantity">
+                            <button class="qty-btn minus">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                    </div>
+                    <div class="cart-item-price">
+                        <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                        <button class="remove-item">&times;</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // Save to localStorage
+        localStorage.setItem('memoireCart', JSON.stringify(cart));
+    }
+    
+    // Add item to cart
+    function addToCart(name, brand, price) {
+        const id = `${name}-${brand}`.replace(/\s+/g, '-');
+        const existingItem = cart.find(item => item.id === id);
+        
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({
+                id: id,
+                name,
+                brand,
+                price: parseFloat(price),
+                quantity: 1
+            });
+        }
+        
+        updateCartDisplay();
+        showToast('✓ ADDED TO CART');
+    }
+    
+    // Remove item from cart
+    function removeFromCart(id) {
+        cart = cart.filter(item => item.id !== id);
+        updateCartDisplay();
+    }
+    
+    // Update item quantity
+    function updateQuantity(id, change) {
+        const item = cart.find(item => item.id === id);
+        if (item) {
+            item.quantity += change;
+            if (item.quantity < 1) {
+                removeFromCart(id);
+            } else {
+                updateCartDisplay();
+            }
+        }
+    }
+    
+    // Show toast notification
+    function showToast(message) {
+        toastText.textContent = message;
+        cartToast.classList.add('show');
+        setTimeout(() => {
+            cartToast.classList.remove('show');
+        }, 2000);
+    }
+    
+    // Event delegation for cart items
+    cartItems.addEventListener('click', function(e) {
+        const cartItem = e.target.closest('.cart-item');
+        if (!cartItem) return;
+        
+        const id = cartItem.dataset.id;
+        
+        if (e.target.classList.contains('minus')) {
+            updateQuantity(id, -1);
+        } else if (e.target.classList.contains('plus')) {
+            updateQuantity(id, 1);
+        } else if (e.target.classList.contains('remove-item')) {
+            removeFromCart(id);
+        }
     });
+    
+    // Add event listeners to "ADD TO CART" buttons
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('add-to-cart')) {
+            const name = e.target.getAttribute('data-name');
+            const brand = e.target.getAttribute('data-brand');
+            const price = e.target.getAttribute('data-price');
+            
+            addToCart(name, brand, price);
+            
+            // Open cart modal
+            cartModal.classList.add('show');
+            cartOverlay.classList.add('show');
+        }
+    });
+    
+    // Cart modal controls
+    cartIcon.addEventListener('click', function() {
+        cartModal.classList.add('show');
+        cartOverlay.classList.add('show');
+    });
+    
+    closeCart.addEventListener('click', function() {
+        cartModal.classList.remove('show');
+        cartOverlay.classList.remove('show');
+    });
+    
+    cartOverlay.addEventListener('click', function() {
+        cartModal.classList.remove('show');
+        this.classList.remove('show');
+    });
+    
+    document.querySelector('.continue-shopping').addEventListener('click', function() {
+        cartModal.classList.remove('show');
+        cartOverlay.classList.remove('show');
+    });
+    
+    // Initialize cart display
+    updateCartDisplay();
+});
 </script>
 
 <!-- Main Website Footer -->
