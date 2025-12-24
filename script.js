@@ -725,3 +725,50 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     }
+
+    // ============ FIX FOR BROKEN CART ITEMS ============
+function fixBrokenCart() {
+    const savedCart = localStorage.getItem('cart');
+    if (!savedCart) return;
+    
+    try {
+        let cart = JSON.parse(savedCart);
+        let hasChanges = false;
+        
+        // Filter out any broken/undefined items
+        const cleanCart = cart.filter(item => {
+            if (!item || !item.id) {
+                hasChanges = true;
+                return false;
+            }
+            
+            // Fix common issues
+            if (item.name === 'undefined' || item.name === 'null') {
+                hasChanges = true;
+                return false;
+            }
+            
+            // Check if image exists
+            if (item.image && item.image.includes('undefined')) {
+                hasChanges = true;
+                return false;
+            }
+            
+            return true;
+        });
+        
+        if (hasChanges) {
+            localStorage.setItem('cart', JSON.stringify(cleanCart));
+            console.log('Fixed broken cart items');
+        }
+        
+        return cleanCart;
+    } catch (e) {
+        console.error('Error fixing cart:', e);
+        localStorage.removeItem('cart');
+        return [];
+    }
+}
+
+// Call this immediately when script loads
+fixBrokenCart();
