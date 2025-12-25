@@ -80,6 +80,15 @@ body {
     color: #ffffff;
 }
 
+@media (max-width: 768px){
+    .hero-content{
+        position: absolute;
+        top: 5%;
+        left: 15%;
+        
+    }
+}
+
 .hero-content h1 {
     font-size: 60px;
     margin-bottom: 10px;
